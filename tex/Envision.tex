@@ -1,0 +1,244 @@
+In order to understand the concept of horizontal security, we must first examine
+the current state of security and its goals. For the purposes of this work, we
+will examine security through the traditional scheme of Confidentiality,
+Integrity and Availability, as is common. According to NIST,
+
+\begin{quotation}
+\textit{A loss of confidentiality is the unauthorized disclosure of 
+information... A loss of integrity is the unauthorized modification or
+destruction of information... A loss of availability is the disruption of access
+to or use of information or an information system.}~\cite{pub2004standards}
+\end{quotation}
+
+Thus, from these definitions we get that confidentiality is the protection of 
+information from unauthorized disclosure, integrity is the protection of
+information from unauthorized modification or destruction, and availability is
+the protection from the disruption of access to or use of information or an
+information system.
+
+Present in two of these three definitions is the concept of authorization. If an
+authorized party reads, modifies, or destroys information, the definitions imply
+that there is no breach. Thus, whether or not the security of an organization has
+been breached depends highly on its security policy. However, this leads us to
+follow up questions: who writes these security policies, and how are the
+decisions of what they should contain made? How do we design authorization when
+authority is distributed across the entire collective?
+
+\subsection{Defining Horizontal Security}
+\label{sec:definition}
+
+In the current approaches to Cybersecurity, these decisions are often made or
+guided by the desires of those on top of the hierarchy of an organization. If
+the CISO of an organization does not agree with the access control decisions of
+an organization, they will insist that the managers below them see that it is
+changed. This will trickle down the hierarchy until it is implemented. Though
+individuals at the lower levels of a hierarchy may have some decision making
+power in how it is implemented, they typically do not have decision making power
+in the questions mentioned above. Further questions arise when we consider the
+structures of organizations with flexible memberships, who operate on principles
+of open participation (plein-air citizens assemblies, etc.).
+
+This concept typically holds true not just with access control and
+authorization, but with all aspects of an organization's security policy.
+Decisions about how infringements are dealt with or the scope of the policies
+are also made in this manner. Decisions about how these policies are enforced,
+and what security mechanisms are used, are also made up top, with individuals at
+the bottom left to enact the desires passed on to them.
+
+We see, then, that hierarchy introduces itself in the decision-making processes
+of security. That is, the concepts of confidentiality, integrity, and availability
+may not need to change under a concept of horizontal security. Instead, it is
+possible that horizontal security may be achieved by shifting policy making
+powers, implementation decisions, and enforcement powers away from individuals
+and towards democratic, participatory processes. A more concrete definition of
+horizontal security follows.
+
+\begin{definition}[Horizontality of Policy]
+Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+security policymakers, $ p $ such that $ p \subseteq S $ and $p \neq 
+\emptyset$. We say that the horizontality of policy making $h_{policy}$ of the
+organization is defined as $ h_{policy} = \frac{|p|}{|S|} $.\\
+\noindent\rule{.48\textwidth}{0.4pt}
+\end{definition}
+
+\begin{definition}[Horizontality of Implementation]
+Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+security implementers, $ i $ such that $ i \subseteq S $ and $i \neq 
+\emptyset$. We say that the horizontality of implementation $h_{implementation}$
+of the organization is defined as $ h_{implementation} = \frac{|i|}{|S|} $.\\
+\noindent\rule{.48\textwidth}{0.4pt}
+\end{definition}
+
+\begin{definition}[Horizontality of Enforcement]
+Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+security enforcers, $ e $ such that $ e \subseteq S $ and $e \neq \emptyset$.
+We say that the horizontality of enforcement $h_{enforcement}$ of the
+organization is defined as $ h_{enforcement} = \frac{|e|}{|S|} $.\\
+\noindent\rule{.48\textwidth}{0.4pt}
+\end{definition}
+
+\begin{definition}[Horizontality of Security]
+We say the horizontality of an organization's security $h$ is defined as $h = 
+h_{policy} \times h_{implementation} \times h_{enforcement}$.\\
+\noindent\rule{.48\textwidth}{0.4pt}
+\end{definition}
+
+One important aspect of this definition is the fact that the horizontality of 
+different factors of security -- policy making, implementation, and enforcement
+-- are multiplied together rather than averaged. This decision was made to
+reflect the compounding control that centralization gives: if the implementation
+of a security policy is heavily centralized and hierarchically, then the
+member(s) of the organization who implement the passed policies can decide
+how to implement security mechanisms to ensure policies are followed, or worse
+still, whether to implement any security mechanisms at all. This centralization
+leads to an imbalance of power similar to the one discussed by Kavada regarding
+activism and social media~\cite{kavada2020counterpublics}.
+
+
+This definition, even with the compounding effect of centralization in any of
+the three areas, implies that horizontality is not a binary trait, but rather a
+spectrum between entirely dictatorial (defined as $h = \frac{1}{|S|}$) and fully
+horizontal (defined as $h = 1$). In practice, most organizations likely do not
+sit at either extreme of this spectrum. In traditional, hierarchical
+organizations, security is likely more skewed towards a lower fraction of
+horizontality, but not equal to $\frac{1}{|S|}$. In worker cooperatives, 
+activist groups, and other traditionally less hierarchical organizations,
+horiztonality is likely more skewed towards, but not arriving at, $1$. An
+interesting first work towards understanding horizontal security may exist in
+measuring, comparing, and contrasting the current horizontality of security in
+different types of organizations. This idea, and other potential future works,
+are further examined in Section~\ref{sec:futurework}.
+
+\subsection{Horizontality, Tools, and Techniques}
+In Section~\ref{sec:definition} we defined horizontality of security as the
+fraction of policymakers over stakeholders of an organization. Thus, we see that
+horizontality is related to security policies more than the tools used to 
+enforce them. 
+
+However, this does not mean that the influence of hierarchy does not affect the
+tools and techniques used in Cybersecurity. For example, most operating systems
+tend to be built around the idea of the singular administrator or a small set of
+administrators setting up the system. This idea makes sense from a  hierarchical
+organization's perspective. After all, if the individuals higher in the
+hierarchy have more privileges, that simply reflects their decision-making 
+power within the organization. 
+
+From a horizontal security perspective, however, this method of system 
+administration may be detrimental. If a singular administrator decides that
+they do not like the policy decisions of the organization, they may be able to
+use their administrative power to stop the organization from taking the
+democratically selected action. When this occurs, there may not be another
+individual with more privileges to override this decision. Thus, the very
+concept of an administrator with the power to shut out other administrators is a
+threat to a horizontally controlled organization. 
+
+On the other hand, there do exist systems that were designed with a more
+horizontal structure in mind. One example of this is the Bitcoin 
+cryptocurrency~\cite{nakamoto2019bitcoin}. This cryptocurrency was developed to
+allow for financial transactions between two individuals without the need for a
+trusted third party to detect and prevent double spending. By design, the
+network prevents the modification of past blocks of the Blockchain unless there
+exists collusion of 51\% of the miner network. This decision was made
+specifically to make it difficult for malicious actors in the network to perform
+malicious activities, such as stealing bitcoin or deleting past transactions.
+The implication of this design is that Bitcoin cannot be centrally 
+regulated~\cite{tu2015rethinking}. If we re-frame the concept of collusion as 
+cooperation via democratic vote, we see that this design allows for regulation
+of the Bitcoin network in a horizontal way. Thus, if a transaction was deemed
+to be against a security policy by the majority of the network, it is possible
+to remove it.
+
+Though this is more horizontal policy enforcement than other tools promote, it
+still has many issues. The first issue is that of defining the stakeholders of
+Bitcoin: are only miners stakeholders, or are users stakeholders as well? If we
+define the stakeholders are only the miners of Bitcoin, we see that this
+approach reaches perfect horizontality. All miners participate in the decision
+to perform a modification on the Blockchain, whether the vote yes or no. If we
+consider users to also be stakeholders, however, we see that this system is no
+longer as horizontal. Users do not get a vote or say in whether or not a
+transaction gets removed or modified. 
+
+Another issue with this approach is its competitive nature. Rather than
+cooperating miners attempting to create, implement, and enforce transaction
+policies, we have competing miners interested in their own profit. One
+implication of this competitive focus is that there is no mechanism to vote in
+Bitcoin; rather, what is referred to as ``regulation'' in this work is seen by
+the Bitcoin community as an attack. However, the design property of requiring
+51\% of participating members to agree in order to make a change on the system
+may still be useful to inspire future horizontal system designs. Worse still,
+this competative nature tends to centralize the network over time. Bitcoin's
+Proof of Work algorithm tends to favor those who can afford highly specialized
+software, eventually leading to a centralization of the network into the hands
+of those who are wealthy enough to control large amounts of machines
+specifically made for mining Bitcoins. Proof of Stake, another consensus
+algorithm for Blockchain, bypasses this middle step and directly benefits those
+who control larger amounts of monetary stake in the network.
+
+Despite these issues, the security design of Blockchain is still more horizontal
+than typical designs. However, Blockchain is no the only security technology
+with a less hierarchical vision and structure. Perhaps the most well known
+example of a security system meant to be horizontal by design is the PGP Web of
+Trust design. This design was created to solve the key distribution problem
+without the need for a centralized, trusted key distribution authority. It
+allows individuals to make trust decisions about the ownership of a key based on
+validating the key ownership in person or over a trusted secure channel. Once a
+key is validated, the keys that are signed by that individual's keys are also
+trusted, though to a lesser extent. This design was meant to be a horizontal
+representation of trust: one trusts the people they verify in person, and then
+trusts the people attested to by their trusted peers, but to a lesser degree.
+However, this scheme suffered from a large number of usability and user
+experience problems. {\color{red} TODO: Cite me.} However, if a method like web
+of trust or derived from web of trust could be improved to be more usable, it
+could serve as a building block for applications and systems that take a
+horizontal approach to security.
+
+In addition to the Blockchain approach used by Bitcoin, and to the web of trust
+used by PGP, many other potential building blocks of horizontal security already
+exist. These include other consensus algorithms such as Practical Byzantine
+Fault Tolerance (PBFT)~\cite{castro1999practical}, Paxos~\cite{lamport2019part}, 
+Raft~\cite{ongaro2013search}, and more. In addition to consensus algorithms,
+secret sharing schemes like Shamir Secret Sharing~\cite{shamir1979share}, 
+Blakley's Secret Sharing~\cite{blakley1993linear}, and Verifiable Secret 
+Sharing~\cite{chor1985verifiable} schemes can be used for distributed secret
+management in organizations. Applications like OAuth~\cite{leiba2012oauth} can
+be used to grant minimal and ephemeral access to organization accounts to
+members of the organization who need it, without revealing a password. 
+Capability based schemes and systems can be used to allow for transfer of
+control over resources based on the will of the collective. Additionally, other
+yet undeveloped primitives, techniques, and tools may be needed as well. Future
+work can address these needs, as described in Section~\ref{sec:futurework}.
+% Access Control:
+% La-Padula, Biba, strictly hierarchical
+% DAC based on individualistic regulation of files, overwritable by admin on
+%    most systems.
+% MAC or RBAC seem to be desirable for horizontal security, but how do we update
+%    policies?
+
+% Bitcoin:
+% attempt at horizontal, democratic control of currency.
+% Regulatable with 51%.
+% suffers from centralization as it goes on due to its competative nature.
+
+%\begin{enumerate}
+%\item Case study: Code review.
+%\item Case study: Peer review.
+%\end{enumerate}
+
+%Conclusion: Security is purely horizontal when the policies and enforcement are
+%handled via direct democratic vote. Horizontality is a spectrum, ranging from
+%hierarchical (one person with decision making power) to purely horizontal.
+%Examples of spots on the spectrum include:
+%\begin{itemize}
+%\item direct democracy / consensus cooperatives
+%\item Random review (i.e. code review)
+%\item random/elected representatives w/ early revocation
+%\item random/elected representatives w/o early revocation
+%\item appointed representatives
+%\item hierarchical
+%\end{itemize}
+
+%Very few spots on this spectrum are represented in current techniques and
+%techologies. Mostly the hierarchical approach is developed because of its
+%continued use in business and government. As that changes, cybesecurity needs to
+%be ahead of the curve and create technologies for the organizations and
+%businesses that sit on the other portions of this spectrum.

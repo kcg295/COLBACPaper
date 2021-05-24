@@ -1,0 +1,235 @@
+%%
+%% This is file `sample-manuscript.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% samples.dtx  (with options: `manuscript')
+%%
+%% IMPORTANT NOTICE:
+%%
+%% For the copyright see the source file.
+%%
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from sample-manuscript.tex.
+%%
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%%
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% The first command in your LaTeX source must be the \documentclass command.
+%%%% Small single column format, used for CIE, CSUR, DTRAP, JACM, JDIQ, JEA, JERIC, JETC, PACMCGIT, TAAS, TACCESS, TACO, TALG, TALLIP (formerly TALIP), TCPS, TDSCI, TEAC, TECS, TELO, THRI, TIIS, TIOT, TISSEC, TIST, TKDD, TMIS, TOCE, TOCHI, TOCL, TOCS, TOCT, TODAES, TODS, TOIS, TOIT, TOMACS, TOMM (formerly TOMCCAP), TOMPECS, TOMS, TOPC, TOPLAS, TOPS, TOS, TOSEM, TOSN, TQC, TRETS, TSAS, TSC, TSLP, TWEB.
+% \documentclass[acmsmall]{acmart}
+
+%%%% Large single column format, used for IMWUT, JOCCH, PACMPL, POMACS, TAP, PACMHCI
+% \documentclass[acmlarge,screen]{acmart}
+
+%%%% Large double column format, used for TOG
+% \documentclass[acmtog, authorversion]{acmart}
+
+%%%% Generic manuscript mode, required for submission
+%%%% and peer review
+\documentclass[sigconf, authordraft]{acmart}
+\usepackage{balance}
+\usepackage{amsthm}
+\usepackage{hyperref}
+%% Fonts used in the template cannot be substituted; margin
+%% adjustments are not allowed.
+%%
+%% \BibTeX command to typeset BibTeX logo in the docs
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+%% Rights management information.  This information is sent to you
+%% when you complete the rights form.  These commands have SAMPLE
+%% values in them; it is your responsibility as an author to replace
+%% the commands and values with those provided to you when you
+%% complete the rights form.
+\setcopyright{acmcopyright}
+\copyrightyear{2021}
+\acmYear{2021}
+\acmDOI{10.1145/1122445.1122456}
+
+%% These commands are for a PROCEEDINGS abstract or paper.
+\acmConference[NSPW 2021]{NSPW: New Security Paradigms Workshop}
+{October 25--28, 2021}{North Conway, NH}
+\acmBooktitle{NSPW '21: New Security Paradigms Workshop,
+  October 25--28, 2021,North Conway, NH}
+\acmPrice{15.00}
+\acmISBN{978-1-4503-XXXX-X/18/06}
+
+
+%%
+%% Submission ID.
+%% Use this when submitting an article to a sponsored event. You'll
+%% receive a unique submission ID from the organizers
+%% of the event, and this ID should be used as the parameter to this command.
+%%\acmSubmissionID{123-A56-BU3}
+
+%%
+%% The majority of ACM publications use numbered citations and
+%% references.  The command \citestyle{authoryear} switches to the
+%% "author year" style.
+%%
+%% If you are preparing content for an event
+%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
+%% citations and references.
+%% Uncommenting
+%% the next command will enable that style.
+%%\citestyle{acmauthoryear}
+
+%%
+%% end of the preamble, start of the body of the document source.
+\newtheoremstyle{mydef}
+{\topsep}{\topsep}%
+{}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{.48\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}.\\*[-1.5ex]%
+  \rule{.48\textwidth}{0.4pt}}%
+
+\theoremstyle{mydef}
+
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{FIRST DRAFT: Shifting Cybersecurity from Hierarchical to Horizontal designs}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Kevin Gallagher}
+%\authornote{Both authors contributed equally to this research.}
+\email{kevin.gallagher@nyu.edu}
+%\orcid{1234-5678-9012}
+\affiliation{%
+    \institution{Department Of Computer Science and Engineering\\New York University}
+    \streetaddress{370 Jay Street, 10th Floor}
+    \city{Brooklyn}
+    \state{New York}
+    \country{USA}
+    \postcode{11021}
+}
+\email{kevin.gallagher@privacylx.org}
+\affiliation{%
+    \institution{Defend Our Privacy Association (PrivacyLX)}
+    %\city{Lisboa}
+    \state{Lisboa}
+    \country{Portugal}
+}
+
+\author{Jessica Feldman}
+\email{jfeldman@aup.edu}
+%\orcid{1234-5678-9012}
+\affiliation{%
+    \institution{Department of Communication, Media, and Culture\\ American University of Paris}
+    %\streetaddress{370 Jay Street, 10th Floor}
+    \city{Paris}
+    %\state{}
+    \country{France}
+    %\postcode{11021}
+}
+
+%%
+%% By default, the full list of authors will be used in the page
+%% headers. Often, this list is too long, and will overlap
+%% other information printed in the page headers. This command allows
+%% the author to define a more concise list
+%% of authors' names for this purpose.
+\renewcommand{\shortauthors}{Gallagher and Feldman}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+\input{tex/Abstract}
+\end{abstract}
+
+%%
+%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
+%% Please copy and paste the code instead of the example below.
+%%
+
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10002978.10002991.10002993</concept_id>
+       <concept_desc>Security and privacy~Access control</concept_desc>
+       <concept_significance>300</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10002978.10002991.10010839</concept_id>
+       <concept_desc>Security and privacy~Authorization</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10002978.10003029.10011703</concept_id>
+       <concept_desc>Security and privacy~Usability in security and privacy</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10002978.10003029.10003032</concept_id>
+       <concept_desc>Security and privacy~Social aspects of security and privacy</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[300]{Security and privacy~Access control}
+\ccsdesc[500]{Security and privacy~Authorization}
+\ccsdesc[500]{Security and privacy~Usability in security and privacy}
+\ccsdesc[500]{Security and privacy~Social aspects of security and privacy}
+
+%%
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{security, democracy, activism, horizontality, distributed systems, authorization, access contrl}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+\input{tex/Introduction}
+
+\section{Envisioning Horizontal Security}
+\label{sec:envisioning}
+\input{tex/Envision}
+
+\section{Implications of Horizontal Security}
+\label{sec:implications}
+\input{tex/Implications}
+
+\section{Horizontal Security and Privacy}
+\label{sec:privacy}
+\input{tex/Privacy}
+
+\section{Future Work}
+\label{sec:futurework}
+\balance
+\input{tex/FutureWork}
+
+\section{Conclusions}
+\label{sec:conclusion}
+\input{tex/Conclusions}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{HorizontalSecurity.bib}
+
+\end{document}
+\endinput
+%%
+%% End of file `sample-authordraft.tex'.

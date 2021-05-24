@@ -1,0 +1,33 @@
+The concept of horizontality of security introduces many opportunities for
+future work. The first, and possibly most obvious, opportunity is measuring the
+horizontality of security in different types of organizations, including typical
+corporations, worker cooperatives, trade unions, activist groups, and more.
+Once the horizontality of security of these organizations is measured we can
+then begin analyzing the security policies, implementation techniques, tools,
+and technologies they use to maintain security in their organizations. We can
+also compare and contrast policies such as surveillance of workers and clients
+to determine whether more horizontality leads to worker privacy gains.
+
+Another opportunity for future work is the development of tools, techniques, and
+technologies that facilitate or encourage horizontal security. This can begin by
+solving current horizontal security problems, such as the password wars
+discussed by Kavada~\cite{kavada2020counterpublics}, and other aspects of 
+horizontal secret sharing. One potential solution for this is a tool that acts
+as a reference monitor between the members of an organization and that
+organization's accounts, and ensures that some sensitive actions, such as
+password resets, cannot occur without the explicit authorization of a
+configurable fraction of the organization. More, this tool may allow
+organizations to vote to undo any detrimental actions taken by system
+administrators. This solution may require the use of techniques such as secret
+sharing~\cite{shamir1979share}, and technologies such as 
+OAuth~\cite{leiba2012oauth}. Our next work in the area of horizontal security
+will explore these directions.
+
+However, after this system is finished another problem presents itself: the
+server's operating system on which the code is running is built with an 
+assumption of hierarchy, with a small set of administrators having access to
+stop the program at any time, or  uninstall it, or remove the secrets the 
+program is storing so that access to all accounts is lost. Future work will be
+needed to explore how we can apply the idea of horizontality down to the
+operating system level. This work can study how, if at all, we can create a
+horizontally controlled operating system on which software can run.

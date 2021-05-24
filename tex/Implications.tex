@@ -1,0 +1,69 @@
+Though horizontal security may not require us to redefine the three pillars of
+Cybersecurity -- confidentiality, integrity, and availability -- it does create
+a few security policy and system design implications. Primarily, if meaningful
+participation in the creation of security policies, implementation of security
+mechanisms, and decisions around enforcement are to occur, more transparency and
+participatory procedures are required. If a larger percentage of an organization
+or group is participating policy making, implementation, and enforcement 
+decisions, all of the information required for them to consider their options
+and make their best decision must be available to them. This implies that the
+practices of the group or organization must be transparent for all of the
+decision-making stakeholders to see, scrutinize, and criticize. This implication
+must be reflected in the security policies relating to confidentiality of
+relevant information in the organization or group.
+
+A second implication of horizontal security is its aversion to centralized
+implementation. As discussed in Section~\ref{sec:definition}, if any of policy
+making, implementation, or enforcement is centralized, the horizontality of the
+organization's security suffers. This forces us to rethink the idea of the
+highly privileged administrator or super user on which most modern operating
+systems are build. As discussed previously, such administrative power leads to
+centralization and could cause password wars, as discussed by 
+Kavada~\cite{kavada2020counterpublics}, or digial vanguards, as discussed by 
+Gerbaudo {\color{red} TODO: CITE ME}.
+
+However, this raises issues. Without administrators, what would something like
+an operating system look like? Horizontal security implies a change to the 
+fundamentals of system building, necessitating the redesign of operating system
+permissions. Mainly, if an administrator attempts to perform an action that may
+drastically change the security properties of the system, i.e. a change in
+security policy, or the installation of a new security mechanism, this change
+must be able to be overridden via a democratic process. Said a different way,
+actions of administrators must be reversible by a majority of stakeholders, and
+the operating system itself must provide a mechanism to support this.
+
+The combination of transparency and stakeholder override implies an interesting
+potential opened up by horizontal security: community control. Our proposed
+definitions of horizontal security includes a set of stakeholders, but does not
+require that those stakeholders exist within the organization. If the users of
+an application or service wish to see a detrimental security decision
+overturned, horizontal security practices may give them an opportunity to do so.
+However, this has some drawbacks. First, it is not immediately obvious what
+security techniques, tools, or mechanisms could enforce this. However, this may
+be solved with future research and development.
+
+Even with future research and development, however, there are still potential
+issues. It may be that users may vote for changes or policy overrides that would
+destroy the organization or group. Additionally, it is difficult to perceive any
+potential incentive for organizations to allow themselves to be regulated by
+users or other community stakeholders. Potential solutions may include limited
+user or community stakeholder involvement for certain issues, such as privacy.
+This is explored further in Section~\ref{sec:privacy}. If such technology could
+be created, and incentives aligned, then such a change could allow for easier
+regulation of businesses without the need for understaffed, underfunded, and
+incentive-misaligned regulator commissions.
+
+Horizontal security comes with drawbacks as well as opportunities. Given that
+more stakeholders take place in the decision making process of a horizontal
+organization, more time may be needed for the decision making process. This
+may slow the organization, or stop it from taking time-sensitive actions
+altogether. This has the potential for opportunity or revenue loss. Thus, an
+organization or group may want to consider their flexibility to respond to
+quickly-appearing situations when deciding which degree of horizontality works
+for them.
+
+One final implication of horizontal security is the need for research and
+development. Horizontal security is under-explored, and may need the development
+of new tools, techniques, and primitives to realize. More, though some
+building-blocks for horizontal security may exist, very few systems or
+procedures of this type exist in practice.
