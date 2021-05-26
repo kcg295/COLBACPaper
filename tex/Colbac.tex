@@ -65,7 +65,7 @@ However, not everything should be directly managed by the collective. Individual
 users may have their own files and programs they intend to use only in a way
 that it does not effect other users of the system or the resources of the
 collective\footnote{We can think of these as the home directories of users in
-modern Unix-like systems.}. These speheres, called the \textbf{User Speheres},
+modern Unix-like systems.}. This spehere, called the \textbf{User Spehere},
 can use traditional DAC systems like modern Unix-like systems without effecting
 the horizontality of the system as a whole.
 
@@ -76,53 +76,92 @@ by democratic control. This allows for the system to provide append only logs
 that are vital to maintaining collective control, as described later in this
 section.
 
-\begin{enumerate}
-%\item Different Spheres
-%    \begin{itemize}
-%    \item user sphere
-%    \item collective sphere (sudo)
-%    \item immutable sphere (cannot be altered, can be read)
-%    \end{itemize}
-\item Registration
-    \begin{itemize}
-    \item at least 3 users
-    \item each user has an offline key.
-    \item specify beginning fraction required for collective action
-    \end{itemize}
-\item Token: Draft Phase
-    \begin{itemize}
-    \item User drafts a proposal. Two types, action token and delegation token.
-    \item See subsection for proposal design.
-    \item user signs the proposal with their key.
-    \end{itemize}
-\item Token: Petition Phase
-    \begin{itemize}
-    \item Pass along token to reference monitor, reference monitor passes to
-    other users.
-    \item If a user agrees, signs and returns to reference monitor.
-    \item If a user disagrees, signs a disagreement and returns to reference
-    monitor.
-    \item User can choose not to vote. Signs a blank vote and returns to
-    reference monitor.
-    \end{itemize}
-\item Token: Action Phase
-    \begin{itemize}
-    \item When petition phase is over, the number of signatures is compared to
-    the fraction.
-    \item If >=, perform action, log.
-    \item Else, just log.
-    \end{itemize}
-\end{enumerate}
+When the system is first installed, a \textit{Registration Phase} will occur.
+During this phase, at least 3 users will be signed up in the system. These users
+will need to supply their public keys, which correspond to offline private keys,
+since they will be needed for later interactions with the system. In addition to
+supplying their public keys, the users will need to decide on an initial
+fraction $f$ and a minimum fraction $m$ that will be used for action and
+delegation petitions, as explained later.
+
+After the system is set up, users can interact with objects in the User Sphere
+as they would in any other system. However, to interact with any objects in the
+Collective Sphere, users would need to follow a specific authorization
+procedure consisting of three phases: the \textit{Draft Phase}, the 
+\textit{Petition Phase}, and the \textit{Action Phase}.
+
+In the Draft Phase, depending on the action the user wishes to perform, they
+will write the code or commands that will interact with objects in the
+collective sphere, or will identify the permissions they will need to accomplish
+their task or tasks. At the end of this process, the user will have a draft
+Action or Delegation token, as described later in Sections \ref{sec:tokentypes}
+and \ref{sec:tokenformat}.
+
+After the user has completed their token, they move on to the Petition Phase. In
+this phase the user sends their draft token to the reference monitor running on
+the system. This reference monitor will then forward the draft token to all
+other members of the system and ask for a vote. The users will then vote one of
+the following ways: yes, no, or abstain. The system will set a pre-configured
+amount of time before marking all individuals who did not vote as abstaining.
+
+After all votes are collected or the response period has timed out, the system
+enters the action phase. During the action phase the reference monitor counts
+all of the votes. If the number of votes divided by the total number of users is
+greater than or equal to $m$, and the fraction of yes votes to the total number
+of votes is greater than or equal to $f$, the petition is considered successful
+and the action is taken. In addition to taking the action, the system logs the
+action in log files held in the immutable sphere. However, if the number of all
+votes divided by the total number of users is less than $m$ or if the number of
+yes votes divided by the total number of votes is less than $f$, the petition
+fails, and the attempted action is logged in the immutable spehere.
 
 \subsubsection{Types of Tokens}
+\label{sec:tokentypes}
 \mbox{}\\
-\begin{enumerate}
-\item Action Token
-\item Delegation Token (Working Group Token)
-\item Emergency Token
-\end{enumerate}
+As the previous section demonstrates, the token is the main form of interacting
+with the collective sphere. Users who wish to affect the collective sphere do
+so by creating a token which is then voted on by the users of the system. In
+order to facilitate easy interaction with the colbac system, there are multiple
+types of tokens.
+
+The first token is called the \textbf{Action Token}. This token allows a single
+command, a small script, or a program to be run in the collective sphere, and to
+enjoy collective sphere access. This is the most straightforward type of token,
+since everything the token will allow to occur is known during the Petition
+Phase. However, this type of token is rigid and unflexible. If there is an error
+in the command, or in the code, a user would need to re-enter the Draft Phase,
+fix the error, and re-enter the Petition Phase to authorize a new token. The
+more a single Action Token attempts to do, the more likely there will be errors,
+causing frustration for both the users drafting the tokens and the users voting
+on them.
+
+To avoid these issues, COLBAC also allows for \textbf{Delegation Tokens}, which
+allow the drafting user to act in the collective sphere for a given set of time,
+and with a given set of restrictions. The procedure is obtaining a Delegation
+Token is the same as that for an Action Token. However, the information that
+would be put in the token would be slightly different. The format for Action
+Tokens and Delegation Tokens are shown in Section~\ref{sec:tokenformat}.
+
+There are some instances in which one needs to respond to emergency situations
+as soon as possible, and cannot wait for a slow authorization process by a
+potentially large set of users. To accomidate these situations, COLBAC has an
+\textbf{Emergency Token}. These tokens allow users to run short scripts, single
+commands, or small programs in the collective sphere without immediate
+auhorization. However, this action is immediately logged and all users are
+informed by the Reference Monitor that an Emergency Token was used. In the case
+that an Emergency Token was incorrectly used (say, to overwrite the result of
+a democractically made decision), a member can create a new Action Token to
+undo the actions of the Emergency Token, which will be pushed to a Petition
+Phase for democractic decision making. To avoid large-scale misuse of the
+Emergency Token, and to avoid Emergency Token Wars\footnote{We define Emergency
+Token Wars as instances in which different members in the organization use
+Emergency Tokens to undo the actions taken in the name of the collective.},
+each member only has a small number of emergency tokens for a given period of
+time. Additionally, there can be limits placed on what can be done with 
+Emergency Tokens.
 
 \subsubsection{Token Format}
+\label{sec:tokenformat}
 \mbox{}\\
 Header:
 \begin{itemize}
