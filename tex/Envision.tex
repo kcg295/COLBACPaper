@@ -19,7 +19,9 @@ information system.
 Present in two of these three definitions is the concept of authorization. If an
 authorized party reads, modifies, or destroys information, the definitions imply
 that there is no breach. Thus, whether or not the security of an organization has
-been breached depends highly on its security policy. However, this leads us to
+been breached depends highly on whether or not an individual is authorized to
+perform an action. This decision as to whether or not a person is authorized is
+heavily informed by an organization's security policy. However, this leads us to
 follow up questions: who writes these security policies, and how are the
 decisions of what they should contain made? How do we design authorization when
 authority is distributed across the entire collective?
@@ -45,92 +47,102 @@ are also made in this manner. Decisions about how these policies are enforced,
 and what security mechanisms are used, are also made up top, with individuals at
 the bottom left to enact the desires passed on to them.
 
-We see, then, that hierarchy introduces itself in the decision-making processes
-of security. That is, the concepts of confidentiality, integrity, and availability
-may not need to change under a concept of horizontal security. Instead, it is
-possible that horizontal security may be achieved by shifting policy making
-powers, implementation decisions, and enforcement powers away from individuals
-and towards democratic, participatory processes. A more concrete definition of
-horizontal security follows.
+We see, then, that hierarchy introduces itself in multiple dimensions of
+security. These dimensions include the different decision-making processes
+of security. This implies that the concepts of confidentiality, integrity, and
+availability, which are informed by an organization's security policy, may not
+need to change under a concept of horizontal security. Instead, it is possible
+that horizontal security may be achieved by shifting policy making powers,
+implementation decisions, and enforcement powers, and other dimensions of
+security away from individuals and towards democratic, participatory processes.
 
-\begin{definition}[Horizontality of Policy]
-Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
-security policymakers, $ p $ such that $ p \subseteq S $ and $p \neq 
-\emptyset$. We say that the horizontality of policy making $h_{policy}$ of the
-organization is defined as $ h_{policy} = \frac{|p|}{|S|} $.\\
-\noindent\rule{.48\textwidth}{0.4pt}
-\end{definition}
+%\begin{definition}[Horizontality of Policy]
+%Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+%security policymakers, $ p $ such that $ p \subseteq S $ and $p \neq 
+%\emptyset$. We say that the horizontality of policy making $h_{policy}$ of the
+%organization is defined as $ h_{policy} = \frac{|p|}{|S|} $.\\
+%\noindent\rule{.48\textwidth}{0.4pt}
+%\end{definition}
+%
+%\begin{definition}[Horizontality of Implementation]
+%Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+%security implementers, $ i $ such that $ i \subseteq S $ and $i \neq 
+%\emptyset$. We say that the horizontality of implementation $h_{implementation}$
+%of the organization is defined as $ h_{implementation} = \frac{|i|}{|S|} $.\\
+%\noindent\rule{.48\textwidth}{0.4pt}
+%\end{definition}
+%
+%\begin{definition}[Horizontality of Enforcement]
+%Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
+%security enforcers, $ e $ such that $ e \subseteq S $ and $e \neq \emptyset$.
+%We say that the horizontality of enforcement $h_{enforcement}$ of the
+%organization is defined as $ h_{enforcement} = \frac{|e|}{|S|} $.\\
+%\noindent\rule{.48\textwidth}{0.4pt}
+%\end{definition}
+%
+%\begin{definition}[Horizontality of Security]
+%We say the horizontality of an organization's security $h$ is defined as $h = 
+%h_{policy} \times h_{implementation} \times h_{enforcement}$.\\
+%\noindent\rule{.48\textwidth}{0.4pt}
+%\end{definition}
 
-\begin{definition}[Horizontality of Implementation]
-Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
-security implementers, $ i $ such that $ i \subseteq S $ and $i \neq 
-\emptyset$. We say that the horizontality of implementation $h_{implementation}$
-of the organization is defined as $ h_{implementation} = \frac{|i|}{|S|} $.\\
-\noindent\rule{.48\textwidth}{0.4pt}
-\end{definition}
+One important aspect of this concept is the fact that the horizontality of 
+different dimensions of security -- policy making, implementation, enforcement,
+and more -- have a compounding effect. If one area is highly hierarchical and
+centralized, it has a profound effect on the hierarchy and centralization of the
+organization as a whole. For example: if the implementation of a security policy
+(through choosing security mechanisms, implementing firewall rules, etc.) is
+heavily centralized and hierarchical, then the member(s) of the organization who
+implement the policies can decide how to implement security mechanisms to ensure
+policies are followed, or worse still, whether to implement any security
+mechanisms at all. This centralization leads to an imbalance of power similar to
+the one discussed by Kavada regarding activism and social
+media~\cite{kavada2020counterpublics}.
 
-\begin{definition}[Horizontality of Enforcement]
-Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
-security enforcers, $ e $ such that $ e \subseteq S $ and $e \neq \emptyset$.
-We say that the horizontality of enforcement $h_{enforcement}$ of the
-organization is defined as $ h_{enforcement} = \frac{|e|}{|S|} $.\\
-\noindent\rule{.48\textwidth}{0.4pt}
-\end{definition}
+Another implication of the fact that the horizontality of security is
+multi-dimensional is that horizontality is not a binary trait, but rather a
+spectrum between entirely dictatorial and fully horizontal. In practice, most
+organizations likely do not sit at either extreme of this spectrum, or even
+occupy a fixed space on this spectrum. Rather, organizations are likely to have
+dynamic levels of horizontality. In traditional, hierarchical organizations,
+security is likely more skewed towards a lower amount of horizontality, and is
+likely to not be too dynamic. Decisions are made by managers, who may or may not
+consider the input of their employees when making decisions. In worker
+cooperatives,  activist groups, and other traditionally less hierarchical
+organizations, security is more likely skewed towards a higher amount of
+horizontality, and may be much more dynamic in nature. An interesting first work
+towards understanding horizontal security may exist in classifying, comparing,
+and contrasting the current horizontality of security in different types of
+organizations. This idea, and other potential future works, are further examined
+in Section~\ref{sec:futurework}.
 
-\begin{definition}[Horizontality of Security]
-We say the horizontality of an organization's security $h$ is defined as $h = 
-h_{policy} \times h_{implementation} \times h_{enforcement}$.\\
-\noindent\rule{.48\textwidth}{0.4pt}
-\end{definition}
-
-One important aspect of this definition is the fact that the horizontality of 
-different factors of security -- policy making, implementation, and enforcement
--- are multiplied together rather than averaged. This decision was made to
-reflect the compounding control that centralization gives: if the implementation
-of a security policy is heavily centralized and hierarchically, then the
-member(s) of the organization who implement the passed policies can decide
-how to implement security mechanisms to ensure policies are followed, or worse
-still, whether to implement any security mechanisms at all. This centralization
-leads to an imbalance of power similar to the one discussed by Kavada regarding
-activism and social media~\cite{kavada2020counterpublics}.
-
-
-This definition, even with the compounding effect of centralization in any of
-the three areas, implies that horizontality is not a binary trait, but rather a
-spectrum between entirely dictatorial (defined as $h = \frac{1}{|S|}$) and fully
-horizontal (defined as $h = 1$). In practice, most organizations likely do not
-sit at either extreme of this spectrum. In traditional, hierarchical
-organizations, security is likely more skewed towards a lower fraction of
-horizontality, but not equal to $\frac{1}{|S|}$. In worker cooperatives, 
-activist groups, and other traditionally less hierarchical organizations,
-horiztonality is likely more skewed towards, but not arriving at, $1$. An
-interesting first work towards understanding horizontal security may exist in
-measuring, comparing, and contrasting the current horizontality of security in
-different types of organizations. This idea, and other potential future works,
-are further examined in Section~\ref{sec:futurework}.
-
+% TODO: Include here the lack of ability to be horizontal when hierarchical
+% tools are used, and vice-versa, the lack of ability to be hierarchical when
+% horizontal tools are used. Can we develop technology that allows us to do
+% both when they are needed?
 \subsection{Horizontality, Tools, and Techniques}
-In Section~\ref{sec:definition} we defined horizontality of security as the
-fraction of policymakers over stakeholders of an organization. Thus, we see that
-horizontality is related to security policies more than the tools used to 
-enforce them. 
+In Section~\ref{sec:definition} we discussed horizontality of security as being
+multidimensional and dynamic, and relating to the different decision making
+processes that an organization has around securit. Thus, we see that
+horizontality is related to security policy decisions, as the participation in
+these decision making processes informs what power individuals in the
+organization have to say how they wish to secure their operations.
 
 However, this does not mean that the influence of hierarchy does not affect the
-tools and techniques used in Cybersecurity. For example, most operating systems
+tools and techniques used in Cybersecurity, and that some tools and techniques
+do not imply or impose hierarchy. For example, most operating systems
 tend to be built around the idea of the singular administrator or a small set of
 administrators setting up the system. This idea makes sense from a  hierarchical
 organization's perspective. After all, if the individuals higher in the
 hierarchy have more privileges, that simply reflects their decision-making 
-power within the organization. 
-
-From a horizontal security perspective, however, this method of system 
-administration may be detrimental. If a singular administrator decides that
-they do not like the policy decisions of the organization, they may be able to
-use their administrative power to stop the organization from taking the
-democratically selected action. When this occurs, there may not be another
+power within the organization. From a horizontal security perspective, however,
+this method of system administration is detrimental. If a singular administrator
+decides that they do not like the policy decisions of the organization, they may
+be able to use their administrative power to stop the organization from taking
+the democratically selected action. When this occurs, there may not be another
 individual with more privileges to override this decision. Thus, the very
 concept of an administrator with the power to shut out other administrators is a
-threat to a horizontally controlled organization. 
+threat to a horizontally controlled organization.
 
 On the other hand, there do exist systems that were designed with a more
 horizontal structure in mind. One example of this is the Bitcoin 
@@ -142,11 +154,11 @@ exists collusion of 51\% of the miner network. This decision was made
 specifically to make it difficult for malicious actors in the network to perform
 malicious activities, such as stealing bitcoin or deleting past transactions.
 The implication of this design is that Bitcoin cannot be centrally 
-regulated~\cite{tu2015rethinking}. If we re-frame the concept of collusion as 
-cooperation via democratic vote, we see that this design allows for regulation
-of the Bitcoin network in a horizontal way. Thus, if a transaction was deemed
-to be against a security policy by the majority of the network, it is possible
-to remove it.
+regulated~\cite{tu2015rethinking}, at least in theory . If we re-frame the
+concept of collusion as cooperation via democratic vote, we see that this design
+allows for regulation of the Bitcoin network in a horizontal way. Thus, if a
+transaction was deemed to be against a security policy by the majority of the
+network, it is possible to remove it.
 
 Though this is more horizontal policy enforcement than other tools promote, it
 still has many issues. The first issue is that of defining the stakeholders of
@@ -174,6 +186,8 @@ specifically made for mining Bitcoins. Proof of Stake, another consensus
 algorithm for Blockchain, bypasses this middle step and directly benefits those
 who control larger amounts of monetary stake in the network.
 
+% TODO: Add something about the DOA hack.
+
 Despite these issues, the security design of Blockchain is still more horizontal
 than typical designs. However, Blockchain is no the only security technology
 with a less hierarchical vision and structure. Perhaps the most well known
@@ -192,6 +206,7 @@ of trust or derived from web of trust could be improved to be more usable, it
 could serve as a building block for applications and systems that take a
 horizontal approach to security.
 
+%TODO: Flesh the following paragraph out. Talk about the cipherpunks.
 In addition to the Blockchain approach used by Bitcoin, and to the web of trust
 used by PGP, many other potential building blocks of horizontal security already
 exist. These include other consensus algorithms such as Practical Byzantine
@@ -207,6 +222,138 @@ Capability based schemes and systems can be used to allow for transfer of
 control over resources based on the will of the collective. Additionally, other
 yet undeveloped primitives, techniques, and tools may be needed as well. Future
 work can address these needs, as described in Section~\ref{sec:futurework}.
+
+\subsection{COLBAC: Collective Based Access Control}
+\label{sec:colbac}
+As discussed in previous sections, the choice of certain software, protocols, or
+techniques such as X509 certificates or PGP web of trust has implications in the
+level of horizontality possible for systems built on top of those software,
+protocols, or techniques. How, then, can we build a foundation such that
+organizations of different horizontality can use the same foundation and arrive
+at much differently structured organizations?
+
+In this section we describe our Collective Based Access Control, or COLBAC: our
+approach to a dynamic horizontality access control system. We begin by
+describing its requirements, focusing on the dynamic horizontality that
+separates COLBAC from other access control systems. We then define the system
+itself. Finally, we discuss the properties of this system and the limitations of
+this system.
+
+\subsubsection{System Requirements}
+\mbox{}\\
+COLBAC is aimed at addressing a novel requirement in cybersecurity research:
+access control and authorization given an organization with dynamic levels of
+horizontal control. Though previous approaches exist for hierarchical access
+control (such as MAC, RBAC, etc.), to our knowledge no access control model
+exists for organizations of dynamic and flexibile horizontality. To realize
+this, our solution must be able to be flexible in terms of horizontality. Said
+another way, our system must not assume or define a pre-determined threshold for
+horizontal control, i.e., it must not assume majority, or super-majority, or 
+full consensus is the preferred method of democratic participation. Instead,
+the threshold must be configured by the collective itself, and must be able to
+be changed when necessary. This allows for rapid temporary centralization of the
+system to respond to crises, or to perform a task that requires expertise that
+few members of the collective contain. However, these moments of centralization
+must be quick to expire and easy to override in order to prevent abuse of
+centralized power. Said another way, it must always be easy for the collective
+to return to more horizontal control.
+\begin{enumerate}
+\item full transparency of actions taken on behalf of the collective.
+\end{enumerate}
+
+\subsubsection{System Design}
+\mbox{}\\
+COLBAC presents a solution to access control that relies around the collective.
+However, as will be discussed later in this section, not all objects on the
+system will need to be collectively controlled or administered. As such, we
+define three distinct \textit{spheres} of the system, or areas that require
+different approaches to access control. These spheres are the \textbf{Collective
+Sphere}, the \textbf{User Spheres}, and the \textbf{Immutable Sphere}.
+
+In order to achieve different degrees of horizontality, there must be a portion
+of the system that is controlled not by any individual user of the system, but
+by some democratic process of the users of the system. We call this portion of
+the system the \textbf{Collective Sphere}, as it contains programs, files, and
+other resources only accessed based on collective authorization. In any
+horizontal system, the administrative functions of the operating system would
+need to exist within this portion of the system to allow for true collective
+control.
+
+However, not everything should be directly managed by the collective. Individual
+users may have their own files and programs they intend to use only in a way
+that it does not effect other users of the system or the resources of the
+collective\footnote{We can think of these as the home directories of users in
+modern Unix-like systems}. These speheres, called the \textbf{User Speheres},
+can use traditional DAC systems like modern Unix-like systems without effecting
+the horizontality of the system as a whole.
+
+Finally, to have meaningful control of the system we must have transparency. To
+achieve this, a system must have an \textbf{Immutable Sphere}, or a portion of
+the file system and programs that cannot be altered once written to, including
+by democratic control. This allows for the system to provide append only logs
+that are vital to maintaining collective control, as described later in this
+section.
+
+\begin{enumerate}
+%\item Different Spheres
+%    \begin{itemize}
+%    \item user sphere
+%    \item collective sphere (sudo)
+%    \item immutable sphere (cannot be altered, can be read)
+%    \end{itemize}
+\item Registration
+    \begin{itemize}
+    \item at least 3 users
+    \item each user has an offline key.
+    \item specify beginning fraction required for collective action
+    \end{itemize}
+\item Token: Draft Phase
+    \begin{itemize}
+    \item User drafts a proposal. Two types, action token and delegation token.
+    \item See subsection for proposal design.
+    \item user signs the proposal with their key.
+    \end{itemize}
+\item Token: Petition Phase
+    \begin{itemize}
+    \item Pass along token to reference monitor, reference monitor passes to
+    other users.
+    \item If a user agrees, signs and returns to reference monitor.
+    \item If a user disagrees, signs a disagreement and returns to reference
+    monitor.
+    \item User can choose not to vote. Signs a blank vote and returns to
+    reference monitor.
+    \end{itemize}
+\item Token: Action Phase
+    \begin{itemize}
+    \item When petition phase is over, the number of signatures is compared to
+    the fraction.
+    \item If >=, perform action, log.
+    \item Else, just log.
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Types of Tokens}
+\mbox{}\\
+\begin{enumerate}
+\item Action Token
+\item Delegation Token (Working Group Token)
+\item Emergency Token
+\end{enumerate}
+
+\subsubsection{Properties of COLBAC}
+\mbox{}\\
+\begin{enumerate}
+\item flexible and dynamic horizontality through configurable fraction.
+\item full transparency of actions taken.
+\end{enumerate}
+
+\subsubsection{Limitations of COLBAC}
+\mbox{}\\
+\begin{enumerate}
+\item USABILITY!!!!!!!
+\end{enumerate}
+
+
 % Access Control:
 % La-Padula, Biba, strictly hierarchical
 % DAC based on individualistic regulation of files, overwritable by admin on

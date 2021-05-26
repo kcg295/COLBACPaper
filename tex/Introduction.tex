@@ -1,8 +1,11 @@
-Recent events all around the globe have demonstrated an increasing desire for
-more inclusive, participatory, and fair social structures. From the demands of
-Black Lives Matter protesters regarding police oversight and funding, to the
-popular reactions to the handling of the COVID pandemic, to the decision making
-power over the product of a worker's labor, people are continuing to demand more
+The struggle of power between centralized, hierarchical structures and
+decentralized, horizontal structures has existed for millenia. This struggle has
+expressed itself in all forms of life: politics, economics, social interaction,
+and more. Recent events all around the globe have demonstrated the resurgence of
+a desire for more inclusive, participatory, and fair social structures. From the
+demands of Black Lives Matter protesters regarding police oversight and funding,
+to the raise in popularity in worker cooperatives that allow workers to have
+power over the product of their labor, people are continuing to demand more
 participation in important economic and societal decision-making processes. %TODO: CITE ME
 Even some schools are beginning to include the democratic participation of the
 school children to their decision making processes, encouraging engagement and
@@ -27,7 +30,8 @@ representatives or working groups to delegate specific tasks, allowing for
 quicker actions and responses to events, but within a power structure that
 allows for the revocation of those who misuse their power. Some organizations
 take a hybrid approach, requiring democratic votes of the whole organization for
-some issues, and electing working groups for others.
+some issues, and electing working groups for others. Some organizations sway
+between all of the above listed approaches.
 
 Despite the rapid demand of this changed structure of organization, 
 Cybersecurity tools, technologies and techniques continue to remain highly 
@@ -91,17 +95,31 @@ control than others? Must these tools be this way? Are there better ways to
 design tools to account for horizontality and equality in a client organization?
 If a tool does not allow for horizontality and equality in a client
 organization, can another tool sit in between the offending tool and the
-organization to address the issue? In his work \textit{The Moral Character of
-Cryptographic Work}, Rogaway states ``Cryptography can be developed in
-directions that tend to benefit the weak \textit{or} the 
-powerful.''~\cite{rogaway2015moral}. Why, then, have we not developed technology
-that benefits the community of powerless by limiting the privileges of the
-powerful within an organization via democratic vote?
+organization to address the issue? 
 
-In this paper we define and argue for the construction of horizontal security.
-We explore different potential approaches to horizontal security, and examine
-some examples of horizontal security practices currently in use. We then address
-some potential benefits and drawbacks of horizontal security, and the effects it
-may have on privacy. We then conclude with future work, and supply a set of
-unsolved problems that must be addressed to realize our vision of horizontal
-security.
+Indeed, we know these concepts can be placed into practice, as they have before
+with horizontal security technologies such as PGP and its web of trust. However,
+where horizontal tools do exist, they tend to be rigid and inflexible, only
+allowing for a pre-defined notion of horizontality. Examples of this are
+technologies that require a set percentage of the system to agree to reach a
+consensus, instead of allowing the percentage required to be flexible and
+dynamic, adjusting to the needs of the organization at the time. Can these tools
+be modified to allow for dynamic horizontality, responding to the needs of an
+organization at a given moment?
+
+In his work \textit{The Moral Character of
+Cryptographic Work}, Rogaway states ``Cryptography can be developed in
+directions that tend to benefit the weak or the
+powerful.''~\cite{rogaway2015moral}. Why, then, have we not developed
+\textbf{more} technologies that benefit the community of powerless by limiting
+the privileges of the powerful within an organization via democratic vote?
+
+In this paper we argue for the construction of horizontal security tools and
+techniques that are flexible and respond to the needs of an organization at a
+given time. We explore different potential approaches to horizontal security,
+and examine some examples of horizontal security practices currently in use. We
+then address some potential benefits and drawbacks of horizontal security, and
+the effects it may have on privacy. We provide an example implementation of the
+idea of dynamic horizontality with a system called COLBAC, or collective based
+access control. We then conclude with future work, and supply a set of unsolved
+problems that must be addressed to realize our vision of horizontal security.
