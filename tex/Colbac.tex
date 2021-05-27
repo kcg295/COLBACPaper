@@ -92,7 +92,7 @@ procedure consisting of three phases: the \textit{Draft Phase}, the
 
 In the Draft Phase, depending on the action the user wishes to perform, they
 will write the code or commands that will interact with objects in the
-collective sphere, or will identify the permissions they will need to accomplish
+Collective Sphere, or will identify the permissions they will need to accomplish
 their task or tasks. At the end of this process, the user will have a draft
 Action or Delegation token, as described later in Sections \ref{sec:tokentypes}
 and \ref{sec:tokenformat}.
@@ -119,14 +119,14 @@ fails, and the attempted action is logged in the immutable spehere.
 \label{sec:tokentypes}
 \mbox{}\\
 As the previous section demonstrates, the token is the main form of interacting
-with the collective sphere. Users who wish to affect the collective sphere do
+with the Collective Sphere. Users who wish to affect the Collective Sphere do
 so by creating a token which is then voted on by the users of the system. In
 order to facilitate easy interaction with the colbac system, there are multiple
 types of tokens.
 
 The first token is called the \textbf{Action Token}. This token allows a single
-command, a small script, or a program to be run in the collective sphere, and to
-enjoy collective sphere access. This is the most straightforward type of token,
+command, a small script, or a program to be run in the Collective Sphere, and to
+enjoy Collective Sphere access. This is the most straightforward type of token,
 since everything the token will allow to occur is known during the Petition
 Phase. However, this type of token is rigid and unflexible. If there is an error
 in the command, or in the code, a user would need to re-enter the Draft Phase,
@@ -136,7 +136,7 @@ causing frustration for both the users drafting the tokens and the users voting
 on them.
 
 To avoid these issues, COLBAC also allows for \textbf{Delegation Tokens}, which
-allow the drafting user to act in the collective sphere for a given set of time,
+allow the drafting user to act in the Collective Sphere for a given set of time,
 and with a given set of restrictions. The procedure is obtaining a Delegation
 Token is the same as that for an Action Token. However, the information that
 would be put in the token would be slightly different. The format for Action
@@ -146,7 +146,7 @@ There are some instances in which one needs to respond to emergency situations
 as soon as possible, and cannot wait for a slow authorization process by a
 potentially large set of users. To accomidate these situations, COLBAC has an
 \textbf{Emergency Token}. These tokens allow users to run short scripts, single
-commands, or small programs in the collective sphere without immediate
+commands, or small programs in the Collective Sphere without immediate
 auhorization. However, this action is immediately logged and all users are
 informed by the Reference Monitor that an Emergency Token was used. In the case
 that an Emergency Token was incorrectly used (say, to overwrite the result of
@@ -163,37 +163,149 @@ Emergency Tokens.
 \subsubsection{Token Format}
 \label{sec:tokenformat}
 \mbox{}\\
-Header:
+Each token contains three sections, a header, a body, and a footer. Different
+types of tokens (action tokens, delegation tokens, or emergency tokens) contain
+different fields in their body sections. However, the headers and footers of all
+token types contain the same fields. For a graphical representation of the token
+format, please see Figure~\ref{fig:tokenformatfigure}.
+
+The first portion of a token is called the header. The header contains the
+following fields:
+%Header:
+\begin{enumerate}
+\item \textbf{Nonce/ID}:\\ 
+An integer used to both identify the token and avoid replay attacks.
+\item \textbf{Token Type}:\\ 
+The type of token. Can only be Action, Delegation, or Emergency.
+\item \textbf{Party(s) Being Authorized}:\\
+A single entity or set of entities requesting aurhotization to perform an action
+or set of actions in the Collective Sphere.
+\item \textbf{Petitioning Party}:\\
+The single entity petitioning for authorization. This user usually also exists
+in the list of parties being authorized.
+\item \textbf{Token Expiration}:\\
+The expertation time of the token in Unix format.
+\end{enumerate}
+
+For Action Tokens or Emegency Tokens, the token body contains the following
+fields:
+\begin{enumerate}
+\item \textbf{Code to be Run}:\\
+The command, script, or program to be run in the Collective Sphere.
+\item \textbf{Permissions Requested}:\\
+A set of permissions requested to complete the task. These permissions include
+negative and positive permissions, of which negative permissions take
+precidence. The inclusion of both negative and positive permissions make it
+easier for permissions to be specified. For example, if a folder in the
+Collective Sphere contains 950 files, and the code running needs read access to
+940 of them, it is easier to specify positive read permissions on the whole
+folder and negative read permissions on the 10 files, rather than specify 940
+positive read permissions and no negative read permissions.
+\item \textbf{Comments (optional)}:\\
+Comments explaining what the code included in the Token does, and why it is
+necessary. This field is similar to messages included in version control systems
+like a Git commit message.
+\end{enumerate}
+
+For Delegation Tokens, the body contains the following fields:
+\begin{enumerate}
+\item \textbf{Permissions Needed}:\\
+Similar to the set of permissions requested in the Action or Emergency Token
+body.
+\item \textbf{Comments (optional)}:\\
+Similar to the comments section of the Action or Emergency Token body.
+\end{enumerate}
+
+As we can see, the Delegation Token body is similar to the Action or Emergency
+Token body, except in that it does not specify the code that is running. This
+design is ideal for sessions that require troubleshooting, or tasks that may
+require back-and-forth between the system and the individual or group performing
+the task in order to fully realize. However, when using Delegation Tokens it is
+more important to ensure that the Permissions Needed section follows the
+principle of least privilege. If not, individuals can use the privileges they
+gain from the Delegation Token to perform actions that were not originally
+intended for their task(s). Though these actions will be logged into the
+Immutable sphere, it still requires time and effort of the system users to undo
+the actions of an individual who abused the power granted to them through
+Delegation Tokens.
+
+Each token, regardless of type, ends with a footer. The footer simply contains
+one field, a field which states if it is approved or denied, along with a
+verifiable authentication value that is difficult to predict and easy to verify,
+such as an HMAC of the permission token keyed by a secret value known only to
+the Reference Monitor.
+
+\subsubsection{Formalizing COLBAC}
+\mbox{}\\
 \begin{itemize}
-\item nonce/Id
-\item token type
-\item party(s) being authorized
-\item petitioning party
-\item token expiration
+\item So much to do here.
+\item Let $u$ be the user attempting access.
+\item Let $o$ be the object or set if objects the user is attempting to
+access.
+\item Let $p$ be the set of permissions the user is requesting.
+\item Let $t$ be the type of Token the user is attempting to create.
+\item Let $e$ be the proposed expiration time of the Token.
+\item Let $c$ be the comment attached to a Token, or in the case it doesn't
+exist, let $c$ be $NULL$.
+\item Let $a$ be the command, script, or program the user wants to run in
+the Collective Sphere, or in the case that it doesn't exist, let $a$ be $NULL$.
+\item Let $d$ be the set of delegate the user is proposing, or in the case
+where it doesn't exist, let $d$ be $NULL$.
+\item $DT_{a}(u,o,p,e,a,c) \rightarrow T_{a} = (u,o,p,e,a,c)$
+\item $DT_{d}(u,o,p,e,a,c) \rightarrow T_{d} = (u,o,p,e,d,c)$
+\item $DT_{e}(u,o,p,a,c) \rightarrow T_{e} = (u,o,p,a,c)$
+\item $DT(u,o,p,e,a,c,t) \rightarrow T$ of type $T_{a}$ or $T_{d}$ or $T_{e}$.
+\item $P(T) \rightarrow \{ $ set of votes $V$ on authorizing $T$ iff $T$ is of
+type $T_{a}$ or $T_{d}$\}.
+\item $V_{T} = P(T)$
+\item $V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}.$
+\item $V_{(T, No)} = \{v \in V$ s.t. $v = False\}.$
+\item $V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$.
+\item $AT(T,V_{T}) \rightarrow True$ iff $|V_{(T, Yes)}| \ge f \wedge
+|V_{(T,Yes)} \bigcup V_{(T, No)}| \ge m$, else $False$.
+\item $GTT(t:Token) \rightarrow \{$the type of Token from $Action, Delegation,\\
+or Emergency$\}.
+\item $GS(o:Object) \rightarrow U$ iff $o \in U$, $C$ iff $o \in C$, $I$ iff
+$o \in I$.
+\item include algorithm that ties everything together.
 \end{itemize}
-Action or Emergency Token Body:
-\begin{itemize}
-\item Code to be run
-\item Permissions needed
-\item Comments (optional)
-\end{itemize}
-Delegation Token Body:
-\begin{itemize}
-\item Permissions needed
-\item Restrictions proposed
-\item Comments (optional)
-\end{itemize}
-Footer:
-\begin{itemize}
-\item number of signatures
-\item signature list
-\end{itemize}
+\begin{algorithm}
+\caption{The main decision making process of COLBAC}
+\begin{algorithmic}[1]
+\If{$GS(o)=U$}
+    \State Perform DAC Access Control.
+\ElsIf{$GS(o)=C$}
+    \State $T = DT(u,o,p,t,e,c,a,d)$
+    \If{$GTT(T) \in (T_{a}, T_{d})$}
+        \State $V_{T} = P(T)$
+        \State $V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}.$
+        \State $V_{(T, No)} = \{v \in V$ s.t. $v = False\}.$
+        \State $V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$.
+        \If{$AT(T, V_{(T, Yes)}, V_{(T, No)}, V_{(T, Blank)},f, m)$}
+            \State Perform($T$)
+            \State Log($T$, $True$)
+        \Else
+            \State Log($T$, $False$)
+        \EndIf
+    \Else
+        \State Perform($T$)
+        \State LogEmergency($T$)
+    \EndIf
+\Else
+    \State TODO: Fill me in.
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+
+\EndIf
 
 \subsubsection{Properties of COLBAC}
 \mbox{}\\
 \begin{enumerate}
 \item flexible and dynamic horizontality through configurable fraction.
 \item full transparency of actions taken.
+\item Inclusion of Immutable Section allows for inalienable rights.
 \end{enumerate}
 
 \subsubsection{Limitations of COLBAC}
