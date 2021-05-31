@@ -15,6 +15,7 @@ itself. Finally, we discuss the properties of this system and the limitations of
 this system.
 
 \subsubsection{System Requirements}
+\label{sec:colbacrequirements}
 \mbox{}\\
 COLBAC is aimed at addressing a novel requirement in cybersecurity research:
 access control and authorization given an organization with dynamic levels of
@@ -44,6 +45,7 @@ end, our system must have a method of logging information about the actions of
 individuals and the collective that is immutable and available.
 
 \subsubsection{System Design}
+\label{sec:colbacdesign}
 \mbox{}\\
 COLBAC presents a solution to access control that relies around the collective.
 However, as will be discussed later in this section, not all objects on the
@@ -236,6 +238,7 @@ such as an HMAC of the permission Token keyed by a secret value known only to
 the Reference Monitor.
 
 \subsubsection{Formalizing COLBAC}
+\label{sec:colbacformal}
 \mbox{}\\
 In this section we take a first attempt at formalizing COLBAC, a collective
 based access control system. To begin, we need to define a few sets.
@@ -523,14 +526,97 @@ some possibilities for this function in Section~\ref{sec:colbacproperties}.
 \subsubsection{Properties of COLBAC}
 \label{sec:colbacproperties}
 \mbox{}\\
-\begin{enumerate}
-\item flexible and dynamic horizontality through configurable fraction.
-\item full transparency of actions taken.
-\item Inclusion of Immutable Section allows for inalienable rights.
-\end{enumerate}
+In Section~\ref{sec:colbacdesign} we introduced the design of COLBAC, an access
+control system meant to serve as a primitive that can be used to achieve a more
+horizontal form of security. In Section~\ref{sec:colbacformal} we presented a
+more formal definition of the system, filling in some of the details of how the
+system worked.
+
+As stated in Section~\ref{sec:colbacrequirements}, the goals of the system
+design were to provide flexibile and dynamic horizontality, and to provide
+transparency such that individuals participating in the system could reasonably
+participate in the decision-making process. Through the design of COLBAC we have
+created an access control system that meets these goals. We achieve flexible and
+dynamic horizontality in our design through the modification of our two security
+parameters, $f$ and $m$. We achieve transparency through the use of the
+Immutable Sphere, and the logging that our reference monitor does during its
+operation (as described in Algorithm~\ref{alg:main}.
+
+Though our design does provide for flexible and dynamic horizontality, it does
+not allow for every level of horizontality. For example, in our design a
+strictly-hierarchical approach is not possible: even if $f$ is set to
+$\frac{1}{n}$, where $n$ is the number of users, that simply means that one
+person needs to vote in favor to authorize an action, but it does not say
+\textit{which} invidivual has that power, meaning that any single vote from any
+user is capable of authorizing an action. This is far from a dictatorial
+strucutre, in which all power is held only by one individual or a small set of
+individuals.
+
+This design does allow for many different expressions of horizontal structures,
+however. For example, because of the existance of delegation Tokens which expire,
+our design allows for an authorization structure that reflects those of
+representative democracies, where elected individuals reside over certain
+responsibilities in the system. However, if the collective does not approve of
+how the elected invidivudal is performing their duties, our solution allows for
+users to call for a democratic vote that invalidates the Token of the delegate,
+thus forcing a new delegate to be chosen or bringing the responsibility back
+into the collective.
+
+More, our system allows for action Tokens to modify the values of $f$ and $m$,
+thus making it possible for an organization to adjust how many individuals in
+the collective must agree on authorizing a Token in order for the Token to be
+authorized. This allows the organization to decide if they want to work with
+a full consensus based approach, a supermajority approach, a majority approach,
+or something else entirely. A consequence of this system is that it is easier to
+require \textbf{more} consensus than it is to require \textbf{less} consensus.
+This property is obvious when one realizes that if an organization calls a vote
+to switch from $f$ to $f'$ where $f > f'$, that action token still needs $f$
+votes, the larger number, to become authorized. However, if the organization
+wants to require \textbf{more} consensus, in other words a user petitions a
+token to change from $f$ to $f'$ where $f < f'$, then that vote requires $f$
+votes, the smaller number of the two, to be authorized. A similar claim can be
+made about the amount of interaction required, which would be affected by
+changing the security parameter $m$.
+
+Another interesting property of this system is that it contains in it the
+inalienable right to vote. Whenever a vote is called, the reference monitor does
+not send it to a small set of individuals who are marked as having a right to
+vote. Instead, it sends it to all individuals who are a part of the system.
+Thus, in the COLBAC system the right to vote is inalienable as long as one
+remains part of the system. Likewise, because the reference monitor grants all
+read access to any object in the Immutable Sphere and disallows any deletions or
+arbitrary write in the Immuatble Sphere, transparency of the system is
+guaranteed so long as the reference monitor behaves according to the system
+design.
+
+However, in order to avoid the equivalent of a coup d'\'etat on the system, we
+must set some limitations of what certain tokens can do. For example, if an 
+individual user of the system wishes to perform a coup d'\'etat, one approach
+would be to use an emergency token to set $f$ and $m$ to $\frac{1}{n}$ where $n$
+is the number of users in the system, then create and authorize action tokens to
+remove users from the system until only user accounts that are loyal to that
+user remain. To avoid this, there must be limitations on what emergency Tokens
+and delegation tokens can do. For this case specifically, emergency and
+delegation Tokens must not be able to alter the values of $f$ and $m$. Similarly
+there must be a limitation on the number of emergency tokens an individual has,
+and individuals with access to delegation tokens must not be able to remove many
+members. It is likely that even more restrictions are required to maintain the
+safety of the system, but we leave the identification of those limitations, and
+further analysis of the properties of COLBAC, to future work.
 
 \subsubsection{Limitations of COLBAC}
 \mbox{}\\
-\begin{enumerate}
-\item USABILITY!!!!!!!
-\end{enumerate}
+Like all systems, COLBAC is not perfect, and suffers from limitations. Perhaps
+one of the most obvious limitations of COLBAC is its usability and user
+experience. Creating a horizontal access control system with democratic
+participation requires the system to interact with its users much more than a
+traditional operating system. Users will be expected to vote on many Tokens in
+the Petition Phase, and this may cause fatigue in some users. Additionally, 
+COLBAC has a limitation in which democratic governance structures it can
+represent. For example, a purely elected representative structure without
+referrendums is impossible to create using COLBAC, since the right to petition
+a Token is inalienable in COLBAC. While this may be seen as a positive for many
+horizontally run organizations, some may also view it as a negative. Finally,
+currently COLBAC does not allow for different values of $f$ and $m$ per file.
+Future research may be needed to determine how this would affect the properties
+of COLBAC, and if it may introduce new attacks.
