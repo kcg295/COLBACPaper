@@ -11,8 +11,12 @@ In this section we describe our Collective Based Access Control, or COLBAC: our
 approach to a dynamic horizontality access control system. We begin by
 describing its requirements, focusing on the dynamic horizontality that
 separates COLBAC from other access control systems. We then define the system
-itself. Finally, we discuss the properties of this system and the limitations of
-this system.
+itself. Finally, we discuss the properties and limitations of this system.
+Though this is, to our knowledge, the first attempt at defining a collective
+based access control system with dynamic and felxible horizontality, it is far
+from the only potential approach. Section~\ref{sec:colbaclimitations} discusses
+some potential factors that can differ from our system, and potentially improve
+upon it.
 
 \subsubsection{System Requirements}
 \label{sec:colbacrequirements}
@@ -31,8 +35,9 @@ be changed when necessary. This allows for rapid temporary centralization of the
 system to respond to crises, or to perform a task that requires expertise that
 few members of the collective contain. However, these moments of centralization
 must be quick to expire and easy to override in order to prevent abuse of
-centralized power. Said another way, it must always be easy for the collective
-to return to more horizontal control.
+centralized power. Said another way, it must always be easier for the collective
+to return to more horizontal control than for a centralized entity to maintain
+control over the system.
 
 However, it makes no sense to have horizontal or democratic control without
 transparency. An individual cannot meaningfully vote or otherwise decide on a
@@ -61,7 +66,8 @@ the system the \textbf{Collective Sphere}, as it contains programs, files, and
 other resources only accessed based on collective authorization. In any
 horizontal system, the administrative functions of the operating system would
 need to exist within this portion of the system to allow for true collective
-control.
+control. Additionally, all services that the collective offers, or official
+sources of collective information, must also exist in this sphere.
 
 However, not everything should be directly managed by the collective. Individual
 users may have their own files and programs they intend to use only in a way
@@ -76,7 +82,8 @@ achieve this, a system must have an \textbf{Immutable Sphere}, or a portion of
 the file system and programs that cannot be altered once written to, including
 by democratic control. This allows for the system to provide append only logs
 that are vital to maintaining collective control, as described later in this
-section.
+section. Additionally, this section can hold a list of inalienable rights that
+each participant in the system has, such as the right to a vote.
 
 When the system is first installed, a \textit{Registration Phase} will occur.
 During this phase, at least 3 users will be signed up in the system. These users
@@ -90,7 +97,7 @@ After the system is set up, users can interact with objects in the User Sphere
 as they would in any other system. However, to interact with any objects in the
 Collective Sphere, users would need to follow a specific authorization
 procedure consisting of three phases: the \textit{Draft Phase}, the 
-\textit{Petition Phase}, and the \textit{Action Phase}.
+\textit{Petition Phase}, and the \textit{Authorization Phase}.
 
 In the Draft Phase, depending on the action the user wishes to perform, they
 will write the code or commands that will interact with objects in the
@@ -103,19 +110,23 @@ After the user has completed their Token, they move on to the Petition Phase. In
 this phase the user sends their draft Token to the reference monitor running on
 the system. This reference monitor will then forward the draft Token to all
 other members of the system and ask for a vote. The users will then vote one of
-the following ways: yes, no, or abstain. The system will set a pre-configured
-amount of time before marking all individuals who did not vote as abstaining.
+the following ways: yes, no, or abstain\footnote{It is important to mention that
+this is not the only way of performing democratic participation. However, other
+models of democratic participation are left to future work.}. The system will
+wait a pre-configured amount of time before marking all individuals who did not
+vote as abstaining.
 
 After all votes are collected or the response period has timed out, the system
-enters the action phase. During the action phase the reference monitor counts
-all of the votes. If the number of votes divided by the total number of users is
-greater than or equal to $m$, and the fraction of yes votes to the total number
-of votes is greater than or equal to $f$, the petition is considered successful
-and the action is taken. In addition to taking the action, the system logs the
-action in log files held in the immutable sphere. However, if the number of all
-votes divided by the total number of users is less than $m$ or if the number of
-yes votes divided by the total number of votes is less than $f$, the petition
-fails, and the attempted action is logged in the immutable sphere.
+enters the authorization phase. During the action phase the reference monitor
+counts all of the votes. If the number of votes divided by the total number of
+users is greater than or equal to $m$, and the fraction of yes votes to the
+total number of votes is greater than or equal to $f$, the petition is
+considered successful and the token is returned to the petitioning user. In
+addition to taking the action, the system logs the action in log files held in
+the immutable sphere. However, if the number of all votes divided by the total
+number of users is less than $m$ or if the number of yes votes divided by the
+total number of votes is less than $f$, the petition fails, and the attempted
+action is logged in the immutable sphere.
 
 \subsubsection{Types of Tokens}
 \label{sec:Tokentypes}
@@ -159,12 +170,17 @@ Emergency Token, and to avoid Emergency Token Wars\footnote{We define Emergency
 Token Wars as instances in which different members in the organization use
 Emergency Tokens to undo the actions taken in the name of the collective.},
 each member only has a small number of emergency Tokens for a given period of
-time. Additionally, there can be limits placed on what can be done with 
-Emergency Tokens.
+time. Additionally, there are limits placed on what can be done with Emergency
+Tokens.
 
 \subsubsection{Token Format}
 \label{sec:Tokenformat}
 \mbox{}\\
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/TokenStructures.png}
+\caption{COLBAC Token Structures}
+\label{fig:Tokenformatfigure}
+\end{figure}
 Each Token contains three sections, a header, a body, and a footer. Different
 types of Tokens (action Tokens, delegation Tokens, or emergency Tokens) contain
 different fields in their body sections. However, the headers and footers of all
@@ -241,7 +257,15 @@ the Reference Monitor.
 \label{sec:colbacformal}
 \mbox{}\\
 In this section we take a first attempt at formalizing COLBAC, a collective
-based access control system. To begin, we need to define a few sets.
+based access control system. This formalization is not yet complete, but rather
+can benefit from insight of fellow participants at the NSPW Workshop. However,
+in the following section we lay as much of a foundation as we can to build on
+top of. To begin, we define important sets. We then go on to discuss which
+permissions are possible in COLBAC, what abbreviations are used in our notation,
+and what functions we rely on in our formalization. Finally, we introduce
+different algorithms used by the reference monitor in our proposed model. This
+formalization serves as a basis for our access control model, but can be changed
+based on the feedback received at the workshop.
 \begin{definition}[Spheres of COLBAC]\label{def:spheres}
 In COLBAC, a \textbf{Sphere} is a set which contains both subjects (users,
 processes, etc.) and objects (files, etc.).\\
@@ -258,9 +282,11 @@ $I \cap C = \emptyset$\\
 \hrule \mbox{}\\
 \end{definition}
 
-\noindent Our access control system also requires a set of permissions. These
-permissions will be used later when the reference monitor is deciding whether or
-not to permit an action.
+\noindent In addition to the sets above, our access control model also requires
+a set of permissions, similar to the sets of permissions used in other access
+control systems. These permissions will be used later when the reference monitor
+is deciding whether or not to permit an action. These permissions can be
+expanded based on feedback received during the NSPW Workshop.
 
 \begin{definition}[Permissions in COLBAC]\label{def:permissions}
 $Create$ allows the creation of an object.\\
@@ -370,7 +396,10 @@ participate in order for a vote to be considered. These two security parameters
 are chosen at the initialization of the system, and can be changed by a
 successful action Token\footnote{These parameters cannot be changed by a
 delegate or by an emergency Token. This is discussed more in Section
-\ref{sec:colbacproperties}.}.
+\ref{sec:colbacproperties}.}. If the vote is successful, the Token is then
+authorized by the addition of a signature field that is difficult to predict or
+replicate, but easy for the reference monitor to later verify. One example of
+this is a keyed HMAC.
 \begin{definition}[Authorization in COLBAC]
 $AuthorizeToken(T,V_{T}) \rightarrow True$ iff $\frac{|V_{(T, Yes)}|}{|V|} > f
 \wedge \\ \frac{|V_{(T,Yes)} \cup V_{(T, No)}|}{|V|} \ge m$, else $False$\\
@@ -605,6 +634,7 @@ safety of the system, but we leave the identification of those limitations, and
 further analysis of the properties of COLBAC, to future work.
 
 \subsubsection{Limitations of COLBAC}
+\label{sec:colbaclimitations}
 \mbox{}\\
 Like all systems, COLBAC is not perfect, and suffers from limitations. Perhaps
 one of the most obvious limitations of COLBAC is its usability and user
@@ -612,11 +642,24 @@ experience. Creating a horizontal access control system with democratic
 participation requires the system to interact with its users much more than a
 traditional operating system. Users will be expected to vote on many Tokens in
 the Petition Phase, and this may cause fatigue in some users. Additionally, 
-COLBAC has a limitation in which democratic governance structures it can
-represent. For example, a purely elected representative structure without
+having horizontal technological solutions relies on the digital literacy of the
+users: users who know how to audit the commands sent in the petition phase have
+a deeper understanding of the potential effects of their vote. However, these
+problems may be solved through interface design, and through iterative
+development of the access control system.
+
+Additionally, COLBAC has a limitation in which democratic governance structures
+it can represent. For example, a purely elected representative structure without
 referendums is impossible to create using COLBAC, since the right to petition
 a Token is inalienable in COLBAC. While this may be seen as a positive for many
 horizontally run organizations, some may also view it as a negative. Finally,
 currently COLBAC does not allow for different values of $f$ and $m$ per file.
 Future research may be needed to determine how this would affect the properties
 of COLBAC, and if it may introduce new attacks.
+
+More, COLBAC focuses only on voting, with strictly set options of yes, no, and
+abstention. Future work should look into more forms of democratic participation,
+including but not limited to random sampling, run-off voting (instant, and
+round based), and more. Another potentially useful feature could be the concept
+of an amendment, or an ability to introduce a change to a petition such as
+removing a permission, or fixing a line of code in the action.

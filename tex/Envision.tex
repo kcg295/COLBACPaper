@@ -36,9 +36,7 @@ an organization, they will insist that the managers below them see that it is
 changed. This will trickle down the hierarchy until it is implemented. Though
 individuals at the lower levels of a hierarchy may have some decision making
 power in how it is implemented, they typically do not have decision making power
-in the questions mentioned above. Further questions arise when we consider the
-structures of organizations with flexible memberships, who operate on principles
-of open participation (plein-air citizens assemblies, etc.).
+in the questions mentioned above. 
 
 This concept typically holds true not just with access control and
 authorization, but with all aspects of an organization's security policy.
@@ -54,7 +52,11 @@ availability, which are informed by an organization's security policy, may not
 need to change under a concept of horizontal security. Instead, it is possible
 that horizontal security may be achieved by shifting policy making powers,
 implementation decisions, and enforcement powers, and other dimensions of
-security away from individuals and towards democratic, participatory processes.
+security away from individuals and towards democratic, participatory 
+processes\footnote{Further questions arise when we consider the structures of
+organizations with flexible memberships, who operate on principles of open 
+participation (plein-air citizens assemblies, etc.), but these will be explored
+in future work}.
 
 %\begin{definition}[Horizontality of Policy]
 %Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
@@ -156,19 +158,19 @@ malicious activities, such as stealing bitcoin or deleting past transactions.
 The implication of this design is that Bitcoin cannot be centrally 
 regulated~\cite{tu2015rethinking}, at least in theory . If we re-frame the
 concept of collusion as cooperation via democratic vote, we see that this design
-allows for regulation of the Bitcoin network in a horizontal way. Thus, if a
-transaction was deemed to be against a security policy by the majority of the
-network, it is possible to remove it.
+allows for regulation of the Bitcoin network in a somewhat horizontal way. Thus,
+if a transaction was deemed to be against a security policy by the majority of
+the network, it is possible to remove it.
 
 Though this is more horizontal policy enforcement than other tools promote, it
 still has many issues. The first issue is that of defining the stakeholders of
 Bitcoin: are only miners stakeholders, or are users stakeholders as well? If we
 define the stakeholders are only the miners of Bitcoin, we see that this
-approach reaches perfect horizontality. All miners participate in the decision
-to perform a modification on the Blockchain, whether the vote yes or no. If we
-consider users to also be stakeholders, however, we see that this system is no
-longer as horizontal. Users do not get a vote or say in whether or not a
-transaction gets removed or modified. 
+approach reaches a reasonable level of horizontality. All miners participate in
+the decision to perform a modification on the Blockchain, whether they vote yes
+or no. If we consider users to also be stakeholders, however, we see that this
+system is no longer as horizontal. Users do not get to participate in the
+decision of whether or not a transaction gets removed or modified. 
 
 Another issue with this approach is its competitive nature. Rather than
 cooperating miners attempting to create, implement, and enforce transaction
@@ -180,7 +182,7 @@ the Bitcoin community as an attack. However, the design property of requiring
 may still be useful to inspire future horizontal system designs. Worse still,
 this competitive nature tends to centralize the network over time. Bitcoin's
 Proof of Work algorithm tends to favor those who can afford highly specialized
-software, eventually leading to a centralization of the network into the hands
+hardware, eventually leading to a centralization of the network into the hands
 of those who are wealthy enough to control large amounts of machines
 specifically made for mining Bitcoins. Proof of Stake, another consensus
 algorithm for Blockchain, bypasses this middle step and directly benefits those
@@ -189,7 +191,7 @@ who control larger amounts of monetary stake in the network.
 % TODO: Add something about the DOA hack.
 
 Despite these issues, the security design of Blockchain is still more horizontal
-than typical designs. However, Blockchain is no the only security technology
+than typical designs. However, Blockchain is not the only security technology
 with a less hierarchical vision and structure. Perhaps the most well known
 example of a security system meant to be horizontal by design is the PGP Web of
 Trust design. This design was created to solve the key distribution problem
@@ -201,12 +203,11 @@ trusted, though to a lesser extent. This design was meant to be a horizontal
 representation of trust: one trusts the people they verify in person, and then
 trusts the people attested to by their trusted peers, but to a lesser degree.
 However, this scheme suffered from a large number of usability and user
-experience problems. {\color{red} TODO: Cite me.} However, if a method like web
-of trust or derived from web of trust could be improved to be more usable, it
-could serve as a building block for applications and systems that take a
-horizontal approach to security.
+experience problems~\cite{whitten1999johnny}. However, if a method like web of
+trust or derived from web of trust could be improved to be more usable, it could
+serve as a building block for applications and systems that take a horizontal
+approach to security.
 
-%TODO: Flesh the following paragraph out. Talk about the cipherpunks.
 In addition to the Blockchain approach used by Bitcoin, and to the web of trust
 used by PGP, many other potential building blocks of horizontal security already
 exist. These include other consensus algorithms such as Practical Byzantine
@@ -218,10 +219,11 @@ Sharing~\cite{chor1985verifiable} schemes can be used for distributed secret
 management in organizations. Applications like OAuth~\cite{leiba2012oauth} can
 be used to grant minimal and ephemeral access to organization accounts to
 members of the organization who need it, without revealing a password. 
-Capability based schemes and systems can be used to allow for transfer of
-control over resources based on the will of the collective. Additionally, other
-yet undeveloped primitives, techniques, and tools may be needed as well. Future
-work can address these needs, as described in Section~\ref{sec:futurework}.
+Capability~\cite{dennis1966programming} based schemes and systems can be used to
+allow for transfer of control over resources based on the will of the
+collective. Additionally, other yet undeveloped primitives, techniques, and
+tools may be needed as well. Future work can address these needs, as described
+in Section~\ref{sec:futurework}.
 
 \input{tex/Colbac}
 
