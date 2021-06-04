@@ -1,62 +1,63 @@
-In order to understand the concept of horizontal security, we must first examine
-the current state of security and its goals. For the purposes of this work, we
-will examine security through the traditional scheme of Confidentiality,
-Integrity and Availability, as is common. According to NIST,
+% In order to understand the concept of horizontal security, we must first examine
+% the current state of security and its goals. For the purposes of this work, we
+% will examine security through the traditional scheme of Confidentiality,
+% Integrity and Availability.
 
-\begin{quotation}
-\textit{A loss of confidentiality is the unauthorized disclosure of 
-information... A loss of integrity is the unauthorized modification or
-destruction of information... A loss of availability is the disruption of access
-to or use of information or an information system.}~\cite{pub2004standards}
-\end{quotation}
+% XXX: I'd like to flip "individual' to entity, as it feels that we could be
+% talking about bots/platforms/processes and more in this horizontal security
+% fashion
+% XXX: this also makes me wonder wether we want to bring the cyborg concept in
+% a playful way. It is not fundamental to the argument, but in a way we are
+% identifying these non-humans as part of the collective.
+Central to the issue of Horizontal Security are is the notion of
+\emph{authorization} (i.e., who is allowed to access a particular resource). If
+an authorized party reads, modifies, or destroys information, the definitions
+imply that there is no breach. Thus, whether or not the security of an
+organization has been breached depends highly on whether or not an entity is
+authorized to perform an action. This decision as to whether or not a person is
+authorized is heavily informed by an organization's security policy.
 
-Thus, from these definitions we get that confidentiality is the protection of 
-information from unauthorized disclosure, integrity is the protection of
-information from unauthorized modification or destruction, and availability is
-the protection from the disruption of access to or use of information or an
-information system.
+However, as it is natural with the notion of authorization, two fundamental
+pieces must exist: authorization \emph{policies} that represent
+collective-based authorization, and an access control system that can
+\emph{enforce} such policies.
 
-Present in two of these three definitions is the concept of authorization. If an
-authorized party reads, modifies, or destroys information, the definitions imply
-that there is no breach. Thus, whether or not the security of an organization has
-been breached depends highly on whether or not an individual is authorized to
-perform an action. This decision as to whether or not a person is authorized is
-heavily informed by an organization's security policy. However, this leads us to
-follow up questions: who writes these security policies, and how are the
-decisions of what they should contain made? How do we design authorization when
-authority is distributed across the entire collective?
+
+% Thus, from these definitions we get that confidentiality is the protection of 
+% information from unauthorized disclosure, integrity is the protection of
+% information from unauthorized modification or destruction, and availability is
+% the protection from the disruption of access to or use of information or an
+% information system.
 
 \subsection{Defining Horizontal Security}
 \label{sec:definition}
 
-In the current approaches to Cybersecurity, these decisions are often made or
-guided by the desires of those on top of the hierarchy of an organization. If
-the CISO of an organization does not agree with the access control decisions of
-an organization, they will insist that the managers below them see that it is
-changed. This will trickle down the hierarchy until it is implemented. Though
-individuals at the lower levels of a hierarchy may have some decision making
-power in how it is implemented, they typically do not have decision making power
-in the questions mentioned above. 
+% Here, I tried to remove the old text relating to policy vs implementation and
+% instead I'm trying to highlight the highly hierarchical notion of regular AC
+% systems.  As a consequence, I'm leaving this
+% policy/enforcement/implementation triad to arise naturally later in the text
+Access control is commonly encoded and enforced in a top-down fashion. The CISO
+of an organization holds institutional power to define access control policies
+within an orgnization. Further, without loss of generallity, lower-level
+administrators may have some decision making power in how to define subsets of
+a policy, yet, they typically do not have decision making power to. 
 
 This concept typically holds true not just with access control and
 authorization, but with all aspects of an organization's security policy.
 Decisions about how infringements are dealt with or the scope of the policies
 are also made in this manner. Decisions about how these policies are enforced,
-and what security mechanisms are used, are also made up top, with individuals at
+and what security mechanisms are used, are also made up top, with entities at
 the bottom left to enact the desires passed on to them.
 
 We see, then, that hierarchy introduces itself in multiple dimensions of
-security. These dimensions include the different decision-making processes
-of security. This implies that the concepts of confidentiality, integrity, and
-availability, which are informed by an organization's security policy, may not
-need to change under a concept of horizontal security. Instead, it is possible
-that horizontal security may be achieved by shifting policy making powers,
-implementation decisions, and enforcement powers, and other dimensions of
-security away from individuals and towards democratic, participatory 
-processes\footnote{Further questions arise when we consider the structures of
-organizations with flexible memberships, who operate on principles of open 
-participation (plein-air citizens assemblies, etc.), but these will be explored
-in future work}.
+security. These dimensions include the different decision-making processes of
+security. Instead, it is possible that horizontal security may be achieved by
+shifting policy making powers, implementation decisions, and enforcement
+powers, and other dimensions of security away from individuals and towards
+democratic, participatory processes\footnote{Further questions arise when we
+consider the structures of organizations with flexible memberships, who operate
+on principles of open participation (plein-air citizens assemblies, etc.), but
+these will be explored in future work}.
 
 %\begin{definition}[Horizontality of Policy]
 %Consider a set of stakeholders $ S \neq \emptyset$. There exists a set of
@@ -88,19 +89,27 @@ in future work}.
 %\noindent\rule{.48\textwidth}{0.4pt}
 %\end{definition}
 
-One important aspect of this concept is the fact that the horizontality of 
+% FIXME: I'm not entirely sure if this matters a lot for the central point
+% we are not trying to measure horizontality here anymore. Instead, we want
+% to show how a horizontal system can be managed.
+One important aspect of this concept is the fact horizontality requires
 different dimensions of security -- policy making, implementation, enforcement,
-and more -- have a compounding effect. If one area is highly hierarchical and
-centralized, it has a profound effect on the hierarchy and centralization of the
-organization as a whole. For example: if the implementation of a security policy
-(through choosing security mechanisms, implementing firewall rules, etc.) is
-heavily centralized and hierarchical, then the member(s) of the organization who
-implement the policies can decide how to implement security mechanisms to ensure
-policies are followed, or worse still, whether to implement any security
-mechanisms at all. This centralization leads to an imbalance of power similar to
-the one discussed by Kavada regarding activism and social
-media~\cite{kavada2020counterpublics}.
+and more. If one area is highly hierarchical and centralized, it has a profound
+effect on the hierarchy and centralization of the organization as a whole. For
+example: if the implementation of a security policy (through choosing security
+mechanisms, implementing firewall rules, etc.) is heavily centralized and
+hierarchical, then the member(s) of the organization who implement the policies
+can decide how to implement security mechanisms to ensure policies are
+followed, or worse still, whether to implement any security mechanisms at all.
+This centralization leads to an imbalance of power similar to the one discussed
+by Kavada regarding activism and social media~\cite{kavada2020counterpublics}.
 
+% Fixme: this brings up the question of *identity*. Entities are multi-phrenic,
+% how can we reconcile access to resources when everybody can wear many hats
+% within the organization. Signed: the chair of shitposting society at 
+% HorizontalSecurityPaper enterprises. I'm actually a little bit more interested
+% in hearing about this than the binary-ness of this (and I think they are
+% deeply connected)
 Another implication of the fact that the horizontality of security is
 multi-dimensional is that horizontality is not a binary trait, but rather a
 spectrum between entirely dictatorial and fully horizontal. In practice, most
@@ -123,13 +132,19 @@ in Section~\ref{sec:futurework}.
 % horizontal tools are used. Can we develop technology that allows us to do
 % both when they are needed?
 \subsection{Horizontality, Tools, and Techniques}
-In Section~\ref{sec:definition} we discussed horizontality of security as being
-multidimensional and dynamic, and relating to the different decision making
-processes that an organization has around security. Thus, we see that
-horizontality is related to security policy decisions, as the participation in
-these decision making processes informs what power individuals in the
-organization have to say how they wish to secure their operations.
+Having explored the principles that unlock horizontality, we can move on to
+creating specific systems that allow entities to organize in such a way.
 
+% XXX: I removed this paragraph below because it was repetitive imvho.
+% In Section~\ref{sec:definition} we discussed horizontality of security as being
+% multidimensional and dynamic, and relating to the different decision making
+% processes that an organization has around security. Thus, we see that
+% horizontality is related to security policy decisions, as the participation in
+% these decision making processes informs what power individuals in the
+% organization have to say how they wish to secure their operations.
+
+% FIXME: ok, I get it, we've been hammering on the verticality of organizations
+% and their tools, do we need more?
 However, this does not mean that the influence of hierarchy does not affect the
 tools and techniques used in Cybersecurity, and that some tools and techniques
 do not imply or impose hierarchy. For example, most operating systems
