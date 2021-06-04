@@ -52,7 +52,7 @@ Cybersecurity tools, technologies and techniques continue to remain highly
 hierarchical. Security policies are written by a security team or imported from
 pre-existing (and sometimes external) templates and imposed on the rest of the
 organization, with at most the limited oversight and approval of a manager or
-higher-up. Even still, not every member of the security teams are participating
+higher-up. Even still, not every member of the security teams is participating
 in deciding what these policies are meant to achieve. This decision is often
 made by a manager, who ensures that the policies do not get in the way of the
 visions of the individuals on the top of their hierarchies. In developing
@@ -77,8 +77,8 @@ when an organization becomes less hierarchical, the decision of who should have
 access to such secrets becomes more difficult to make. If everyone should have
 access to the secrets, such as passwords, then any insider can change the
 passwords and cause denial of service for the organization. If only a few people
-have the password, then a hierarchy forms based on one's access to confidential
-organizational material. This can lead to events like password 
+have access to the password, then a hierarchy forms based on one's access to
+confidential organizational material. This can lead to events like password 
 wars~\cite{kavada2020counterpublics}, or issues like the digital vanguard
 problem~\cite{gerbaudo2017social}.
 
@@ -100,20 +100,22 @@ individual organization.
 
 In his work \textit{The Moral Character of Cryptographic Work}, Rogaway states
 ``Cryptography can be developed in directions that tend to benefit the weak or
-the powerful.''~\cite{rogaway2015moral}. Why, then, have we not developed
-\textbf{more} technologies that benefit the community by limiting the privileges
-of the powerful within an organization via democratic participation? Why have
-no access control methods been developed to allow for authorization via
-horizontal, participatory protocols? In this work we address this gap.
+the powerful.''~\cite{rogaway2015moral}. However, there is no reason why this
+must stop at cryptography, and cannot generalize to all the fields of security.
+Why, then, have we not developed \textbf{more} technologies that benefit the
+community by limiting the privileges of the powerful within an organization via
+democratic participation? Why have no access control methods been developed to
+allow for authorization via horizontal, participatory protocols?
 
-In the following sections we propose COLBAC, a collective based system that
-allows for access control via flexible and dynamic democratic participation to
-fit the needs of the organization using it. We start by introducing the design
-goals of COLBAC in Section~\ref{sec:colbacrequirements}. We then informally
-describe the COLBAC system design in Sections~\ref{sec:colbacdesign},
-\ref{sec:Tokentypes} and  \ref{sec:Tokenformat}, and formally
-define COLBAC in Section~\ref{sec:colbacformal}. We then discuss the properties
-of COLBAC in Section~\ref{sec:colbacproperties} and its limitations in Section
+In this work we address this gap. In the following sections we propose COLBAC, a
+collective based system that allows for access control via flexible and dynamic
+democratic participation to fit the needs of the organization using it. We start
+by introducing the design goals of COLBAC in
+Section~\ref{sec:colbacrequirements}. We then informally describe the COLBAC
+system design in Sections~\ref{sec:colbacdesign}, \ref{sec:Tokentypes} and 
+\ref{sec:Tokenformat}, and formally define COLBAC in
+Section~\ref{sec:colbacformal}. We then discuss the properties of COLBAC in
+Section~\ref{sec:colbacproperties} and its limitations in Section
 \ref{sec:colbaclimitations}. Finally, in Section~\ref{sec:conclusion} we
 conclude.
 %organizations~\cite{kavada2020counterpublics}.
