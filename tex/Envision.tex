@@ -9,7 +9,7 @@
 % XXX: this also makes me wonder wether we want to bring the cyborg concept in
 % a playful way. It is not fundamental to the argument, but in a way we are
 % identifying these non-humans as part of the collective.
-Central to the issue of Horizontal Security are is the notion of
+Central to the issue of Horizontal Security is the notion of
 \emph{authorization} (i.e., who is allowed to access a particular resource). If
 an authorized party reads, modifies, or destroys information, the definitions
 imply that there is no breach. Thus, whether or not the security of an
@@ -165,9 +165,13 @@ allows an organization to be flexible and dynamic in its horizontality, being
 participatory or hierarchical depending on the needs at hand, without
 jeopardizing the ability to return to horizontality when desired?
 
-\subsection{Horizontality, Tools, and Techniques}
+\subsection{Achieving Horizontality: Tools, and Techniques}
 Having explored the principles that unlock horizontality, we can move on to
 creating specific systems that allow entities to organize in such a way.
+Achieving horizontality is not trivial. In fact, many projects and
+organizations have attempted to do so with varying degrees of success. In this
+section, we argue that these failings are a consequence of a missing building
+block: Collective-based Access Control (or COLBAC).
 
 % XXX: I removed this paragraph below because it was repetitive imvho.
 % In Section~\ref{sec:definition} we discussed horizontality of security as being
@@ -179,47 +183,55 @@ creating specific systems that allow entities to organize in such a way.
 
 % FIXME: ok, I get it, we've been hammering on the verticality of organizations
 % and their tools, do we need more?
-However, this does not mean that the influence of hierarchy does not affect the
-tools and techniques used in Cybersecurity, and that some tools and techniques
-do not imply or impose hierarchy. For example, most operating systems
-tend to be built around the idea of the singular administrator or a small set of
-administrators setting up the system. This idea makes sense from a  hierarchical
-organization's perspective. After all, if the individuals higher in the
-hierarchy have more privileges, that simply reflects their decision-making 
-power within the organization. From a horizontal security perspective, however,
-this method of system administration is detrimental. If a singular administrator
-decides that they do not like the policy decisions of the organization, they may
-be able to use their administrative power to stop the organization from taking
-the democratically selected action. When this occurs, there may not be another
-individual with more privileges to override this decision. Thus, the very
-concept of an administrator with the power to shut out other administrators is a
-threat to a horizontally controlled organization.
+% However, this does not mean that the influence of hierarchy does not affect the
+% tools and techniques used in Cybersecurity, and that some tools and techniques
+% do not imply or impose hierarchy. For example, most operating systems
+% tend to be built around the idea of the singular administrator or a small set of
+% administrators setting up the system. This idea makes sense from a  hierarchical
+% organization's perspective. After all, if the individuals higher in the
+% hierarchy have more privileges, that simply reflects their decision-making 
+% power within the organization. From a horizontal security perspective, however,
+% this method of system administration is detrimental. If a singular administrator
+% decides that they do not like the policy decisions of the organization, they may
+% be able to use their administrative power to stop the organization from taking
+% the democratically selected action. When this occurs, there may not be another
+% individual with more privileges to override this decision. Thus, the very
+% concept of an administrator with the power to shut out other administrators is a
+% threat to a horizontally controlled organization.
 
-On the other hand, there do exist systems that were designed with a more
-horizontal structure in mind. One example of this is the Bitcoin 
-cryptocurrency~\cite{nakamoto2019bitcoin}. This cryptocurrency was developed to
-allow for financial transactions between two individuals without the need for a
-trusted third party to detect and prevent double spending. By design, the
-network prevents the modification of past blocks of the Blockchain unless there
-exists collusion of 51\% of the miner network. This decision was made
-specifically to make it difficult for malicious actors in the network to perform
-malicious activities, such as stealing bitcoin or deleting past transactions.
-The implication of this design is that Bitcoin cannot be centrally 
-regulated~\cite{tu2015rethinking}, at least in theory . If we re-frame the
-concept of collusion as cooperation via democratic vote, we see that this design
-allows for regulation of the Bitcoin network in a somewhat horizontal way. Thus,
-if a transaction was deemed to be against a security policy by the majority of
-the network, it is possible to remove it.
+When laying out known horizontal software systems, perhaps the most
+widely-known example is Bitcoin~\cite{nakamoto2019bitcoin}. This cryptocurrency
+was developed to allow for financial transactions between two individuals
+without the need for a trusted third party to detect and prevent double
+spending. By design, the network prevents the modification of past blocks of
+the Blockchain unless there exists collusion of a large group of entities with
+computing~\cite{bonneau2018hostile} (or to a lesser extent,
+network~\cite{heilman2015eclipse}) resources. This decision was made
+specifically to make it difficult for malicious actors in the network to
+perform malicious activities, such as stealing bitcoin or deleting past
+transactions. The implication of this design is that Bitcoin cannot be
+centrally regulated~\cite{tu2015rethinking}, at least in theory. Thus, a core
+element of cryptocurrencies, the consensus protocol is an instantiation of a
+democratically-based access control policy (this is indeed more obvious for
+proof-of-stake blockchain systems).
 
-Though this is more horizontal policy enforcement than other tools promote, it
-still has many issues. The first issue is that of defining the stakeholders of
-Bitcoin: are only miners stakeholders, or are users stakeholders as well? If we
-define the stakeholders are only the miners of Bitcoin, we see that this
-approach reaches a reasonable level of horizontality. All miners participate in
-the decision to perform a modification on the Blockchain, whether they vote yes
-or no. If we consider users to also be stakeholders, however, we see that this
-system is no longer as horizontal. Users do not get to participate in the
-decision of whether or not a transaction gets removed or modified. 
+
+Yet there exists many shortcomings in the Bitcoin/cryptocurrency model. First
+is identifying \emph{who} is part of the collective: are only miners
+stakeholders, or are users stakeholders as well, are developers stakeholders?
+This question raises the fundamental limitation of Bitcoin. Although it can be
+considered ``network-horizontal'' it does not provide  horizontality mechanisms
+for other elements of the ecosystem. This is apparent when considering
+historical events in blockchain-based systems, such as the DAO hack~\cite{},
+the Bitcoin Classic fork~\cite{} and more. Indeed, it seems that developers of
+a blockchain, those blessed with public visibility (or even just commit access)
+can have more impact on the nature of the blockchain than a large mining
+cartel.
+% All miners participate in the decision to perform a
+% modification on the Blockchain, whether they vote yes or no. If we consider
+% users to also be stakeholders, however, we see that this system is no longer as
+% horizontal. Users do not get to participate in the decision of whether or not a
+% transaction gets removed or modified. 
 
 Another issue with this approach is its competitive nature. Rather than
 cooperating miners attempting to create, implement, and enforce transaction
@@ -227,7 +239,7 @@ policies, we have competing miners interested in their own profit. One
 implication of this competitive focus is that there is no mechanism to vote in
 Bitcoin; rather, what is referred to as ``regulation'' in this work is seen by
 the Bitcoin community as an attack. However, the design property of requiring
-51\% of participating members to agree in order to make a change on the system
+a majority of participating members to agree in order to make a change on the system
 may still be useful to inspire future horizontal system designs. Worse still,
 this competitive nature tends to centralize the network over time. Bitcoin's
 Proof of Work algorithm tends to favor those who can afford highly specialized
@@ -239,23 +251,25 @@ who control larger amounts of monetary stake in the network.
 
 % TODO: Add something about the DOA hack.
 
-Despite these issues, the security design of Blockchain is still more horizontal
-than typical designs. However, Blockchain is not the only security technology
-with a less hierarchical vision and structure. Perhaps the most well known
-example of a security system meant to be horizontal by design is the PGP Web of
-Trust design. This design was created to solve the key distribution problem
-without the need for a centralized, trusted key distribution authority. It
-allows individuals to make trust decisions about the ownership of a key based on
-validating the key ownership in person or over a trusted secure channel. Once a
-key is validated, the keys that are signed by that individual's keys are also
-trusted, though to a lesser extent. This design was meant to be a horizontal
-representation of trust: one trusts the people they verify in person, and then
-trusts the people attested to by their trusted peers, but to a lesser degree.
-However, this scheme suffered from a large number of usability and user
-experience problems~\cite{whitten1999johnny}. However, if a method like web of
-trust or derived from web of trust could be improved to be more usable, it could
-serve as a building block for applications and systems that take a horizontal
-approach to security.
+Other, more voluntary (and less driven-by-greed) designs also attempt to
+achieve horizontality. Perhaps the most well known example of a security system
+meant to be horizontal by design is the PGP Web of Trust (WoT) design. Within this ecosystem
+attempts to allow entities to authenticate (i.e., tie public key material to
+emails, names, or identities) and exchange signed or encrypted messages without
+a central authority. This is done through a transitive trust process:
+known-good entities can sign trust relationships with other entities and
+various WoT algorithms will compute resulting trust levels based on a personal
+security policy that ranges from marginal trust to full trust. There is however
+no global notion of policing or enforcement in the PGP ecosystem. As such, it
+is impossible for entities in a group to agree access control policies in a
+distributed ecosystem.
+
+% This is a rather tangential problem, that lies within GPG design, not PGP
+% However, this scheme suffered from a large
+% number of usability and user experience problems~\cite{whitten1999johnny}.
+% However, if a method like web of trust or derived from web of trust could be
+% improved to be more usable, it could serve as a building block for applications
+% and systems that take a horizontal approach to security.
 
 In addition to the Blockchain approach used by Bitcoin, and to the web of trust
 used by PGP, many other potential building blocks of horizontal security already
