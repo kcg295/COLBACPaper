@@ -14,13 +14,9 @@ Central to the issue of Horizontal Security are is the notion of
 an authorized party reads, modifies, or destroys information, the definitions
 imply that there is no breach. Thus, whether or not the security of an
 organization has been breached depends highly on whether or not an entity is
-authorized to perform an action. This decision as to whether or not a person is
+authorized to perform an action. This decision as to whether or not an entity is
 authorized is heavily informed by an organization's security policy.
 
-However, as it is natural with the notion of authorization, two fundamental
-pieces must exist: authorization \emph{policies} that represent
-collective-based authorization, and an access control system that can
-\emph{enforce} such policies.
 
 
 % Thus, from these definitions we get that confidentiality is the protection of 
@@ -28,19 +24,25 @@ collective-based authorization, and an access control system that can
 % information from unauthorized modification or destruction, and availability is
 % the protection from the disruption of access to or use of information or an
 % information system.
-
-\subsection{Defining Horizontal Security}
+%
+\subsection{Hierarchy and Access Control}
 \label{sec:definition}
 
 % Here, I tried to remove the old text relating to policy vs implementation and
 % instead I'm trying to highlight the highly hierarchical notion of regular AC
 % systems.  As a consequence, I'm leaving this
 % policy/enforcement/implementation triad to arise naturally later in the text
-Access control is commonly encoded and enforced in a top-down fashion. The CISO
-of an organization holds institutional power to define access control policies
-within an orgnization. Further, without loss of generallity, lower-level
-administrators may have some decision making power in how to define subsets of
-a policy, yet, they typically do not have decision making power to. 
+However, as is natural with the notion of authorization, two fundamental pieces
+must exist: authorization \emph{policies} that represent collective-based
+authorization, and an access control system that can \emph{enforce} such
+policies.
+
+Access control is commonly both encoded and enforced in a top-down fashion. The
+CISO of an organization holds institutional power to define access control
+policies within an organization. Further, without loss of generality,
+lower-level administrators may have some decision making power in how to define
+subsets of a policy, yet, they typically do not have decision making power to
+change the direction of the policy completely. 
 
 This concept typically holds true not just with access control and
 authorization, but with all aspects of an organization's security policy.
@@ -92,17 +94,19 @@ these will be explored in future work}.
 % FIXME: I'm not entirely sure if this matters a lot for the central point
 % we are not trying to measure horizontality here anymore. Instead, we want
 % to show how a horizontal system can be managed.
-One important aspect of this concept is the fact horizontality requires
-different dimensions of security -- policy making, implementation, enforcement,
-and more. If one area is highly hierarchical and centralized, it has a profound
-effect on the hierarchy and centralization of the organization as a whole. For
-example: if the implementation of a security policy (through choosing security
-mechanisms, implementing firewall rules, etc.) is heavily centralized and
-hierarchical, then the member(s) of the organization who implement the policies
-can decide how to implement security mechanisms to ensure policies are
-followed, or worse still, whether to implement any security mechanisms at all.
-This centralization leads to an imbalance of power similar to the one discussed
-by Kavada regarding activism and social media~\cite{kavada2020counterpublics}.
+% SOLTUION: I think we just remove it then, right? Measuring is not the goal of
+% this paper.
+%One important aspect of this concept is the fact horizontality requires
+%different dimensions of security -- policy making, implementation, enforcement,
+%and more. If one area is highly hierarchical and centralized, it has a profound
+%effect on the hierarchy and centralization of the organization as a whole. For
+%example: if the implementation of a security policy (through choosing security
+%mechanisms, implementing firewall rules, etc.) is heavily centralized and
+%hierarchical, then the member(s) of the organization who implement the policies
+%can decide how to implement security mechanisms to ensure policies are
+%followed, or worse still, whether to implement any security mechanisms at all.
+%This centralization leads to an imbalance of power similar to the one discussed
+%by Kavada regarding activism and social media~\cite{kavada2020counterpublics}.
 
 % Fixme: this brings up the question of *identity*. Entities are multi-phrenic,
 % how can we reconcile access to resources when everybody can wear many hats
@@ -110,27 +114,56 @@ by Kavada regarding activism and social media~\cite{kavada2020counterpublics}.
 % HorizontalSecurityPaper enterprises. I'm actually a little bit more interested
 % in hearing about this than the binary-ness of this (and I think they are
 % deeply connected)
-Another implication of the fact that the horizontality of security is
-multi-dimensional is that horizontality is not a binary trait, but rather a
-spectrum between entirely dictatorial and fully horizontal. In practice, most
-organizations likely do not sit at either extreme of this spectrum, or even
-occupy a fixed space on this spectrum. Rather, organizations are likely to have
-dynamic levels of horizontality. In traditional, hierarchical organizations,
-security is likely more skewed towards a lower amount of horizontality, and is
-likely to not be too dynamic. Decisions are made by managers, who may or may not
-consider the input of their employees when making decisions. In worker
-cooperatives,  activist groups, and other traditionally less hierarchical
-organizations, security is more likely skewed towards a higher amount of
-horizontality, and may be much more dynamic in nature. An interesting first work
-towards understanding horizontal security may exist in classifying, comparing,
-and contrasting the current horizontality of security in different types of
-organizations. This idea, and other potential future works, are further examined
-in Section~\ref{sec:futurework}.
+% FIXME: I struggled with this part. Please reread it and see if anything is
+% worth salvaging. After reading it many times I think it's terrible. If you
+% think you can save the idea, awesome, but my recomendation would be to just
+% take this paragraph out.
+% NEW (KG):
+%When shifting to these participatory processes, identity still remains a central
+%question in access control decisions. When determining whether or not to grant
+%access, the collective will consider which entity or entites they wish to grant
+%access to, taking into account many attributes included competency, trust, and
+%current power dyanmics within the collective. Thus, though other access control
+%schemes like capabilities can create identity-agnostic protocols, collective
+%based access control systems require this information to be present.
+% DELETED:
+%Another implication of the fact that the horizontality of security is
+%multi-dimensional is that horizontality is not a binary trait, but rather a
+%spectrum between entirely dictatorial and fully horizontal. In practice, most
+%organizations likely do not sit at either extreme of this spectrum, or even
+%occupy a fixed space on this spectrum. Rather, organizations are likely to have
+%dynamic levels of horizontality. In traditional, hierarchical organizations,
+%security is likely more skewed towards a lower amount of horizontality, and is
+%likely to not be too dynamic. Decisions are made by managers, who may or may not
+%consider the input of their employees when making decisions. In worker
+%cooperatives,  activist groups, and other traditionally less hierarchical
+%organizations, security is more likely skewed towards a higher amount of
+%horizontality, and may be much more dynamic in nature. An interesting first work
+%towards understanding horizontal security may exist in classifying, comparing,
+%and contrasting the current horizontality of security in different types of
+%organizations. This idea, and other potential future works, are further examined
+%in Section~\ref{sec:futurework}.
 
 % TODO: Include here the lack of ability to be horizontal when hierarchical
 % tools are used, and vice-versa, the lack of ability to be hierarchical when
 % horizontal tools are used. Can we develop technology that allows us to do
 % both when they are needed?
+However, organizations that attempt to create their access control policies
+horizontally may run into problems when they move to implement them. Currently,
+access control systems force the creation of a hierarchy. In access control
+systems such as MAC, DAC, or RBAC, certain entities in the organization have the
+power to implement the access control rules that were democratically created by
+the organization. Thus, if the individuals who have the ability to enforce the
+rules decide not to, the newly created access control policies become
+ineffective. This forms a hierarchy with the entities capable of enforcing
+access control sitting at the top. Similarly, if an organization were to attempt
+to temporarily act hierarchically and attempted to implement that using tools
+that assumed horizontality, this may cause the hierarchy to lose any potential
+efficiency benefits. Thus, a question arises: can we develop technology that
+allows an organization to be flexible and dynamic in its horizontality, being
+participatory or hierarchical depending on the needs at hand, without
+jeopardizing the ability to return to horizontality when desired?
+
 \subsection{Horizontality, Tools, and Techniques}
 Having explored the principles that unlock horizontality, we can move on to
 creating specific systems that allow entities to organize in such a way.
