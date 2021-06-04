@@ -165,7 +165,7 @@ allows an organization to be flexible and dynamic in its horizontality, being
 participatory or hierarchical depending on the needs at hand, without
 jeopardizing the ability to return to horizontality when desired?
 
-\subsection{Achieving Horizontality: Tools, and Techniques}
+\subsection{Previous Attempts at Horizontal Security}
 Having explored the principles that unlock horizontality, we can move on to
 creating specific systems that allow entities to organize in such a way.
 Achieving horizontality is not trivial. In fact, many projects and
@@ -213,8 +213,7 @@ transactions. The implication of this design is that Bitcoin cannot be
 centrally regulated~\cite{tu2015rethinking}, at least in theory. Thus, a core
 element of cryptocurrencies, the consensus protocol is an instantiation of a
 democratically-based access control policy (this is indeed more obvious for
-proof-of-stake blockchain systems).
-
+proof-of-stake Blockchain systems).
 
 Yet there exists many shortcomings in the Bitcoin/cryptocurrency model. First
 is identifying \emph{who} is part of the collective: are only miners
@@ -222,10 +221,10 @@ stakeholders, or are users stakeholders as well, are developers stakeholders?
 This question raises the fundamental limitation of Bitcoin. Although it can be
 considered ``network-horizontal'' it does not provide  horizontality mechanisms
 for other elements of the ecosystem. This is apparent when considering
-historical events in blockchain-based systems, such as the DAO hack~\cite{},
+historical events in Blockchain-based systems, such as the DAO hack~\cite{},
 the Bitcoin Classic fork~\cite{} and more. Indeed, it seems that developers of
-a blockchain, those blessed with public visibility (or even just commit access)
-can have more impact on the nature of the blockchain than a large mining
+a Blockchain, those blessed with public visibility (or even just commit access)
+can have more impact on the nature of the Blockchain than a large mining
 cartel.
 % All miners participate in the decision to perform a
 % modification on the Blockchain, whether they vote yes or no. If we consider
@@ -239,30 +238,28 @@ policies, we have competing miners interested in their own profit. One
 implication of this competitive focus is that there is no mechanism to vote in
 Bitcoin; rather, what is referred to as ``regulation'' in this work is seen by
 the Bitcoin community as an attack. However, the design property of requiring
-a majority of participating members to agree in order to make a change on the system
-may still be useful to inspire future horizontal system designs. Worse still,
-this competitive nature tends to centralize the network over time. Bitcoin's
-Proof of Work algorithm tends to favor those who can afford highly specialized
-hardware, eventually leading to a centralization of the network into the hands
-of those who are wealthy enough to control large amounts of machines
+a majority of participating members to agree in order to make a change on the
+system may still be useful to inspire future horizontal system designs. Worse
+still, this competitive nature tends to centralize the network over time.
+Bitcoin's Proof of Work algorithm tends to favor those who can afford highly
+specialized hardware, eventually leading to a centralization of the network into
+the hands of those who are wealthy enough to control large amounts of machines
 specifically made for mining Bitcoins. Proof of Stake, another consensus
 algorithm for Blockchain, bypasses this middle step and directly benefits those
 who control larger amounts of monetary stake in the network.
 
-% TODO: Add something about the DOA hack.
-
 Other, more voluntary (and less driven-by-greed) designs also attempt to
 achieve horizontality. Perhaps the most well known example of a security system
-meant to be horizontal by design is the PGP Web of Trust (WoT) design. Within this ecosystem
-attempts to allow entities to authenticate (i.e., tie public key material to
-emails, names, or identities) and exchange signed or encrypted messages without
-a central authority. This is done through a transitive trust process:
-known-good entities can sign trust relationships with other entities and
-various WoT algorithms will compute resulting trust levels based on a personal
-security policy that ranges from marginal trust to full trust. There is however
-no global notion of policing or enforcement in the PGP ecosystem. As such, it
-is impossible for entities in a group to agree access control policies in a
-distributed ecosystem.
+meant to be horizontal by design is the PGP Web of Trust (WoT) design. Within
+this ecosystem attempts to allow entities to authenticate (i.e., tie public key
+material to emails, names, or identities) and exchange signed or encrypted
+messages without a central authority. This is done through a transitive trust
+process: known-good entities can sign trust relationships with other entities
+and various WoT algorithms will compute resulting trust levels based on a
+personal security policy that ranges from marginal trust to full trust. There is
+however no global notion of policing or enforcement in the PGP ecosystem. As
+such, it is impossible for entities in a group to agree access control policies
+in a distributed ecosystem.
 
 % This is a rather tangential problem, that lies within GPG design, not PGP
 % However, this scheme suffered from a large
@@ -271,22 +268,43 @@ distributed ecosystem.
 % improved to be more usable, it could serve as a building block for applications
 % and systems that take a horizontal approach to security.
 
+% XXX: This last paragraph seems to diverge from the message a bit. It would
+% be worth it to reframe it to be more along the lines of "other systems that
+% attempt to solve the problem or part of the problem but still don't arrive
+% at a complete solution."
 In addition to the Blockchain approach used by Bitcoin, and to the web of trust
-used by PGP, many other potential building blocks of horizontal security already
+used by PGP, many other attempted approaches towards horizontal security already
 exist. These include other consensus algorithms such as Practical Byzantine
 Fault Tolerance (PBFT)~\cite{castro1999practical}, Paxos~\cite{lamport2019part}, 
-Raft~\cite{ongaro2013search}, and more. In addition to consensus algorithms,
-secret sharing schemes like Shamir Secret Sharing~\cite{shamir1979share}, 
+Raft~\cite{ongaro2013search}, and more. However, most of these protocols do not
+allow for flexible horizontality; rather, they have a set percentage of
+entities in the system that must agree. More, these systems are more concerned
+with fault tolerance rather than access control. However, the distribution of
+these systems may be beneficial in future horizontal security projects.
+
+In addition to consensus algorithms, secret sharing schemes like Shamir Secret
+Sharing~\cite{shamir1979share},
 Blakley's Secret Sharing~\cite{blakley1993linear}, and Verifiable Secret 
 Sharing~\cite{chor1985verifiable} schemes can be used for distributed secret
-management in organizations. Applications like OAuth~\cite{leiba2012oauth} can
-be used to grant minimal and ephemeral access to organization accounts to
-members of the organization who need it, without revealing a password. 
-Capability~\cite{dennis1966programming} based schemes and systems can be used to
-allow for transfer of control over resources based on the will of the
-collective. Additionally, other yet undeveloped primitives, techniques, and
-tools may be needed as well. Future work can address these needs, as described
-in Section~\ref{sec:futurework}.
+management in organizations. This allows for individuals to recover access to a
+resource if a set fraction of the participants agree and submit their secret
+share. However, these approaches are inefficient and are also rigid in their
+horizontality.
+
+Other solutions to small horizontal security problems exist. Applications like
+OAuth~\cite{leiba2012oauth} can be used to grant minimal and ephemeral access to
+organization accounts to members of the organization who need it, without
+revealing a password. However, someone in the organization still must control
+the password, causing hierarchy issues. Capability~\cite{dennis1966programming}
+based schemes and systems can be used to allow for transfer of control over
+resources in a more flexible way, but is not sufficient alone: a collective
+authorization scheme is required to determine whether or not to issue capability
+tokens. %Other yet undeveloped primitives, techniques, and tools may be needed
+%as well. Future work can address these needs, as described in
+%Section~\ref{sec:futurework}.
+
+% TODO: We need an awesome one sentence to transition over to the idea of COLBAC
+% here.
 
 \input{tex/Colbac}
 
