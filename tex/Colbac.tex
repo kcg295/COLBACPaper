@@ -1,5 +1,3 @@
-\subsection{COLBAC: Collective Based Access Control}
-\label{sec:colbac}
 As discussed in previous sections, the choice of certain software, protocols, or
 techniques such as X509 certificates or PGP web of trust has implications in the
 level of horizontality possible for systems built on top of those software,
@@ -18,9 +16,8 @@ from the only potential approach. Section~\ref{sec:colbaclimitations} discusses
 some potential factors that can differ from our system, and potentially improve
 upon it.
 
-\subsubsection{System Requirements}
+\subsection{System Requirements}
 \label{sec:colbacrequirements}
-\mbox{}\\
 COLBAC is aimed at addressing a novel requirement in Cybersecurity research:
 access control and authorization given an organization with dynamic levels of
 horizontal control. Though previous approaches exist for hierarchical access
@@ -49,9 +46,8 @@ that any horizontal access control system requires transparency. Towards this
 end, our system must have a method of logging information about the actions of
 individuals and the collective that is immutable and available.
 
-\subsubsection{System Design}
+\subsection{System Design}
 \label{sec:colbacdesign}
-\mbox{}\\
 COLBAC presents a solution to access control that relies around the collective.
 However, as will be discussed later in this section, not all objects on the
 system will need to be collectively controlled or administered. As such, we
@@ -128,9 +124,8 @@ number of users is less than $m$ or if the number of yes votes divided by the
 total number of votes is less than $f$, the petition fails, and the attempted
 action is logged in the immutable sphere.
 
-\subsubsection{Types of Tokens}
+\subsection{Types of Tokens}
 \label{sec:Tokentypes}
-\mbox{}\\
 As the previous section demonstrates, the Token is the main form of interacting
 with the Collective Sphere. Users who wish to affect the Collective Sphere do
 so by creating a Token which is then voted on by the users of the system. In
@@ -173,9 +168,8 @@ each member only has a small number of emergency Tokens for a given period of
 time. Additionally, there are limits placed on what can be done with Emergency
 Tokens.
 
-\subsubsection{Token Format}
+\subsection{Token Format}
 \label{sec:Tokenformat}
-\mbox{}\\
 \begin{figure}
 \includegraphics[width=\linewidth]{figs/TokenStructures.png}
 \caption{COLBAC Token Structures}
@@ -253,9 +247,8 @@ verifiable authentication value that is difficult to predict and easy to verify,
 such as an HMAC of the permission Token keyed by a secret value known only to
 the Reference Monitor.
 
-\subsubsection{Formalizing COLBAC}
+\subsection{Formalizing COLBAC}
 \label{sec:colbacformal}
-\mbox{}\\
 In this section we take a first attempt at formalizing COLBAC, a collective
 based access control system. This formalization is not yet complete, but rather
 can benefit from insight of fellow participants at the NSPW Workshop. However,
@@ -552,9 +545,8 @@ permission is requesting among the permissions listed in Definition
 In this paper we leave CheckEmergencyPermissions as yet undefined, but discuss
 some possibilities for this function in Section~\ref{sec:colbacproperties}.
 
-\subsubsection{Properties of COLBAC}
+\subsection{Properties of COLBAC}
 \label{sec:colbacproperties}
-\mbox{}\\
 In Section~\ref{sec:colbacdesign} we introduced the design of COLBAC, an access
 control system meant to serve as a primitive that can be used to achieve a more
 horizontal form of security. In Section~\ref{sec:colbacformal} we presented a
@@ -633,9 +625,8 @@ members. It is likely that even more restrictions are required to maintain the
 safety of the system, but we leave the identification of those limitations, and
 further analysis of the properties of COLBAC, to future work.
 
-\subsubsection{Limitations of COLBAC}
+\subsection{Limitations of COLBAC}
 \label{sec:colbaclimitations}
-\mbox{}\\
 Like all systems, COLBAC is not perfect, and suffers from limitations. Perhaps
 one of the most obvious limitations of COLBAC is its usability and user
 experience. Creating a horizontal access control system with democratic
