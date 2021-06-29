@@ -33,10 +33,12 @@
 
 %%%% Generic manuscript mode, required for submission
 %%%% and peer review
-\documentclass[sigconf, authordraft]{acmart}
+\documentclass[sigconf, review, anonymous]{acmart}
 \usepackage{balance}
 \usepackage{amsthm}
 \usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 %% Fonts used in the template cannot be substituted; margin
 %% adjustments are not allowed.
 %%
@@ -53,7 +55,7 @@
 \setcopyright{acmcopyright}
 \copyrightyear{2021}
 \acmYear{2021}
-\acmDOI{10.1145/1122445.1122456}
+\acmDOI{XXXXXXXXXXXXXXXXXXXXXXXXX}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
 \acmConference[NSPW 2021]{NSPW: New Security Paradigms Workshop}
@@ -104,7 +106,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{FIRST DRAFT: Shifting Cybersecurity from Hierarchical to Horizontal designs}
+\title{COLBAC: Shifting Cybersecurity from Hierarchical to Horizontal Designs}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -132,16 +134,38 @@
     \country{Portugal}
 }
 
+\author{Santiago Torres-Arias}
+\email{santiagotorres@purdue.edu}
+\affiliation{
+    \institution{Department of Electrical and Computer Engineering\\ Purdue University}
+    \streetaddress{501 Northwestern Avenue}
+    \city{Wast Lafayette}
+    \state{Indiana}
+    \country{United States of America}
+    \postcode{47907-2305}
+}
+
+\author{Nasir Memon}
+\email{memon@nyu.edu}
+\affiliation{
+    \institution{Department of Computer Science and Engineering\\ New York University}
+    \streetaddress{370 Jay Street, 10th floor}
+    \city{Brooklyn}
+    \state{New York}
+    \country{United States of America}
+    \postcode{11201}
+}
+
 \author{Jessica Feldman}
 \email{jfeldman@aup.edu}
 %\orcid{1234-5678-9012}
 \affiliation{%
     \institution{Department of Communication, Media, and Culture\\ American University of Paris}
-    %\streetaddress{370 Jay Street, 10th Floor}
+    \streetaddress{5, Boulevard de La Tour-Maubourg}
     \city{Paris}
     %\state{}
     \country{France}
-    %\postcode{11021}
+    \postcode{75007}
 }
 
 %%
@@ -150,7 +174,7 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Gallagher and Feldman}
+\renewcommand{\shortauthors}{Gallagher, Torres, Memon and Feldman}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
@@ -197,9 +221,13 @@
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{security, democracy, activism, horizontality, distributed systems, authorization, access contrl}
+\keywords{security, democracy, activism, horizontality, participation, participatory design, distributed systems, authorization, access control}
 
 \maketitle
+
+\section*{Justification Statement}
+\label{sec:justification}
+\input{tex/Justification}
 
 \section{Introduction}
 \label{sec:introduction}
@@ -209,22 +237,33 @@
 \label{sec:envisioning}
 \input{tex/Envision}
 
-\section{Implications of Horizontal Security}
-\label{sec:implications}
-\input{tex/Implications}
+\section{COLBAC: Collective Based Access Control}
+\label{sec:colbac}
+\input{tex/Colbac}
 
-\section{Horizontal Security and Privacy}
-\label{sec:privacy}
-\input{tex/Privacy}
+%\section{Implications of Horizontal Security}
+%\label{sec:implications}
+%\input{tex/Implications}
 
-\section{Future Work}
-\label{sec:futurework}
-\balance
-\input{tex/FutureWork}
+%\section{Horizontal Security and Privacy}
+%\label{sec:privacy}
+%\input{tex/Privacy}
+
+\section{Discussion and Future Work}
+\label{sec:discussion}
+\input{tex/Discussion}
+
+%\section{Future Work}
+%\label{sec:futurework}
+%\input{tex/FutureWork}
 
 \section{Conclusions}
 \label{sec:conclusion}
+\balance
 \input{tex/Conclusions}
+
+\section{Acknowledgements}
+\input{tex/Acknowledgements}
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{HorizontalSecurity.bib}
