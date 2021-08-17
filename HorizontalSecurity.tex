@@ -33,7 +33,7 @@
 
 %%%% Generic manuscript mode, required for submission
 %%%% and peer review
-\documentclass[sigconf, review, anonymous]{acmart}
+\documentclass[sigconf, review]{acmart}
 \usepackage{balance}
 \usepackage{amsthm}
 \usepackage{hyperref}
@@ -129,8 +129,7 @@
 \email{kevin.gallagher@privacylx.org}
 \affiliation{%
     \institution{Defend Our Privacy Association (PrivacyLX)}
-    %\city{Lisboa}
-    \state{Lisboa}
+    \state{Lisbon}
     \country{Portugal}
 }
 
@@ -237,21 +236,33 @@
 \label{sec:envisioning}
 \input{tex/Envision}
 
+\section{Threat Model}
+\label{sec:threat_model}
+\input{tex/ThreatModel}
+
 \section{COLBAC: Collective Based Access Control}
 \label{sec:colbac}
 \input{tex/Colbac}
 
-%\section{Implications of Horizontal Security}
-%\label{sec:implications}
-%\input{tex/Implications}
+\section{Democracy and Colbac}
+\label{sec:democracy}
+\input{tex/Democracy}
 
-%\section{Horizontal Security and Privacy}
-%\label{sec:privacy}
-%\input{tex/Privacy}
+\section{Security Analysis of COLBAC}
+\label{sec:security_analysis}
+\input{tex/SecurityAnalysis}
 
-\section{Discussion and Future Work}
-\label{sec:discussion}
-\input{tex/Discussion}
+\section{Usability of COLBAC}
+\label{sec:usabilty}
+\input{tex/Usability}
+
+\section{Limitations}
+\label{sec:limitations}
+\input{tex/Limitations}
+
+\section{Future Work}
+\label{sec:future_work}
+\input{tex/FutureWork}
 
 %\section{Future Work}
 %\label{sec:futurework}
