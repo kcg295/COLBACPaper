@@ -1,0 +1,18 @@
+Threats faced within collective ownership of resources encompass both internal and external threats.
+As such, it is expected that attackers may be outsiders impersonating members of a community, as 
+well as disgruntled insiders that are trying to subvert the system. We, however expect that at 
+least a simple majority of users will act honestly, and will attempt to use the system to 
+represent the collective goal of the broader community.
+
+However, we also expect attackers to attempt to inject accounts in attempts to dilute the 
+democratic process (e.g., a Sybil attack~\cite{sybil1, sybil2}). While these types of attacks are often performed 
+in the wild~\cite{tor-sybil}, we expect different projects to mitigate this threat as they seem fit. 
+One example of it is the  Debian project, for which membership is often gated through 
+physically-present PGP key signing processes. This has been widely documented in work by Coleman~\cite{coleman-oss}. 
+
+Malicious users may abuse other elements beyond raw voting power. They could, for example, 
+gather a group colluding users could abuse time-zones (e.g., one in which people are 
+often not online), system availability (e.g., network outages, net-splits) to carry out 
+exceptional votes. This can likely be mitigated by ensuring the vote parameters 
+are adjusted to the nature of the community (e.g., by adjusting simple majority to 
+relative majority or set an arbitrary threshold for a vote to come through).
