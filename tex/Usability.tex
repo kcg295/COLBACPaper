@@ -21,6 +21,38 @@ include:
 %      Given the above numbers, calculate amounts of time we expect COLBAC votes
 %       to be open.
 
+In order to measure the total time for a Petition Phase, we studied the
+users’ access patterns to a running server. Our goal is to identify how often
+$k$ different users log in to a system, assuming they would vote after logging
+in. To do this, we used nearly 10 years of entries from the Wikimedia database
+and event log dump system~\cite{wikidata}. We obtained the actions performed by
+all administrators of the English Wikipedia site, including edition, creation
+and deletion events. With this information in hand, we measured the time it
+takes for a server to receive $k$ consecutive accesses from unique administrator
+ids. In other words, we assumed that if a user were to start a Petition Phase at
+any point in the log the $k$ subsequent actions performed by unique ids would be
+preceded by a successful login and by our assumption, a vote. After this, we
+normalized our results using the threshold value of votes needed to perform a
+vote. We present the average, median and 99th percentile vote times in
+Figure~\ref{fig:vote_graph}. Using Figure~\ref{fig:vote_graph}, we can derive
+the vote times for a certain number of users. For example, for a threshold of
+CHANGEME, the Petition Phase times ranged from CHANGEME seconds, to under
+CHANGEME in the 99th percentile. Likewise, a COLBAC system configured with a
+threshold of CHANGEME should finish bootstrapping in around CHANGEME seconds on
+average. It is worth mentioning that the number of active administrators
+oscillated around 5,000 at all times; however, the average Petition Phase time
+decreased from $\approx$CHANGEME seconds to $\approx$CHANGEME seconds. 
+
+%To assess the effect of these
+%Petition Phase times, we contrasted them with the amount of tentative downtime
+%for Wikipedia. To identify possible windows of inactivity, we looked
+%for gaps in the log that indicated a lack of interaction between users and the
+%server for more than 30 minutes. We were able to identify at most 17 periods of
+%unavailability per year, peaking at 28.63 hours of downtime. If we added the
+%time to bootstrap after these periods of unavailability, the total downtime for
+%each year would increase by at most 3.890\%. This is shown in Table
+%\ref{tab:downtime}.
+
 In COLBAC there is a balance that must be struck between usability and security,
 specifically in the amount of time that a COLBAC petition phase is open. We
 would like to strike an optimal balance where the COLBAC petition phase is open
