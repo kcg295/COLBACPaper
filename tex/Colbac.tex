@@ -452,6 +452,20 @@ Algorithm~\ref{alg:main}.
 \caption{The main decision making process of COLBAC}
 \label{alg:main}
 \begin{algorithmic}[1]
+\State Let $u$ be a user of the system.
+\State Let $s$ be the subject attempting access.
+\State Let $o$ be the object or set if objects the user is attempting to access.
+\State Let $p$ be the set of permissions the user is requesting.
+\State Let $t$ be the type of Token the user is attempting to create.
+\State Let $e$ be the proposed expiration time of the Token.
+\State Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
+let $c$ be $NULL$.
+\State Let $a$ be the action the user wants to run in the Collective Sphere, or in the
+case that it doesn't exist, let $a$ be $NULL$.
+\State Let $d$ be the set of delegates the user is proposing, or in the case where it
+doesn't exist, let $d$ be $NULL$.
+\State Let $DAC(s :$ Subject$, o:$ Object$)$ be a Discretionary Access Control
+system.
 \If{$GetSphere(o)=U$}
     \State Return $DAC(s,o)$
 \ElsIf{$GetSphere(o)=C$}
@@ -521,6 +535,8 @@ permission is requesting among the permissions listed in Definition
 \label{alg:isvalid}
 \begin{algorithmic}[1]
 \Procedure{IsValid}{$S$: Sphere, $T$: Token, $a$: Action}
+\State Let $C$ be the Collective Sphere.
+\State Let $I$ be the Immutable Sphere.
 \If{$S = C$}
     \If{$GetTokenType(T) \neq T_{e}$}
         \For{$c \in a$} \Comment{For each command in the action}
