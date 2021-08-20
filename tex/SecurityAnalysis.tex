@@ -1,0 +1,50 @@
+In this section, we explore the security properties of COLBAC in two possible
+scenarios.  First, Section explores and contrasts how COLBAC's token system
+fares through usual system operations. We expect to develop a taxonomy of
+security-related failure modes for COLBAC enabled systems After, we elaborate
+on possible endpoints related to COLBAC operation that an attacker could abused
+by attackers.
+
+\subsection{COLBAC failure modes and attack surface}
+
+COLBAC's ability to carry out collective decision making is dependent on the
+attackers ability to affect foundational elements of Information Security:
+Confidentiality, Availability, Integrity and Non-repudiation. Although COLBAC
+is still in the ``theoretical'' space, we are able to explore the failure modes
+within the system and derive a taxonomy in which malicious users (as per the
+categorization outlined in Section~\ref{sec:threat-model}:
+
+\begin{itemize}
+    \item {\bf Collective bypass}: a cadre of malicious users is able
+        to perform actions bypassing the democratic process.
+
+    \item {\bf Sybil attack}: a malicious users is able
+        to impersonate legitimate voters.
+
+    \item {\bf System disruption}: a cadre of malicious users is able to halt
+        the system from operating by disrupting voting operations.
+
+\end{itemize}
+
+To explore the attack surface, we enumerate the states and interfaces of
+COLBAC described in section~\ref{sec:} and explore the impact whether these
+interfaces were compromised/mis-implemented.
+        
+\paragraph{$DraftToken$} Failure in the DraftToken function may materialize by
+a failure to authenticate the originator. As a conseqeuence, it may allow
+malicious users to create tokens that impersonate actions on behalf of other
+users. This could lead to a \emph{Collective bypass} or a \emph{Sybil} attack. 
+
+Within $DraftToken$, the $Petition$ endpoint may fail as well. In this case, it
+is likely that a system stalled waiting for peer input (i.e., votes) may halt
+in a similar way as a SYN-flood attack. As such, the $Petition$ function could
+be abused to cause a \emph{System Disruption}. Similarly, $Vote$ can be abused
+by attackers to flood the system with bogus votes, with a similar consequence.
+        
+Finally, $AuthorizeToken$ likely serves as a gatekeeper for actions running on
+the system. An attacker in control of this endpoint is able to bypass any
+democratic process (i.e., a \emph{Collective Bypass}). However, in contrast to
+failure in $DraftToken$ functions, it is likely that a compromised
+$AuthorizeToken$ endpoint could leave no trace of compromise. With this in
+mind, we envision this functionality of COLBAC to run as part of a hardened
+environment (e.g., a hardware enclave~\cite{sgx}).
