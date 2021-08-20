@@ -292,29 +292,29 @@ $Execute$ allows a subject to run an object as a program.\\
 \end{definition}
 %\begin{itemize}
 
-\noindent Before introducing the main algorithms involved in COLBAC, we first
-need to define a few functions. However, to save space some shorthand is used.
-For the functions to follow, we will use the following short-hand:
+%\noindent Before introducing the main algorithms involved in COLBAC, we first
+%need to define a few functions. However, to save space some shorthand is used.
+%For the functions to follow, we will use the following short-hand:
 
-\begin{definition}[Abbreviations Used in COLBAC Functions]
+%\begin{definition}[Abbreviations Used in COLBAC Functions]
 %\begin{itemize}
-Let $u$ be a user of the system.\\
-Let $s$ be the subject attempting access.\\
-Let $o$ be the object or set if objects the user is attempting to access.\\
-Let $p:$ be the set of permissions the user is requesting.\\
-Let $t$ be the type of Token the user is attempting to create.\\
-Let $e$ be the proposed expiration time of the Token.\\
-Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
-let $c$ be $NULL$.\\
-Let $a$ be the action\footnote{command, script or program} the user wants to run
-in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
-$NULL$.\\
-Let $d$ be the set of delegates the user is proposing, or in the case where it
-doesn't exist, let $d$ be $NULL$.\\
-Let $DAC(s :$ Subject$, o:$ Object$)$ be a Discretionary Access Control
-system.\\
-\hrule \mbox{}\\
-\end{definition}
+%Let $u$ be a user of the system.\\
+%Let $s$ be the subject attempting access.\\
+%Let $o$ be the object or set if objects the user is attempting to access.\\
+%Let $p:$ be the set of permissions the user is requesting.\\
+%Let $t$ be the type of Token the user is attempting to create.\\
+%Let $e$ be the proposed expiration time of the Token.\\
+%Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
+%let $c$ be $NULL$.\\
+%Let $a$ be the action\footnote{command, script or program} the user wants to run
+%in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
+%$NULL$.\\
+%Let $d$ be the set of delegates the user is proposing, or in the case where it
+%doesn't exist, let $d$ be $NULL$.\\
+%Let $DAC(s :$ Subject$, o:$ Object$)$ be a Discretionary Access Control
+%system.\\
+%\hrule \mbox{}\\
+%\end{definition}
 
 \noindent The first important function we need to define is the $GetSphere$
 function. When passed a subject or object, the $GetSphere$ function will return
@@ -324,7 +324,7 @@ exactly one Sphere, meaning that this function will never return $NULL$ or more
 than one value.
 
 \begin{definition}[GetSphere]\label{def:getsphere}
-$GetSphere(x:$ Subject or Object$) \rightarrow U$ iff $o \in U$, $C$ iff $o \in 
+$GetSphere(o:$ Subject or Object$) \rightarrow U$ iff $o \in U$, $C$ iff $o \in 
 C$, $I$ iff $o \in I$\\
 \hrule \mbox{}\\
 \end{definition}
@@ -339,6 +339,18 @@ a $DraftToken$ function, which calls one of the following three functions
 depending on the type of Token the subject wishes to create. In addition, COLBAC
 requires a function to get the type of a given Token.
 \begin{definition}[Token Functions]\label{def:Tokens}
+Let $u$ be a user of the system.\\
+Let $o$ be the object or set if objects the user is attempting to access.\\
+Let $p$ be the set of permissions the user is requesting.\\
+Let $t$ be the type of Token the user is attempting to create.\\
+Let $e$ be the proposed expiration time of the Token.\\
+Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
+let $c$ be $NULL$.\\
+Let $a$ be the action\footnote{command, script or program} the user wants to run
+in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
+$NULL$.\\
+Let $d$ be the set of delegates the user is proposing, or in the case where it
+doesn't exist, let $d$ be $NULL$.\\
 $DraftToken(u,o,p,e,a,c,t) \rightarrow T$ of type $T_{a}$ or $T_{d}$ or 
 $T_{e}$\\
 $DraftToken_{a}(u,o,p,e,a,c) \rightarrow T_{a} = (u,o,p,e,a,c)$\\
@@ -361,6 +373,7 @@ referred to as $V_{T}$, and can only be called on Tokens of type \textit{action}
 or \textit{delegation.}
 
 \begin{definition}[Petition Function]\label{def:petition}
+Let $T$ be a Token created through $DraftToken$.\\
 $Petition(T) \rightarrow \{$set of votes $V_{T}$ on authorizing $T$ iff $T$ is
 of type $T_{a}$ or $T_{d}$, else $NULL$\}.\\
 \hrule \mbox{}\\
@@ -369,31 +382,32 @@ of type $T_{a}$ or $T_{d}$, else $NULL$\}.\\
 \noindent The returned set of votes, $V$, can then be split into more useful
 sets, such as the set of votes that affirm the authorization of $T$,
 $V_{(T, Yes)}$, the set of votes that negate the authorization of $T$,
-$V_{(T, No)}$, and the set of abstentions, $V_{(T, Blank)}$. These sets are
-defined more formally as follows:
+$V_{(T, No)}$, and the set of abstentions, $V_{(T, Blank)}$. After votes are
+sorted into their respective sets, the process of authorizing the votes comes
+down to a simple task of comparing the number of votes to fractions of voters
+initially defined at system registration. Said another way, a function called
+$AuthorizeToken$ will count the votes and compare the results to two security
+parameters, $f$, or the fraction of yes votes required to authorize a Token, and
+$m$, the fraction of voters required to participate in order for a vote to be
+considered. These two security parameters are chosen at the initialization of
+the system, and can be changed by a successful action Token\footnote{These
+parameters cannot be changed by a delegate or by an emergency Token. This is
+discussed more in Section \ref{sec:colbacproperties}.}. If the vote is
+successful, the Token is then authorized by the addition of a signature field
+that is difficult to predict or replicate, but easy for the reference monitor to
+later verify. One example of this is a keyed HMAC.
+%\begin{definition}[Sets of Votes]\label{def:votes}
+%$V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}$\\
+%$V_{(T, No)} = \{v \in V$ s.t. $v = False\}$\\
+%$V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$\\
+%\hrule\mbox{}\\
+%\end{definition}
 
-\begin{definition}[Sets of Votes]\label{def:votes}
-$V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}$\\
-$V_{(T, No)} = \{v \in V$ s.t. $v = False\}$\\
-$V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$\\
-\hrule\mbox{}\\
-\end{definition}
-
-\noindent After votes are sorted into their respective sets, the process of
-authorizing the votes comes down to a simple task of comparing the number of
-votes to fractions of voters initially defined at system registration. Said
-another way, a function called $AuthorizeToken$ will count the votes and compare
-the results to two security parameters, $f$, or the fraction of yes votes
-required to authorize a Token, and $m$, the fraction of voters required to
-participate in order for a vote to be considered. These two security parameters
-are chosen at the initialization of the system, and can be changed by a
-successful action Token\footnote{These parameters cannot be changed by a
-delegate or by an emergency Token. This is discussed more in Section
-\ref{sec:colbacproperties}.}. If the vote is successful, the Token is then
-authorized by the addition of a signature field that is difficult to predict or
-replicate, but easy for the reference monitor to later verify. One example of
-this is a keyed HMAC.
 \begin{definition}[Authorization in COLBAC]
+Let $V$ be the set of all votes on token T.\\
+Let $V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}$\\
+Let $V_{(T, No)} = \{v \in V$ s.t. $v = False\}$\\
+Let $V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$\\
 $AuthorizeToken(T,V_{T}) \rightarrow True$ iff $\frac{|V_{(T, Yes)}|}{|V|} > f
 \wedge \\ \frac{|V_{(T,Yes)} \cup V_{(T, No)}|}{|V|} \ge m$, else $False$\\
 \hrule\mbox{}\\
