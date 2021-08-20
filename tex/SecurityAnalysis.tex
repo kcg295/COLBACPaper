@@ -1,18 +1,26 @@
-In this section, we explore the security properties of COLBAC in two possible
-scenarios.  First, Section explores and contrasts how COLBAC's token system
-fares through usual system operations. We expect to develop a taxonomy of
-security-related failure modes for COLBAC enabled systems After, we elaborate
-on possible endpoints related to COLBAC operation that an attacker could abused
-by attackers.
+%In this section, we explore the security properties of COLBAC in two possible
+%scenarios.  First, Section explores and contrasts how COLBAC's token system
+%fares through usual system operations. We expect to develop a taxonomy of
+%security-related failure modes for COLBAC enabled systems After, we elaborate
+%on possible endpoints related to COLBAC operation that an attacker could abused
+%by attackers.
+
+In this section we explore the security properties of COLBAC. In Section
+\ref{sec:normal_operation} we explore how COLBAC deals with usual system
+operations. Then, in Section~\ref{failure_modes} we develop a taxonomy of
+security-related failure modes for COLBAC enabled systems, then elaborate on
+possible endpoints related to COLBAC operation that an attacker could abuse.
 
 \subsection{COLBAC failure modes and attack surface}
+\label{sec:failure_modes}
 
 COLBAC's ability to carry out collective decision making is dependent on the
 attackers ability to affect foundational elements of Information Security:
 Confidentiality, Availability, Integrity and Non-repudiation. Although COLBAC
 is still in the ``theoretical'' space, we are able to explore the failure modes
 within the system and derive a taxonomy in which malicious users (as per the
-categorization outlined in Section~\ref{sec:threat-model}:
+categorization outlined in Section~\ref{sec:threat_model}). In this taxonomy,
+the potential threats we face are:
 
 \begin{itemize}
     \item {\bf Collective bypass}: a cadre of malicious users is able
@@ -27,20 +35,24 @@ categorization outlined in Section~\ref{sec:threat-model}:
 \end{itemize}
 
 To explore the attack surface, we enumerate the states and interfaces of
-COLBAC described in section~\ref{sec:} and explore the impact whether these
-interfaces were compromised/mis-implemented.
-        
-\paragraph{$DraftToken$} Failure in the DraftToken function may materialize by
-a failure to authenticate the originator. As a conseqeuence, it may allow
-malicious users to create tokens that impersonate actions on behalf of other
-users. This could lead to a \emph{Collective bypass} or a \emph{Sybil} attack. 
+COLBAC described in Sections~\ref{sec:colbacdesign} through 
+\ref{sec:colbacformal}and explore the impact whether these interfaces were
+compromised/mis-implemented.\\
 
+\noindent$DraftToken$\mbox{}\\
+Failure in the DraftToken function may materialize by a failure to authenticate
+the originator. As a conseqeuence, it may allow malicious users to create tokens
+that impersonate actions on behalf of other users. This could lead to a
+\emph{Collective bypass} or a \emph{Sybil} attack.\\
+
+\noindent$PetitionToken$\mbox{}\\
 Within $DraftToken$, the $Petition$ endpoint may fail as well. In this case, it
 is likely that a system stalled waiting for peer input (i.e., votes) may halt
 in a similar way as a SYN-flood attack. As such, the $Petition$ function could
 be abused to cause a \emph{System Disruption}. Similarly, $Vote$ can be abused
-by attackers to flood the system with bogus votes, with a similar consequence.
-        
+by attackers to flood the system with bogus votes, with a similar consequence.\\
+
+\noindent$AuthorizeToken$\mbox{}\\
 Finally, $AuthorizeToken$ likely serves as a gatekeeper for actions running on
 the system. An attacker in control of this endpoint is able to bypass any
 democratic process (i.e., a \emph{Collective Bypass}). However, in contrast to
