@@ -50,12 +50,12 @@ authorization, but with all aspects of an organization's security policy.
 Decisions about how infringements are dealt with or the scope of the policies
 are also made in this manner. Decisions about how these policies are enforced,
 and what security mechanisms are used, are also made up top, with entities at
-the bottom left to enact the desires passed on to them.
+the bottom left to enact the desires passed down to them.
 
 We see, then, that hierarchy introduces itself in multiple dimensions of
 security. These dimensions include the different decision-making processes of
 security. Instead, it is possible that horizontal security may be achieved by
-shifting policy making powers, implementation decisions, and enforcement
+shifting policy-making powers, implementation decisions, enforcement
 powers, and other dimensions of security away from individuals and towards
 democratic, participatory processes\footnote{Further questions arise when we
 consider the structures of organizations with flexible memberships, who operate
@@ -158,7 +158,7 @@ the organization. Thus, if the individuals who have the ability to enforce the
 rules decide not to, the newly created access control policies become
 ineffective. This forms a hierarchy with the entities capable of enforcing
 access control sitting at the top. Similarly, if an organization were to attempt
-to temporarily act hierarchically and attempted to implement that using tools
+to temporarily act hierarchically and to implement that using tools
 that assumed horizontality, this may cause the hierarchy to lose any potential
 efficiency benefits. Thus, a question arises: can we develop technology that
 allows an organization to be flexible and dynamic in its horizontality, being
@@ -213,10 +213,10 @@ perform malicious activities, such as stealing bitcoin or deleting past
 transactions. The implication of this design is that Bitcoin cannot be
 centrally regulated~\cite{tu2015rethinking}, at least in theory. Thus, a core
 element of cryptocurrencies, the consensus protocol is an instantiation of a
-democratically-based access control policy (this is indeed more obvious for
-proof-of-stake Blockchain systems).
+democratically-based access control policy. %(this is indeed more obvious for
+%proof-of-stake Blockchain systems).
 
-Yet there exists many shortcomings in the Bitcoin/cryptocurrency model. First
+Yet there exist many shortcomings in the Bitcoin/cryptocurrency model. First
 is identifying \emph{who} is part of the collective: are only miners
 stakeholders, or are users stakeholders as well, are developers stakeholders?
 This question raises the fundamental limitation of Bitcoin. Although it can be
@@ -240,8 +240,7 @@ implication of this competitive focus is that there is no mechanism to vote in
 Bitcoin; rather, what is referred to as ``regulation'' in this work is seen by
 the Bitcoin community as an attack. However, the design property of requiring
 a majority of participating members to agree in order to make a change on the
-system may still be useful to inspire future horizontal system designs. Worse
-still, this competitive nature tends to centralize the network over time.
+system may still be useful to inspire future horizontal system designs. In the case of cryptocurrencies, the competitive design tends to centralize the network over time.
 Bitcoin's Proof of Work algorithm tends to favor those who can afford highly
 specialized hardware, eventually leading to a centralization of the network into
 the hands of those who are wealthy enough to control large amounts of machines
@@ -249,10 +248,9 @@ specifically made for mining Bitcoins. Proof of Stake, another consensus
 algorithm for Blockchain, bypasses this middle step and directly benefits those
 who control larger amounts of monetary stake in the network.
 
-Other, more voluntary (and less driven-by-greed) designs also attempt to
+Other, more voluntary (and less profit-driven) designs also attempt to
 achieve horizontality. Perhaps the most well known example of a security system
-meant to be horizontal by design is the PGP Web of Trust (WoT) design. Within
-this ecosystem attempts to allow entities to authenticate (i.e., tie public key
+meant to be horizontal by design is the PGP Web of Trust (WoT) design. This ecosystem attempts to allow entities to authenticate (i.e., tie public key
 material to emails, names, or identities) and exchange signed or encrypted
 messages without a central authority. This is done through a transitive trust
 process: known-good entities can sign trust relationships with other entities

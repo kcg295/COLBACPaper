@@ -4,12 +4,12 @@ has expressed itself in all forms of life: politics, economics, social
 interaction, and more. Recent events all around the globe have demonstrated the
 continuance of this struggle: while wealth inequality increases, surveillance
 technologies are deployed more widely, and political power centralizes in the
-hands of political families, other elements of society demonstrate a desire for
+hands of political families, economic elites, or dictators, other elements of society demonstrate a desire for
 more inclusive, participatory, and fair social structures. Examples of this can
-be seen in the Arab Spring movements, which demanded more democratic
+be seen in the ``Arab Spring'' movements, which demanded more democratic
 participation in governments of the Arab world, and the Occupy Movement, which
 demanded more democratic participation in economic and political policies. More
-recently, in Hong Kong recent protests have demanded the right to participate in
+recently, in Hong Kong, recent protests have demanded the right to participate in
 their own government through democratic vote. In the Movement for Black Lives,
 some Black Lives Matter chapters are demanding more than just increased police
 oversight and funding reallocation, but community control of police, including
@@ -19,6 +19,8 @@ worker participation in their place of employment is becoming more prevalent,
 and research is beginning to demonstrate economic advantages to cooperative
 organization of the
 workplace~\cite{jackall19846,wright2014worker, lindenfeld1982workplace}.
+In the tech sector, Free Open Source Software (FOSS) projects practice a range
+of democratic governance mechanisms~\cite{foss}.
 % XXX: if you want to go shitlib, we can argue for the presence of the PRO act in the US
 Even some schools are beginning to include the democratic participation of the
 school children to their decision making processes, encouraging engagement and
@@ -48,7 +50,7 @@ is being challenged by a demand for more participatory structures.
 %organization for some issues, and electing working groups for others. Some
 %organizations sway between all of the above listed approaches.
 
-Despite the rapid demand of this changed structure of organization, 
+Despite the increasing demand for a changed structure of organization, 
 Cybersecurity tools, technologies and techniques continue to remain highly 
 hierarchical. Security policies are written by a security team or imported from
 pre-existing (and sometimes external) templates and imposed on the rest of the
@@ -56,20 +58,20 @@ organization, with at most the limited oversight and approval of a manager or
 higher-up. Even still, not every member of a security team participates
 in deciding what these policies are meant to achieve. This decision is often
 made by a manager, who ensures that the policies do not get in the way of the
-visions of the individuals on the top of their hierarchies. In developing
+visions of the individuals on the top of the hierarchies. In developing
 security policies and implementing security technologies, the resulting
-technologies and policies reflect political decisions made during their
+technologies and policies embed the political dynamics in place during their
 creation~\cite{winner1980artifacts}. The resulting policies and technologies
 then themselves have political implications that affect the individuals,
 organizations, and societies that use them. Since most security tools have their
-roots in hierarchical entities such as military or corporate business, these
+historical roots in hierarchical entities such as military or corporate business, these
 tools tend to reflect the assumptions of hierarchy that exist in those
 communities. While this may make sense for the military or corporate sectors,
 these technologies are not the best fit for horizontal and participatory sectors
-such as the worker cooperative sector, the activism sector, and the nonprofit
-sector.
+such as worker cooperatives, activist groups, and more horizontally run nonprofits, as
+well as cities and states that are experimenting with direct democracy initiatives.
 
-One example of this is the access to organization controlled secrets. Secrets
+One example of this is the access to organization-controlled secrets. Secrets
 such as organizational passwords to third-party services are often trusted to
 one individual or a small group in an organization, but easily recovered by an
 administrator or other individual higher in the hierarchy in the case that the
@@ -80,8 +82,8 @@ access to the secrets, such as passwords, then any insider can change the
 passwords and cause denial of service for the organization. If only a few people
 have access to the password, then a hierarchy forms based on one's access to
 confidential organizational material. This can lead to events like password 
-wars~\cite{kavada2020counterpublics}, or issues like the digital vanguard
-problem~\cite{gerbaudo2017social}.
+wars~\cite{kavada2020counterpublics}, or issues like the ``digital vanguard
+problem'', discussed below.~\cite{gerbaudo2017social}.
 
 A case in point: one of the organizations we have observed in our ethnographic
 research was a democratic trade union, which had recently transitioned from a
@@ -123,9 +125,9 @@ in control of the social media accounts become the default voice of, and
 ideological leaders, of the group. Gerbaudo describes 
 
 \begin{quote}
-``the emergence of new forms of power stratification embedded in the hierarchy
+the emergence of new forms of power stratification embedded in the hierarchy
 of content management systems used by activists, and the explosion of power
-struggles for the control of social media accounts''~\cite{gerbaudo2017social}.
+struggles for the control of social media accounts~\cite{gerbaudo2017social}.
 \end{quote}
 
 However, the issue does not stop at secrets or accounts. Indeed, these cases are
@@ -158,9 +160,9 @@ collective based system that allows for access control via flexible and dynamic
 democratic participation to fit the needs of the organization using it. We start
 by discussing the current hierarchical state of access control in Section
 \ref{sec:definition} and discussing previous attempts at hierarchical security
-in Section~\ref{sec:previous}. We then discussion COLBAC's threat model in
+in Section~\ref{sec:previous}. We then discuss COLBAC's threat model in
 Section~\ref{sec:threat_model} and introduce the design goals of COLBAC in
-Section~\ref{sec:colbacrequirements}. We then informally describe the COLBAC
+Section~\ref{sec:colbacrequirements}. We informally describe the COLBAC
 system design in Sections~\ref{sec:colbacdesign}, \ref{sec:Tokentypes} and 
 \ref{sec:Tokenformat}, and formally define COLBAC in
 Section~\ref{sec:colbacformal}. We then discuss the properties of COLBAC in

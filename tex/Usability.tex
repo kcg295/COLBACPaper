@@ -10,7 +10,7 @@ include:
 \item The number of members of a COLBAC based system, $m$.
 \item The amount of time COLBAC petition phases are open, $t$.
 \item The average amount of time it takes for members to vote, $a$.
-\item Fraction of people required to form a quorom, $f$.
+\item Fraction of people required to form a quorum, $f$.
 \end{enumerate}
 
 %Idea:
@@ -32,16 +32,19 @@ takes for a server to receive $k$ consecutive accesses from unique administrator
 ids. In other words, we assumed that if a user were to start a Petition Phase at
 any point in the log the $k$ subsequent actions performed by unique ids would be
 preceded by a successful login and by our assumption, a vote. After this, we
-normalized our results using the threshold value of votes needed to perform a
-vote. We present the average, median and 99th percentile vote times in
-Figure~\ref{fig:vote_graph}. Using Figure~\ref{fig:vote_graph}, we can derive
-the vote times for a certain number of users. For example, for a threshold of
-CHANGEME, the Petition Phase times ranged from CHANGEME seconds, to under
-CHANGEME in the 99th percentile. Likewise, a COLBAC system configured with a
-threshold of CHANGEME should finish bootstrapping in around CHANGEME seconds on
-average. It is worth mentioning that the number of active administrators
-oscillated around 5,000 at all times; however, the average Petition Phase time
-decreased from $\approx$CHANGEME seconds to $\approx$CHANGEME seconds. 
+normalized our results using the quorum value of votes needed to perform a
+Petition Phase. 
+%We present the average, median and 99th percentile vote times in
+%Figure~\ref{fig:vote_graph}.
+Using this data we can derive the vote times for a certain number of users. For
+example, for a quorum of 4, the Petition Phase times ranged from 60
+seconds, to under 4 minutes in the 99\textsuperscript{th} percentile. Likewise, a
+COLBAC system configured with a quorum of 8 should finish a Petition Phase
+in around 80 seconds on average. Thus, on average, for each individual required to
+make a quorum, the average time for the Petition Phase increases by 10 seconds. 
+It is worth mentioning that the number of active administrators oscillated around
+5,000 at all times; however, the average vote time decreased from $\approx$24
+seconds to $\approx$10 seconds.
 
 %To assess the effect of these
 %Petition Phase times, we contrasted them with the amount of tentative downtime
@@ -53,12 +56,11 @@ decreased from $\approx$CHANGEME seconds to $\approx$CHANGEME seconds.
 %each year would increase by at most 3.890\%. This is shown in Table
 %\ref{tab:downtime}.
 
-In COLBAC there is a balance that must be struck between usability and security,
-specifically in the amount of time that a COLBAC petition phase is open. We
-would like to strike an optimal balance where the COLBAC petition phase is open
-long enough for members to vote, but does not cause delay on necessary actions
-being performed on the system.
-
+%In COLBAC there is a balance that must be struck between usability and security,
+%specifically in the amount of time that a COLBAC petition phase is open. We
+%would like to strike an optimal balance where the COLBAC petition phase is open
+%long enough for members to vote, but does not cause delay on necessary actions
+%being performed on the system.
 However, the amount of time for the petition phase of a token is not the only
 usability or user experience concern of the COLBAC system. Additionally, issues
 may arise with voting fatigue. Specifically, large amount of votes on action
@@ -67,20 +69,22 @@ details of each vote. To avoid this, voting can be simplified through the use of
 simplified democratic structures like elected representatives. Here we can have
 seats for administrating different functions of a system, and these seats can be
 elected by democratic vote. This can be done via long-lived delegation tokens
-with permissions relevant only to the elect representative's role within the
-system. If the representative misbehaves their permissions could be revoked with
-an action token, and new elections can be held. Similar to how workers in some
+with permissions relevant only to the elected representative's role within the
+system. If the representative misbehaves, their permissions could be revoked with
+an action token, and new elections can be held. Similarly to how workers in some
 worker cooperatives hire their managers, or how union members elect their
-stewarts, members in COLBAC can elect their administrators.
+stewards, members in COLBAC can elect their administrators.
 
 For organizations that prefer more direct democratic approaches, issues with
 voting fatigue can be avoided using non-technological organizational practices.
 For example, many more hierarchically run organizations (such as some of the 
-Mondrogon cooperatives in Spain or the democratic free school Escola da Ponte in
+\textit{Mondragon}\footnote{https://www.mondragon-corporation.com/en/}cooperatives
+in Spain or the democratic free school 
+\textit{Escola da Ponte}\footnote{https://www.escoladaponte.pt/} in
 Portugal) have regular meetings where organizational decisions are made.
 Organizations that run COLBAC can also use these meetings to decide aspects of
 system administration. This alleviates voting fatigue, since results of these
-discussions can be batched into a few action tokens and the participants know
+discussions can be batched into a few action tokens and the participants will know
 exactly what they are voting on before the Petition Phase of COLBAC even begins.
 %These usability factors can further be simplified through the organizational
 %structures that use them. For example, many cooperatives have weekly meetings of

@@ -11,7 +11,7 @@ describing its requirements, focusing on the dynamic horizontality that
 separates COLBAC from other access control systems. We then define the system
 itself. Finally, we discuss the properties and limitations of this system.
 Though this is, to our knowledge, the first attempt at defining a collective
-based access control system with dynamic and felxible horizontality, it is far
+based access control system with dynamic and flexible horizontality, it is far
 from the only potential approach. Section~\ref{sec:colbaclimitations} discusses
 some potential factors that can differ from our system, and potentially improve
 upon it.
@@ -48,7 +48,7 @@ individuals and the collective that is immutable and available.
 
 \subsection{System Design}
 \label{sec:colbacdesign}
-COLBAC presents a solution to access control that relies around the collective.
+COLBAC presents a solution to access control that relies on the collective.
 However, as will be discussed later in this section, not all objects on the
 system will need to be collectively controlled or administered. As such, we
 define three distinct \textit{spheres} of the system, or areas that require
@@ -66,17 +66,17 @@ control. Additionally, all services that the collective offers, or official
 sources of collective information, must also exist in this sphere.
 
 However, not everything should be directly managed by the collective. Individual
-users may have their own files and programs they intend to use only in a way
-that it does not effect other users of the system or the resources of the
+users may have their own files and programs, which they intend to use only in ways
+that do not affect other users of the system or the resources of the
 collective\footnote{We can think of these as the home directories of users in
 modern Unix-like systems.}. This sphere, called the \textbf{User Sphere},
-can use traditional DAC systems like modern Unix-like systems without effecting
+can use traditional DAC systems like modern Unix-like systems without affecting
 the horizontality of the system as a whole.
 
 Finally, to have meaningful control of the system we must have transparency. To
 achieve this, a system must have an \textbf{Immutable Sphere}, or a portion of
 the file system and programs that cannot be altered once written to, including
-by democratic control. This allows for the system to provide append only logs
+by democratic control. This allows for the system to provide append-only logs
 that are vital to maintaining collective control, as described later in this
 section. Additionally, this section can hold a list of inalienable rights that
 each participant in the system has, such as the right to a vote.
@@ -109,7 +109,7 @@ other members of the system and ask for a vote. The users will then vote one of
 the following ways: yes, no, or abstain\footnote{It is important to mention that
 this is not the only way of performing democratic participation. However, other
 models of democratic participation are left to future work.}. The system will
-wait a pre-configured amount of time before marking all individuals who did not
+wait for a pre-configured amount of time before marking all individuals who did not
 vote as abstaining.
 
 After all votes are collected or the response period has timed out, the system
@@ -232,7 +232,7 @@ As we can see, the Delegation Token body is similar to the Action or Emergency
 Token body, except in that it does not specify the code that is running. This
 design is ideal for sessions that require troubleshooting, or tasks that may
 require back-and-forth between the system and the individual or group performing
-the task in order to fully realize. However, when using Delegation Tokens it is
+the task. However, when using Delegation Tokens it is
 more important to ensure that the Permissions Needed section follows the
 principle of least privilege. If not, individuals can use the privileges they
 gain from the Delegation Token to perform actions that were not originally
@@ -414,15 +414,15 @@ $AuthorizeToken(T,V_{T}) \rightarrow True$ iff $\frac{|V_{(T, Yes)}|}{|V|} > f
 \end{definition}
 
 The process of determining authorization in COLBAC occurs in one or two phases,
-depending on which Sphere the object the subject is trying to access exists in.
-If the object exists in the User Sphere, the reference monitor simply performs a
+depending on which Sphere contains the object the subject wants to access.
+If the object is in the User Sphere, the reference monitor simply performs a
 traditional DAC check, like one would see on a typical Unix-like operating
 system.
 
-If the object exists in the Collective Sphere, the subject is expected to
+If the object is in the Collective Sphere, the subject is expected to
 provide a previously authorized Token or draft a new Token for the reference
 monitor. If the subject provides a previously authorized Token, the validity of
-that Token is checked, and if it is valid the action is taken. If
+that Token is checked, and if it is valid, the action is taken. If
 the subject does not have a valid Token, they instead provide a draft Token. The
 reference monitor then takes this draft Token and enters the Petition phase,
 where all users of the system are given the opportunity to vote on the Token. If
@@ -439,7 +439,7 @@ the Collective Sphere, since the Immutable Sphere mainly contains logs of what
 was done in the Collective Sphere. If the type of access on the resource in the
 Immutable Sphere is a $write$ operation, it always fails, since $write$
 operations can arbitrarily write to any portion of a file. Likewise, $delete$
-operations always and $execute$ operations always fail. If the operation is a
+operations and $execute$ operations always fail. If the operation is a
 $create$ or $append$ operation, the reference monitor must check that the
 subject has a valid Token to do so. If not, they may not perform the action.
 The reference monitor, however, may always append or create in the Immutable
@@ -584,17 +584,17 @@ $\frac{1}{n}$, where $n$ is the number of users, that simply means that one
 person needs to vote in favor to authorize an action, but it does not say
 \textit{which} individual has that power, meaning that any single vote from any
 user is capable of authorizing an action. This is far from a dictatorial
-structure, in which all power is held only by one individual or a small set of
+structure, in which all power is fixed in the hands of one individual or a small set of
 individuals.
 
 This design does allow for many different expressions of horizontal structures,
 however. For example, because of the existence of delegation Tokens which expire,
 our design allows for an authorization structure that reflects those of
-representative democracies, where elected individuals reside over certain
+representative democracies, where elected individuals preside over certain
 responsibilities in the system. However, if the collective does not approve of
 how the elected individual is performing their duties, our solution allows for
 users to call for a democratic vote that invalidates the Token of the delegate,
-thus forcing a new delegate to be chosen or bringing the responsibility back
+thus forcing a new delegate to be chosen, or bringing the responsibility back
 into the collective.
 
 More, our system allows for action Tokens to modify the values of $f$ and $m$,
@@ -620,7 +620,7 @@ vote. Instead, it sends it to all individuals who are a part of the system.
 Thus, in the COLBAC system the right to vote is inalienable as long as one
 remains part of the system. Likewise, because the reference monitor grants all
 read access to any object in the Immutable Sphere and disallows any deletions or
-arbitrary write in the Immutable Sphere, transparency of the system is
+arbitrary writes in the Immutable Sphere, transparency of the system is
 guaranteed so long as the reference monitor behaves according to the system
 design.
 
@@ -653,11 +653,11 @@ a deeper understanding of the potential effects of their vote. However, these
 problems may be solved through interface design, and through iterative
 development of the access control system.
 
-Additionally, COLBAC has a limitation in which democratic governance structures
+Additionally, COLBAC has a limitation regarding \textit{which} democratic governance structures
 it can represent. For example, a purely elected representative structure without
 referendums is impossible to create using COLBAC, since the right to petition
 a Token is inalienable in COLBAC. While this may be seen as a positive for many
-horizontally run organizations, some may also view it as a negative. Finally,
+horizontally-run organizations, some may also view it as a negative. Finally,
 currently COLBAC does not allow for different values of $f$ and $m$ per file.
 Future research may be needed to determine how this would affect the properties
 of COLBAC, and if it may introduce new attacks.

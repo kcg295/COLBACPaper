@@ -5,20 +5,19 @@
 %on possible endpoints related to COLBAC operation that an attacker could abused
 %by attackers.
 
-In this section we explore the security properties of COLBAC. In Section
-\ref{sec:normal_operation} we explore how COLBAC deals with usual system
-operations. Then, in Section~\ref{sec:failure_modes} we develop a taxonomy of
-security-related failure modes for COLBAC enabled systems, then elaborate on
-possible endpoints related to COLBAC operation that an attacker could abuse.
+%In this section we explore the security properties of COLBAC. In Section
+%\ref{sec:normal_operation} we explore how COLBAC deals with usual system
+%operations. Then, in Section~\ref{sec:failure_modes} we develop a taxonomy of
+%security-related failure modes for COLBAC enabled systems, then elaborate on
+%possible endpoints related to COLBAC operation that an attacker could abuse.
 
-\subsection{COLBAC failure modes and attack surface}
-\label{sec:failure_modes}
-
+%\subsection{COLBAC failure modes and attack surface}
+%\label{sec:failure_modes}
 COLBAC's ability to carry out collective decision making is dependent on the
-attackers ability to affect foundational elements of Information Security:
+attackers' ability to affect foundational elements of Information Security:
 Confidentiality, Availability, Integrity and Non-repudiation. Although COLBAC
 is still in the ``theoretical'' space, we are able to explore the failure modes
-within the system and derive a taxonomy in which malicious users (as per the
+within the system and derive a taxonomy of potential attacks by malicious users (as per the
 categorization outlined in Section~\ref{sec:threat_model}). In this taxonomy,
 the potential threats we face are:
 
@@ -26,7 +25,7 @@ the potential threats we face are:
     \item {\bf Collective bypass}: a cadre of malicious users is able
         to perform actions bypassing the democratic process.
 
-    \item {\bf Sybil attack}: a malicious users is able
+    \item {\bf Sybil attack}: a malicious user is able
         to impersonate legitimate voters.
 
     \item {\bf System disruption}: a cadre of malicious users is able to halt
@@ -36,12 +35,12 @@ the potential threats we face are:
 
 To explore the attack surface, we enumerate the states and interfaces of
 COLBAC described in Sections~\ref{sec:colbacdesign} through 
-\ref{sec:colbacformal}and explore the impact whether these interfaces were
+\ref{sec:colbacformal} and explore the impact if these interfaces were
 compromised/mis-implemented.\\
 
 \noindent$DraftToken$\mbox{}\\
 Failure in the DraftToken function may materialize by a failure to authenticate
-the originator. As a conseqeuence, it may allow malicious users to create tokens
+the originator. As a consequence, it may allow malicious users to create tokens
 that impersonate actions on behalf of other users. This could lead to a
 \emph{Collective bypass} or a \emph{Sybil} attack.\\
 
