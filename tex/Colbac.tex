@@ -249,16 +249,12 @@ the Reference Monitor.
 
 \subsection{Formalizing COLBAC}
 \label{sec:colbacformal}
-In this section we take a first attempt at formalizing COLBAC, a collective
-based access control system. This formalization is not yet complete, but rather
-can benefit from insight of fellow participants at the NSPW Workshop. However,
-in the following section we lay as much of a foundation as we can to build on
-top of. To begin, we define important sets. We then go on to discuss which
-permissions are possible in COLBAC, what abbreviations are used in our notation,
-and what functions we rely on in our formalization. Finally, we introduce
-different algorithms used by the reference monitor in our proposed model. This
-formalization serves as a basis for our access control model, but can be changed
-based on the feedback received at the workshop.
+In this section we formalize COLBAC, a collective based access control system.
+To begin, we define important sets. We then go on to discuss which permissions
+are possible in COLBAC, what abbreviations are used in our notation, and what
+functions we rely on in our formalization. Finally, we introduce different
+algorithms used by the reference monitor in our proposed model. This
+formalization serves as a basis for our access control model.
 \begin{definition}[Spheres of COLBAC]\label{def:spheres}
 In COLBAC, a \textbf{Sphere} is a set which contains both subjects (users,
 processes, etc.) and objects (files, etc.).\\
@@ -278,8 +274,7 @@ $I \cap C = \emptyset$\\
 \noindent In addition to the sets above, our access control model also requires
 a set of permissions, similar to the sets of permissions used in other access
 control systems. These permissions will be used later when the reference monitor
-is deciding whether or not to permit an action. These permissions can be
-expanded based on feedback received during the NSPW Workshop.
+is deciding whether or not to permit an action.
 
 \begin{definition}[Permissions in COLBAC]\label{def:permissions}
 $Create$ allows the creation of an object.\\
