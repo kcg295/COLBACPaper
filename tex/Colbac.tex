@@ -16,6 +16,25 @@ from the only potential approach. Section~\ref{sec:colbaclimitations} discusses
 some potential factors that can differ from our system, and potentially improve
 upon it.
 
+To our knowledge COLBAC is the first attempt to incorporate democratic processes
+into access control. However, democracy is a complex concept, and COLBAC only
+incorporates some aspects of democracy. For example, sortition is not utilized
+at all in COLBAC. For our definition of the \textit{Demos}, we consider all members of
+a system using COLBAC do be part of the \textit{Demos} and thus eligable to vote. Our
+design of COLBAC also assumes there exists an external channel for deliberation
+that is used by all members of the \textit{Demos}.
+
+Given these assumptions and the design of COLBAC, we can see that COLBAC allows
+for a large variety of different democratic governance schemes. More direct
+forms of democracy can be done using Action Tokens, and elective representation
+can be done using Delegation Tokens\footnote{These types of Tokens are described
+in Section~\ref{sec:Tokentypes}}. The spectrum between full consensus and
+majority decision-making is represented through the security parameter $f$ and
+the decision of how much participation is required per vote and, therefore, how
+difficult it is to create a quorum can be fine-tuned using the security
+parameter $m$\footnote{These security parameters are described in Section
+\ref{sec:colbacdesign}}.
+
 \subsection{System Requirements}
 \label{sec:colbacrequirements}
 COLBAC is aimed at addressing a novel requirement in Cybersecurity research:
@@ -149,6 +168,19 @@ and with a given set of restrictions. The procedure is obtaining a Delegation
 Token is the same as that for an Action Token. However, the information that
 would be put in the Token would be slightly different. The format for Action
 Tokens and Delegation Tokens are shown in Section~\ref{sec:Tokenformat}.
+
+Consider the example of the democraticly run trade union from Section 
+\ref{sec:introduction}. In this example, when the new communication committee
+were put in power by the union memebers though a slate of democratic elections.
+However, former individuals who had access to read the emails that arrived to
+the collective's inbox did not allow members of the new committee to read or
+send emails. If this trade union had been using COLBAC, after the elections a
+Delegation Token would have been drafted to grant the new committee access to
+both read and send emails. This Delegation Token would then gone through a
+Petition Phase, where presumably it would pass\footnote{This assumption is based
+off of the results of the democratic elections that occurred before.}. Thus, the
+individuals previously in charge of email would be incapable of denying access
+to the new committee.
 
 There are some instances in which one needs to respond to emergency situations
 as soon as possible, and cannot wait for a slow authorization process by a
@@ -349,7 +381,7 @@ doesn't exist, let $d$ be $NULL$.\\
 $DraftToken(u,o,p,e,a,c,t) \rightarrow T$ of type $T_{a}$ or $T_{d}$ or 
 $T_{e}$\\
 $DraftToken_{a}(u,o,p,e,a,c) \rightarrow T_{a} = (u,o,p,e,a,c)$\\
-$DraftToken_{d}(u,o,p,e,a,c) \rightarrow T_{d} = (u,o,p,e,d,c)$\\
+$DraftToken_{d}(u,o,p,e,d,c) \rightarrow T_{d} = (u,o,p,e,d,c)$\\
 $DraftToken_{e}(u,o,p,a,c) \rightarrow T_{e} = (u,o,p,a,c)$\\
 $GetTokenType(t:$ Token$) \rightarrow \{$the type of Token $t$ from $Action$,
 $Delegation$, or $Emergency$\}
@@ -367,6 +399,21 @@ authorized. This $Petition$ function returns a set of Votes on the Token $T$,
 referred to as $V_{T}$, and can only be called on Tokens of type \textit{action}
 or \textit{delegation.}
 
+Let's consider again the example of the democratic trade union presented in
+Section~\ref{sec:introduction}. As mentioned in Section~\ref{sec:Tokentypes},
+in COLBAC this change of power would occur through a Delegation Token. Relating
+to the notation in Definition~\ref{def:Tokens}, if u were a member of the
+committee, $o$ was the set of files, folders, and programs needed to read,
+write, and send emails, $p$ was the necessary set of permissions to perform
+these actions\footnote{Such as the $Execute$ permission for the email program,
+the $Create$ and $Write$ permission for temporary files, the $Read$ permission
+for the files the emails are stored in, etc.}, $e$ was the experation date of
+the Token\footnote{Which should be set to the last day of the mandate of the
+elected body.}, $d$ was the list of all members of the committee, and $c$ was
+any human-readable comment the token drafter deemed necessary. Then, the token
+drafter would compute $T_{d} = DraftToken_{d}(u,o,p,e,d,c)$, and run
+$Petition(T)$ as follows.
+
 \begin{definition}[Petition Function]\label{def:petition}
 Let $T$ be a Token created through $DraftToken$.\\
 $Petition(T) \rightarrow \{$set of votes $V_{T}$ on authorizing $T$ iff $T$ is
@@ -374,7 +421,8 @@ of type $T_{a}$ or $T_{d}$, else $NULL$\}.\\
 \hrule \mbox{}\\
 \end{definition}
 
-\noindent The returned set of votes, $V$, can then be split into more useful
+\noindent This Petition Phase would collect votes from all of the members on the
+system. The returned set of votes, $V$, can then be split into more useful
 sets, such as the set of votes that affirm the authorization of $T$,
 $V_{(T, Yes)}$, the set of votes that negate the authorization of $T$,
 $V_{(T, No)}$, and the set of abstentions, $V_{(T, Blank)}$. After votes are
@@ -417,31 +465,44 @@ system.
 If the object is in the Collective Sphere, the subject is expected to
 provide a previously authorized Token or draft a new Token for the reference
 monitor. If the subject provides a previously authorized Token, the validity of
-that Token is checked, and if it is valid, the action is taken. If
-the subject does not have a valid Token, they instead provide a draft Token. The
-reference monitor then takes this draft Token and enters the Petition phase,
-where all users of the system are given the opportunity to vote on the Token. If
-the petition succeeds, the Token is authorized and returned to the subject. If
-the petition fails, the Token is not returned. In either case, the submission of
-the Token to the reference monitor is logged in the Immutable Sphere.
+that Token is checked, and if it is valid, the action is taken. If the subject
+does not have a valid Token, they instead provide a draft Token. The reference
+monitor then takes this draft Token and enters the Petition phase, where all
+users of the system are given the opportunity to vote on the Token. If the
+petition succeeds, the Token is authorized and returned to the subject. If the
+petition fails, the Token is not returned. In either case, the submission of the
+Token to the reference monitor is logged in the Immutable Sphere. In the example
+provided in Section~\ref{sec:introduction}, all of the data required to access
+the collective email exists in the Collective Sphere.
 
 If the object the subject is trying to access is in the Immutable Sphere, the
 reference monitor performs a very simple access control check. If the type of
 access on the resource in the Immutable Sphere is a $read$ operation, it always
-succeeds. This
-is to provide transparency on the different operations that are attempted in
-the Collective Sphere, since the Immutable Sphere mainly contains logs of what
-was done in the Collective Sphere. If the type of access on the resource in the
-Immutable Sphere is a $write$ operation, it always fails, since $write$
-operations can arbitrarily write to any portion of a file. Likewise, $delete$
-operations and $execute$ operations always fail. If the operation is a
+succeeds. This is to provide transparency on the different operations that are
+attempted in the Collective Sphere, since the Immutable Sphere mainly contains
+logs of what was done in the Collective Sphere. If the type of access on the
+resource in the Immutable Sphere is a $write$ operation, it always fails, since
+$write$ operations can arbitrarily write to any portion of a file. Likewise,
+$delete$ operations and $execute$ operations always fail. If the operation is a
 $create$ or $append$ operation, the reference monitor must check that the
 subject has a valid Token to do so. If not, they may not perform the action.
 The reference monitor, however, may always append or create in the Immutable
 Sphere.
 
 An algorithmic representation of these access control decisions are included in
-Algorithm~\ref{alg:main}.
+Algorithm~\ref{alg:main}. To continue with our example from Section
+\ref{sec:introduction}, imagine that a member of the committee wants to read an
+email in the Collective Sphere. We can see that $GetSphere(o)$ would return $C$,
+since the email program exists in the Collective Sphere. Thus, the block of code
+from lines 14 to 20 would be executed, and the Token would be checked. Assuming
+that the previous vote on the Petition Phase for the Delegation Token has
+passed, line 14 would return the non-NULL Delegation Token that $u$ has as a
+member of the elected committee. Then, since the action that they wish to
+perform (read an email) is covered by the permissions of the Delegation Token
+$T$, the action will be logged on line 17 and then performed on line 18.
+However, if $u$ were not a member of the committee, then the $GetToken$ function
+would return NULL, or would return Tokens that do not have the relevant
+permissions. As such, lines 22 -- 32 or line 19 would be executed, respectively.
 
 \begin{algorithm}
 \caption{The main decision making process of COLBAC}

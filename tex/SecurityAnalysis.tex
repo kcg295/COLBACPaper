@@ -1,5 +1,8 @@
-%In this section, we explore the security properties of COLBAC in two possible
-%scenarios.  First, Section explores and contrasts how COLBAC's token system
+In this section, we explore the security properties of COLBAC in two possible
+scenarios.  First, Section~\ref{sec:technical} explores some of the possible
+technical attacks against the COLBAC system at different system endpoints.
+After, we elaberate on some well-known attacks against democracy, and how they
+fit into and are mitigated by COLBAC's design.
 %fares through usual system operations. We expect to develop a taxonomy of
 %security-related failure modes for COLBAC enabled systems After, we elaborate
 %on possible endpoints related to COLBAC operation that an attacker could abused
@@ -11,15 +14,15 @@
 %security-related failure modes for COLBAC enabled systems, then elaborate on
 %possible endpoints related to COLBAC operation that an attacker could abuse.
 
-%\subsection{COLBAC failure modes and attack surface}
-%\label{sec:failure_modes}
+\subsection{COLBAC failure modes and technical attack surfaces}
+\label{sec:technical}
 COLBAC's ability to carry out collective decision making is dependent on the
 attackers' ability to affect foundational elements of Information Security:
 Confidentiality, Availability, Integrity and Non-repudiation. Although COLBAC
 is still in the ``theoretical'' space, we are able to explore the failure modes
-within the system and derive a taxonomy of potential attacks by malicious users (as per the
-categorization outlined in Section~\ref{sec:threat_model}). In this taxonomy,
-the potential threats we face are:
+within the system and derive a taxonomy of potential attacks by malicious users
+(as per the categorization outlined in Section~\ref{sec:threat_model}). In this
+taxonomy, the potential threats we face are:
 
 \begin{itemize}
     \item {\bf Collective bypass}: a cadre of malicious users is able
@@ -59,3 +62,61 @@ failure in $DraftToken$ functions, it is likely that a compromised
 $AuthorizeToken$ endpoint could leave no trace of compromise. With this in
 mind, we envision this functionality of COLBAC to run as part of a hardened
 environment (e.g., a hardware enclave~\cite{sgx}).
+
+\subsection{Democratic Attacks and COLBAC}
+%\noindent\textbf{Attacks on Democracy}\mbox{}\\
+In addition to the technical attacks enumerated above, there are also political
+attacks that can occur against the system. Each of these attacks are not
+specific to our system, but rather are attacks against democratic forms of
+organization and management.
+
+\noindent\textbf{Malicious Representative}\mbox{}\\
+One such attack is the concept of a malicious representative, or an entity in
+the organization that has gained access to a resource through a Delegation Token
+but then does not perform the promised actions, or, worse, performs other
+actions that are not in the interest of the organization, causing a
+\emph{Collective bypass}. Unfortunately, no technical solution exists to the
+problem of malicious representatives. However, previous democracies have
+mitigated this problem through accountability in the form of \emph{checks and
+balances}.
+
+In order to have checks and balances, a democratic system must have a group that
+is reposible for over-ruling the decisions made by potentially malicious
+representatives, and that group must have transparency into the actions of the
+representatives and the ability to undo the actions these representatives have
+done. In COLBAC, the group responsible for over-ruling the decisions made by the
+malicious representatives are the users themselves. Transparecny is achieved
+through the existance of COLBAC's Immutable Sphere, where the elected
+representative cannot remove traces of their actions, nor can they deny members
+of the system the right to see the Immutable Sphere. If the users have decided
+that the representative has acted maliciously, they can call a Petition Phase
+for an Action Token that will revoke the represenatative's rights. They can also
+undo any actions that the representative has made through additional Action
+Tokens, or elect a new representative to do that via a new Delegation Token.
+
+\noindent\textbf{Misuse of Emergency Tokens}\mbox{}\\
+Similar to the Malicious Representative attack, individuals in the organization
+can use Emergency Tokens to perform an action that is against the collective
+will, causing a \emph{Collective bypass} attack. Similar to the Malicious
+Representative attack, these attacks are mitigated through checks and balances
+within the system.
+
+\noindent\textbf{Artificial Quorum through Collusion}\mbox{}\\
+An Artificial Quorum attack occurs when a minority group in the organization
+attempts to manipulate who is present at a vote to increase the chances of an
+unpopular outcome. This can result in a \emph{Collective bypass}. This attack is
+likely to occur for organizations that have a low $f$ value, and thus it can
+be mitigated through selecting a large enough value $f$ to ensure a large group
+is needed for quorum. 
+
+\noindent\textbf{Quorum Denial through Collusion}\mbox{}\\
+In direct contract to an Artifical Quroum attack, a Quorum Denial attack occurs
+when a minority group in the organization refuses to log into the system to vote
+on a popular Token, potentially denying quorum and resulting in a
+\emph{Collective bypass}. This attack is likely to occur for organization that
+have a high $f$ value, and thus it can be mitigated through selecting a large
+enough value $f$ to ensure a small group cannot deny quorum.
+    
+% One interesting thing to see here is that two different attacks are enabled by
+%   the value of f. One can occur is f is small, and one can occur if f is big.
+
