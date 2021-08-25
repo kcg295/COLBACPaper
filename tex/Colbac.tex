@@ -9,20 +9,22 @@ In this section we describe Collective Based Access Control, or COLBAC: our
 approach to a dynamic horizontality access control system. We begin by
 describing its requirements, focusing on the dynamic horizontality that
 separates COLBAC from other access control systems. We then define the system
-itself. Finally, we discuss the properties and limitations of this system.
-Though this is, to our knowledge, the first attempt at defining a collective
-based access control system with dynamic and flexible horizontality, it is far
-from the only potential approach. Section~\ref{sec:colbaclimitations} discusses
-some potential factors that can differ from our system, and potentially improve
-upon it.
+itself. Finally, we discuss the properties and in Section~\ref{sec:limitations}
+we discuss the limitations of this system. Though this is, to our knowledge, the
+first attempt at defining a collective based access control system with dynamic
+and flexible horizontality, it is far from the only potential approach. Section
+\ref{sec:future_work} discusses some potential future work to improve upon it.
 
 To our knowledge COLBAC is the first attempt to incorporate democratic processes
 into access control. However, democracy is a complex concept, and COLBAC only
-incorporates some aspects of democracy. For example, sortition is not utilized
-at all in COLBAC. For our definition of the \textit{Demos}, we consider all members of
-a system using COLBAC do be part of the \textit{Demos} and thus eligable to vote. Our
-design of COLBAC also assumes there exists an external channel for deliberation
-that is used by all members of the \textit{Demos}.
+incorporates some aspects of democracy. For example, solution is not utilized
+at all in COLBAC. For our definition of the \textit{Demos}, we consider all
+members of a system using COLBAC do be part of the \textit{Demos} and thus
+eligible to vote. Our design of COLBAC also assumes there exists an external
+channel for deliberation that is used by all members of the \textit{Demos}, and
+that there may exist external channels for other forms of decision-making.
+However, every decision made in these external channels that affects the system
+must eventually become a vote within COLBAC.
 
 Given these assumptions and the design of COLBAC, we can see that COLBAC allows
 for a large variety of different democratic governance schemes. More direct
@@ -85,8 +87,8 @@ control. Additionally, all services that the collective offers, or official
 sources of collective information, must also exist in this sphere.
 
 However, not everything should be directly managed by the collective. Individual
-users may have their own files and programs, which they intend to use only in ways
-that do not affect other users of the system or the resources of the
+users may have their own files and programs, which they intend to use only in
+ways that do not affect other users of the system or the resources of the
 collective\footnote{We can think of these as the home directories of users in
 modern Unix-like systems.}. This sphere, called the \textbf{User Sphere},
 can use traditional DAC systems like modern Unix-like systems without affecting
@@ -169,18 +171,17 @@ Token is the same as that for an Action Token. However, the information that
 would be put in the Token would be slightly different. The format for Action
 Tokens and Delegation Tokens are shown in Section~\ref{sec:Tokenformat}.
 
-Consider the example of the democraticly run trade union from Section 
-\ref{sec:introduction}. In this example, when the new communication committee
-were put in power by the union memebers though a slate of democratic elections.
-However, former individuals who had access to read the emails that arrived to
-the collective's inbox did not allow members of the new committee to read or
-send emails. If this trade union had been using COLBAC, after the elections a
-Delegation Token would have been drafted to grant the new committee access to
-both read and send emails. This Delegation Token would then gone through a
-Petition Phase, where presumably it would pass\footnote{This assumption is based
-off of the results of the democratic elections that occurred before.}. Thus, the
-individuals previously in charge of email would be incapable of denying access
-to the new committee.
+Consider the example of the democratically run trade union introduced in Section 
+\ref{sec:introduction}. In this example, a new communication committee was put
+in power though a slate of democratic elections. However, former individuals who
+had access to read the emails that arrived to the collective's inbox did not
+allow members of the new committee to read or send emails. If this trade union
+had been using COLBAC, after the elections a Delegation Token would have been
+drafted to grant the new committee access to both read and send emails. This
+Delegation Token would then gone through a Petition Phase, where presumably it
+would pass\footnote{This assumption is based off of the results of the
+democratic elections that occurred before.}. Thus, the individuals previously in
+charge of email would be incapable of denying access to the new committee.
 
 There are some instances in which one needs to respond to emergency situations
 as soon as possible, and cannot wait for a slow authorization process by a
@@ -402,12 +403,12 @@ or \textit{delegation.}
 Let's consider again the example of the democratic trade union presented in
 Section~\ref{sec:introduction}. As mentioned in Section~\ref{sec:Tokentypes},
 in COLBAC this change of power would occur through a Delegation Token. Relating
-to the notation in Definition~\ref{def:Tokens}, if u were a member of the
-committee, $o$ was the set of files, folders, and programs needed to read,
+to the notation in Definition~\ref{def:Tokens}, if \textit{u} were a member of
+the committee, $o$ was the set of files, folders, and programs needed to read,
 write, and send emails, $p$ was the necessary set of permissions to perform
 these actions\footnote{Such as the $Execute$ permission for the email program,
 the $Create$ and $Write$ permission for temporary files, the $Read$ permission
-for the files the emails are stored in, etc.}, $e$ was the experation date of
+for the files the emails are stored in, etc.}, $e$ was the expiration date of
 the Token\footnote{Which should be set to the last day of the mandate of the
 elected body.}, $d$ was the list of all members of the committee, and $c$ was
 any human-readable comment the token drafter deemed necessary. Then, the token
