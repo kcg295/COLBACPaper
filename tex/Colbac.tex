@@ -29,7 +29,7 @@ must eventually become a vote within COLBAC.
 Given these assumptions and the design of COLBAC, we can see that COLBAC allows
 for a large variety of different democratic governance schemes. More direct
 forms of democracy can be done using Action Tokens, and elective representation
-can be done using Delegation Tokens\footnote{These types of Tokens are described
+can be done using Delegation Tokens\footnote{These types of tokens are described
 in Section~\ref{sec:Tokentypes}}. The spectrum between full consensus and
 majority decision-making is represented through the security parameter $f$ and
 the decision of how much participation is required per vote and, therefore, how
@@ -123,9 +123,9 @@ their task or tasks. At the end of this process, the user will have a draft
 Action or Delegation Token, as described later in Sections \ref{sec:Tokentypes}
 and \ref{sec:Tokenformat}.
 
-After the user has completed their Token, they move on to the Petition Phase. In
-this phase the user sends their draft Token to the reference monitor running on
-the system. This reference monitor will then forward the draft Token to all
+After the user has completed their token, they move on to the Petition Phase. In
+this phase the user sends their draft token to the reference monitor running on
+the system. This reference monitor will then forward the draft token to all
 other members of the system and ask for a vote. The users will then vote one of
 the following ways: yes, no, or abstain\footnote{It is important to mention that
 this is not the only way of performing democratic participation. However, other
@@ -147,28 +147,28 @@ action is logged in the immutable sphere.
 
 \subsection{Types of Tokens}
 \label{sec:Tokentypes}
-As the previous section demonstrates, the Token is the main form of interacting
+As the previous section demonstrates, the token is the main form of interacting
 with the Collective Sphere. Users who wish to affect the Collective Sphere do
-so by creating a Token which is then voted on by the users of the system. In
+so by creating a token which is then voted on by the users of the system. In
 order to facilitate easy interaction with the COLBAC system, there are multiple
-types of Tokens.
+types of tokens.
 
-The first Token is called the \textbf{Action Token}. This Token allows a single
+The first token is called the \textbf{Action Token}. This token allows a single
 command, a small script, or a program to be run in the Collective Sphere, and to
-enjoy Collective Sphere access. This is the most straightforward type of Token,
-since everything the Token will allow to occur is known during the Petition
-Phase. However, this type of Token is rigid and inflexible. If there is an error
+enjoy Collective Sphere access. This is the most straightforward type of token,
+since everything the token will allow to occur is known during the Petition
+Phase. However, this type of token is rigid and inflexible. If there is an error
 in the command, or in the code, a user would need to re-enter the Draft Phase,
-fix the error, and re-enter the Petition Phase to authorize a new Token. The
+fix the error, and re-enter the Petition Phase to authorize a new token. The
 more a single Action Token attempts to do, the more likely there will be errors,
-causing frustration for both the users drafting the Tokens and the users voting
+causing frustration for both the users drafting the tokens and the users voting
 on them.
 
 To avoid these issues, COLBAC also allows for \textbf{Delegation Tokens}, which
 allow the drafting user to act in the Collective Sphere for a given set of time,
 and with a given set of restrictions. The procedure is obtaining a Delegation
 Token is the same as that for an Action Token. However, the information that
-would be put in the Token would be slightly different. The format for Action
+would be put in the token would be slightly different. The format for Action
 Tokens and Delegation Tokens are shown in Section~\ref{sec:Tokenformat}.
 
 Consider the example of the democratically run trade union introduced in Section 
@@ -186,7 +186,7 @@ charge of email would be incapable of denying access to the new committee.
 There are some instances in which one needs to respond to emergency situations
 as soon as possible, and cannot wait for a slow authorization process by a
 potentially large set of users. To accommodate these situations, COLBAC has an
-\textbf{Emergency Token}. These Tokens allow users to run short scripts, single
+\textbf{Emergency Token}. These tokens allow users to run short scripts, single
 commands, or small programs in the Collective Sphere without immediate
 authorization. However, this action is immediately logged and all users are
 informed by the Reference Monitor that an Emergency Token was used. In the case
@@ -197,7 +197,7 @@ Phase for democratic decision making. To avoid large-scale misuse of the
 Emergency Token, and to avoid Emergency Token Wars\footnote{We define Emergency
 Token Wars as instances in which different members in the organization use
 Emergency Tokens to undo the actions taken in the name of the collective.},
-each member only has a small number of emergency Tokens for a given period of
+each member only has a small number of Emergency Tokens for a given period of
 time. Additionally, there are limits placed on what can be done with Emergency
 Tokens.
 
@@ -208,20 +208,20 @@ Tokens.
 \caption{COLBAC Token Structures}
 \label{fig:Tokenformatfigure}
 \end{figure}
-Each Token contains three sections, a header, a body, and a footer. Different
-types of Tokens (action Tokens, delegation Tokens, or emergency Tokens) contain
+Each token contains three sections, a header, a body, and a footer. Different
+types of tokens (Action Tokens, Delegation Tokens, or Emergency Tokens) contain
 different fields in their body sections. However, the headers and footers of all
-Token types contain the same fields. For a graphical representation of the Token
+token types contain the same fields. For a graphical representation of the token
 format, please see Figure~\ref{fig:Tokenformatfigure}.
 
-The first portion of a Token is called the header. The header contains the
+The first portion of a token is called the header. The header contains the
 following fields:
 %Header:
 \begin{enumerate}
 \item \textbf{Nonce/ID}:\\ 
-An integer used to both identify the Token and avoid replay attacks.
+An integer used to both identify the token and avoid replay attacks.
 \item \textbf{Token Type}:\\ 
-The type of Token. Can only be Action, Delegation, or Emergency.
+The type of token. Can only be Action, Delegation, or Emergency.
 \item \textbf{Party(s) Being Authorized}:\\
 A single entity or set of entities requesting authorization to perform an action
 or set of actions in the Collective Sphere.
@@ -229,10 +229,10 @@ or set of actions in the Collective Sphere.
 The single entity petitioning for authorization. This user usually also exists
 in the list of parties being authorized.
 \item \textbf{Token Expiration}:\\
-The expiration time of the Token in Unix format.
+The expiration time of the token in Unix format.
 \end{enumerate}
 
-For Action Tokens or Emergency Tokens, the Token body contains the following
+For Action Tokens or Emergency Tokens, the token body contains the following
 fields:
 \begin{enumerate}
 \item \textbf{Code to be Run}:\\
@@ -247,7 +247,7 @@ Collective Sphere contains 950 files, and the code running needs read access to
 folder and negative read permissions on the 10 files, rather than specify 940
 positive read permissions and no negative read permissions.
 \item \textbf{Comments (optional)}:\\
-Comments explaining what the code included in the Token does, and why it is
+Comments explaining what the code included in the token does, and why it is
 necessary. This field is similar to messages included in version control systems
 like a Git commit message.
 \end{enumerate}
@@ -274,10 +274,10 @@ Immutable sphere, it still requires time and effort of the system users to undo
 the actions of an individual who abused the power granted to them through
 Delegation Tokens.
 
-Each Token, regardless of type, ends with a footer. The footer simply contains
+Each token, regardless of type, ends with a footer. The footer simply contains
 one field, a field which states if it is approved or denied, along with a
 verifiable authentication value that is difficult to predict and easy to verify,
-such as an HMAC of the permission Token keyed by a secret value known only to
+such as an HMAC of the permission token keyed by a secret value known only to
 the Reference Monitor.
 
 \subsection{Formalizing COLBAC}
@@ -318,31 +318,10 @@ $Delete$ allows a subject to delete an object. \\
 $Execute$ allows a subject to run an object as a program.\\
 \hrule \mbox{}\\
 \end{definition}
-%\begin{itemize}
 
 %\noindent Before introducing the main algorithms involved in COLBAC, we first
 %need to define a few functions. However, to save space some shorthand is used.
 %For the functions to follow, we will use the following short-hand:
-
-%\begin{definition}[Abbreviations Used in COLBAC Functions]
-%\begin{itemize}
-%Let $u$ be a user of the system.\\
-%Let $s$ be the subject attempting access.\\
-%Let $o$ be the object or set if objects the user is attempting to access.\\
-%Let $p:$ be the set of permissions the user is requesting.\\
-%Let $t$ be the type of Token the user is attempting to create.\\
-%Let $e$ be the proposed expiration time of the Token.\\
-%Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
-%let $c$ be $NULL$.\\
-%Let $a$ be the action\footnote{command, script or program} the user wants to run
-%in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
-%$NULL$.\\
-%Let $d$ be the set of delegates the user is proposing, or in the case where it
-%doesn't exist, let $d$ be $NULL$.\\
-%Let $DAC(s :$ Subject$, o:$ Object$)$ be a Discretionary Access Control
-%system.\\
-%\hrule \mbox{}\\
-%\end{definition}
 
 \noindent The first important function we need to define is the $GetSphere$
 function. When passed a subject or object, the $GetSphere$ function will return
@@ -357,22 +336,22 @@ C$, $I$ iff $o \in I$\\
 \hrule \mbox{}\\
 \end{definition}
 
-\noindent A very important building block of COLBAC is the \textbf{Token}, which
-is a primitive taken from Capability based access control. A Token will allow a
+\noindent A very important building block of COLBAC is the \textbf{token}, which
+is a primitive taken from Capability based access control. A token will allow a
 subject which exists in $U$ to perform an action on an object that exists in
-$C$. These Tokens can be of type \textbf{action}, denoted by a sub-scripted $a$,
-\textbf{delegation}, denoted by a sub-scripted $d$, or \textbf{emergency},
-denoted by a sub-scripted $e$. Before authorization, a Token is first created by
+$C$. These tokens can be of type \textbf{Action}, denoted by a sub-scripted $a$,
+\textbf{Delegation}, denoted by a sub-scripted $d$, or \textbf{Emergency},
+denoted by a sub-scripted $e$. Before authorization, a token is first created by
 a $DraftToken$ function, which calls one of the following three functions
-depending on the type of Token the subject wishes to create. In addition, COLBAC
-requires a function to get the type of a given Token.
+depending on the type of token the subject wishes to create. In addition, COLBAC
+requires a function to get the type of a given token.
 \begin{definition}[Token Functions]\label{def:Tokens}
 Let $u$ be a user of the system.\\
 Let $o$ be the object or set if objects the user is attempting to access.\\
 Let $p$ be the set of permissions the user is requesting.\\
-Let $t$ be the type of Token the user is attempting to create.\\
-Let $e$ be the proposed expiration time of the Token.\\
-Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
+Let $t$ be the type of token the user is attempting to create.\\
+Let $e$ be the proposed expiration time of the token.\\
+Let $c$ be the comment attached to a token, or in the case it doesn't exist,
 let $c$ be $NULL$.\\
 Let $a$ be the action\footnote{command, script or program} the user wants to run
 in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
@@ -384,20 +363,20 @@ $T_{e}$\\
 $DraftToken_{a}(u,o,p,e,a,c) \rightarrow T_{a} = (u,o,p,e,a,c)$\\
 $DraftToken_{d}(u,o,p,e,d,c) \rightarrow T_{d} = (u,o,p,e,d,c)$\\
 $DraftToken_{e}(u,o,p,a,c) \rightarrow T_{e} = (u,o,p,a,c)$\\
-$GetTokenType(t:$ Token$) \rightarrow \{$the type of Token $t$ from $Action$,
+$GetTokenType(t:$ token$) \rightarrow \{$the type of token $t$ from $Action$,
 $Delegation$, or $Emergency$\}
 \hrule \mbox{}\\
 \end{definition}
 
 \noindent Unlike other capability based access control systems, COLBAC does not
 rely on a centralized authority or resource owner in the system to grant
-capability Tokens. Instead, when a Token is drafted by the user requesting it,
-the Token enters a $Petition$ function, which sends the Token to all other
+capability tokens. Instead, when a token is drafted by the user requesting it,
+the token enters a $Petition$ function, which sends the token to all other
 users\footnote{Here we mean human users of the system, not subjects or user
 accounts on the system that don't correspond to humans.} of the system for a
-participatory decision-making process on whether or not the Token should be
-authorized. This $Petition$ function returns a set of Votes on the Token $T$,
-referred to as $V_{T}$, and can only be called on Tokens of type \textit{action}
+participatory decision-making process on whether or not the token should be
+authorized. This $Petition$ function returns a set of votes on the token $T$,
+referred to as $V_{T}$, and can only be called on tokens of type \textit{action}
 or \textit{delegation.}
 
 Let's consider again the example of the democratic trade union presented in
@@ -409,14 +388,14 @@ write, and send emails, $p$ was the necessary set of permissions to perform
 these actions\footnote{Such as the $Execute$ permission for the email program,
 the $Create$ and $Write$ permission for temporary files, the $Read$ permission
 for the files the emails are stored in, etc.}, $e$ was the expiration date of
-the Token\footnote{Which should be set to the last day of the mandate of the
+the token\footnote{Which should be set to the last day of the mandate of the
 elected body.}, $d$ was the list of all members of the committee, and $c$ was
 any human-readable comment the token drafter deemed necessary. Then, the token
 drafter would compute $T_{d} = DraftToken_{d}(u,o,p,e,d,c)$, and run
 $Petition(T)$ as follows.
 
 \begin{definition}[Petition Function]\label{def:petition}
-Let $T$ be a Token created through $DraftToken$.\\
+Let $T$ be a token created through $DraftToken$.\\
 $Petition(T) \rightarrow \{$set of votes $V_{T}$ on authorizing $T$ iff $T$ is
 of type $T_{a}$ or $T_{d}$, else $NULL$\}.\\
 \hrule \mbox{}\\
@@ -431,13 +410,13 @@ sorted into their respective sets, the process of authorizing the votes comes
 down to a simple task of comparing the number of votes to fractions of voters
 initially defined at system registration. Said another way, a function called
 $AuthorizeToken$ will count the votes and compare the results to two security
-parameters, $f$, or the fraction of yes votes required to authorize a Token, and
+parameters, $f$, or the fraction of yes votes required to authorize a token, and
 $m$, the fraction of voters required to participate in order for a vote to be
 considered. These two security parameters are chosen at the initialization of
-the system, and can be changed by a successful action Token\footnote{These
-parameters cannot be changed by a delegate or by an emergency Token. This is
+the system, and can be changed by a successful Action Token\footnote{These
+parameters cannot be changed by a delegate or by an Emergency Token. This is
 discussed more in Section \ref{sec:colbacproperties}.}. If the vote is
-successful, the Token is then authorized by the addition of a signature field
+successful, the token is then authorized by the addition of a signature field
 that is difficult to predict or replicate, but easy for the reference monitor to
 later verify. One example of this is a keyed HMAC.
 %\begin{definition}[Sets of Votes]\label{def:votes}
@@ -464,15 +443,15 @@ traditional DAC check, like one would see on a typical Unix-like operating
 system.
 
 If the object is in the Collective Sphere, the subject is expected to
-provide a previously authorized Token or draft a new Token for the reference
-monitor. If the subject provides a previously authorized Token, the validity of
-that Token is checked, and if it is valid, the action is taken. If the subject
-does not have a valid Token, they instead provide a draft Token. The reference
-monitor then takes this draft Token and enters the Petition phase, where all
-users of the system are given the opportunity to vote on the Token. If the
-petition succeeds, the Token is authorized and returned to the subject. If the
-petition fails, the Token is not returned. In either case, the submission of the
-Token to the reference monitor is logged in the Immutable Sphere. In the example
+provide a previously authorized token or draft a new token for the reference
+monitor. If the subject provides a previously authorized token, the validity of
+that token is checked, and if it is valid, the action is taken. If the subject
+does not have a valid token, they instead provide a draft token. The reference
+monitor then takes this draft token and enters the Petition Phase, where all
+users of the system are given the opportunity to vote on the token. If the
+petition succeeds, the token is authorized and returned to the subject. If the
+petition fails, the token is not returned. In either case, the submission of the
+token to the reference monitor is logged in the Immutable Sphere. In the example
 provided in Section~\ref{sec:introduction}, all of the data required to access
 the collective email exists in the Collective Sphere.
 
@@ -486,7 +465,7 @@ resource in the Immutable Sphere is a $write$ operation, it always fails, since
 $write$ operations can arbitrarily write to any portion of a file. Likewise,
 $delete$ operations and $execute$ operations always fail. If the operation is a
 $create$ or $append$ operation, the reference monitor must check that the
-subject has a valid Token to do so. If not, they may not perform the action.
+subject has a valid token to do so. If not, they may not perform the action.
 The reference monitor, however, may always append or create in the Immutable
 Sphere.
 
@@ -495,14 +474,14 @@ Algorithm~\ref{alg:main}. To continue with our example from Section
 \ref{sec:introduction}, imagine that a member of the committee wants to read an
 email in the Collective Sphere. We can see that $GetSphere(o)$ would return $C$,
 since the email program exists in the Collective Sphere. Thus, the block of code
-from lines 14 to 20 would be executed, and the Token would be checked. Assuming
+from lines 14 to 20 would be executed, and the token would be checked. Assuming
 that the previous vote on the Petition Phase for the Delegation Token has
 passed, line 14 would return the non-NULL Delegation Token that $u$ has as a
 member of the elected committee. Then, since the action that they wish to
 perform (read an email) is covered by the permissions of the Delegation Token
 $T$, the action will be logged on line 17 and then performed on line 18.
 However, if $u$ were not a member of the committee, then the $GetToken$ function
-would return NULL, or would return Tokens that do not have the relevant
+would return NULL, or would return tokens that do not have the relevant
 permissions. As such, lines 22 -- 32 or line 19 would be executed, respectively.
 
 \begin{algorithm}
@@ -513,9 +492,9 @@ permissions. As such, lines 22 -- 32 or line 19 would be executed, respectively.
 \State Let $s$ be the subject attempting access.
 \State Let $o$ be the object or set if objects the user is attempting to access.
 \State Let $p$ be the set of permissions the user is requesting.
-\State Let $t$ be the type of Token the user is attempting to create.
-\State Let $e$ be the proposed expiration time of the Token.
-\State Let $c$ be the comment attached to a Token, or in the case it doesn't exist,
+\State Let $t$ be the type of token the user is attempting to create.
+\State Let $e$ be the proposed expiration time of the token.
+\State Let $c$ be the comment attached to a token, or in the case it doesn't exist,
 let $c$ be $NULL$.
 \State Let $a$ be the action the user wants to run in the Collective Sphere, or in the
 case that it doesn't exist, let $a$ be $NULL$.
@@ -562,9 +541,9 @@ system.
 \end{algorithm}
 
 Perhaps the most important part of this logic lies in the IsValid function. This
-function must ensure that the Token itself has been issued by the reference
-monitor, that the Token has not expired, and that the permissions of the actions
-that the Token grants are consistent with what the action is attempting to do.
+function must ensure that the token itself has been issued by the reference
+monitor, that the token has not expired, and that the permissions of the actions
+that the token grants are consistent with what the action is attempting to do.
 In the case that one of these three conditions is not true, the reference
 monitor must not perform an action. We present the logic of the IsValid function
 in Algorithm~\ref{alg:isvalid}.
@@ -661,18 +640,18 @@ structure, in which all power is fixed in the hands of one individual or a small
 individuals.
 
 This design does allow for many different expressions of horizontal structures,
-however. For example, because of the existence of delegation Tokens which expire,
+however. For example, because of the existence of Delegation Tokens which expire,
 our design allows for an authorization structure that reflects those of
 representative democracies, where elected individuals preside over certain
 responsibilities in the system. However, if the collective does not approve of
 how the elected individual is performing their duties, our solution allows for
-users to call for a democratic vote that invalidates the Token of the delegate,
+users to call for a democratic vote that invalidates the token of the delegate,
 thus forcing a new delegate to be chosen, or bringing the responsibility back
 into the collective.
 
-More, our system allows for action Tokens to modify the values of $f$ and $m$,
+More, our system allows for Action Tokens to modify the values of $f$ and $m$,
 thus making it possible for an organization to adjust how many individuals in
-the collective must agree on authorizing a Token in order for the Token to be
+the collective must agree on authorizing a token in order for the token to be
 authorized. This allows the organization to decide if they want to work with
 a full consensus based approach, a super majority approach, a majority approach,
 or something else entirely. A consequence of this system is that it is easier to
@@ -703,9 +682,9 @@ individual user of the system wishes to perform a coup d'\'etat, one approach
 would be to use an emergency token to set $f$ and $m$ to $\frac{1}{n}$ where $n$
 is the number of users in the system, then create and authorize action tokens to
 remove users from the system until only user accounts that are loyal to that
-user remain. To avoid this, there must be limitations on what emergency Tokens
+user remain. To avoid this, there must be limitations on what Emergency Tokens
 and delegation tokens can do. For this case specifically, emergency and
-delegation Tokens must not be able to alter the values of $f$ and $m$. Similarly
+Delegation Tokens must not be able to alter the values of $f$ and $m$. Similarly
 there must be a limitation on the number of emergency tokens an individual has,
 and individuals with access to delegation tokens must not be able to remove many
 members. It is likely that even more restrictions are required to maintain the
