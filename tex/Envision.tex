@@ -9,15 +9,14 @@
 % XXX: this also makes me wonder wether we want to bring the cyborg concept in
 % a playful way. It is not fundamental to the argument, but in a way we are
 % identifying these non-humans as part of the collective.
-Central to the issue of Horizontal Security is the notion of
-\emph{authorization} (i.e., who is allowed to access a particular resource). If
+Central to the issue of Horizontal Security are the notions of
+\emph{authorization} (i.e., who is allowed to access a particular resource) and
+\emph{authentication} (i.e., determining who a given individual is). If
 an authorized party reads, modifies, or destroys information, the definitions
 imply that there is no breach. Thus, whether or not the security of an
 organization has been breached depends highly on whether or not an entity is
 authorized to perform an action. This decision as to whether or not an entity is
 authorized is heavily informed by an organization's security policy.
-
-
 
 % Thus, from these definitions we get that confidentiality is the protection of 
 % information from unauthorized disclosure, integrity is the protection of
@@ -33,7 +32,9 @@ authorized is heavily informed by an organization's security policy.
 However, as is natural with the notion of authorization, two fundamental pieces
 must exist: authorization \emph{policies} that represent collective-based
 authorization, and an access control system that can \emph{enforce} such
-policies.
+policies. Though \emph{authentication} is also a vital piece of this process,
+in this work we assume that \emph{authentication} is performed by another system
+and do not consider it further in this work.
 
 \subsection{Hierarchy and Access Control}
 \label{sec:definition}
@@ -54,7 +55,9 @@ the bottom left to enact the desires passed down to them.
 
 We see, then, that hierarchy introduces itself in multiple dimensions of
 security. These dimensions include the different decision-making processes of
-security. Instead, it is possible that horizontal security may be achieved by
+security. However, in democratic institutions security can be multilateral
+\cite{multilateral}, and thus hierarchical security decision making is not
+appropriate. Instead, it is possible that horizontal security may be achieved by
 shifting policy-making powers, implementation decisions, enforcement
 powers, and other dimensions of security away from individuals and towards
 democratic, participatory processes\footnote{Further questions arise when we
@@ -240,17 +243,19 @@ implication of this competitive focus is that there is no mechanism to vote in
 Bitcoin; rather, what is referred to as ``regulation'' in this work is seen by
 the Bitcoin community as an attack. However, the design property of requiring
 a majority of participating members to agree in order to make a change on the
-system may still be useful to inspire future horizontal system designs. In the case of cryptocurrencies, the competitive design tends to centralize the network over time.
-Bitcoin's Proof of Work algorithm tends to favor those who can afford highly
-specialized hardware, eventually leading to a centralization of the network into
-the hands of those who are wealthy enough to control large amounts of machines
-specifically made for mining Bitcoins. Proof of Stake, another consensus
-algorithm for Blockchain, bypasses this middle step and directly benefits those
-who control larger amounts of monetary stake in the network.
+system may still be useful to inspire future horizontal system designs. In the
+case of cryptocurrencies, the competitive design tends to centralize the network
+over time. Bitcoin's Proof of Work algorithm tends to favor those who can afford
+highly specialized hardware, eventually leading to a centralization of the
+network into the hands of those who are wealthy enough to control large amounts
+of machines specifically made for mining Bitcoins. Proof of Stake, another
+consensus algorithm for Blockchain, bypasses this middle step and directly
+benefits those who control larger amounts of monetary stake in the network.
 
 Other, more voluntary (and less profit-driven) designs also attempt to
 achieve horizontality. Perhaps the most well known example of a security system
-meant to be horizontal by design is the PGP Web of Trust (WoT) design. This ecosystem attempts to allow entities to authenticate (i.e., tie public key
+meant to be horizontal by design is the PGP Web of Trust (WoT) design. This
+ecosystem attempts to allow entities to authenticate (i.e., tie public key
 material to emails, names, or identities) and exchange signed or encrypted
 messages without a central authority. This is done through a transitive trust
 process: known-good entities can sign trust relationships with other entities
@@ -299,16 +304,42 @@ the password, causing hierarchy issues. Capability~\cite{dennis1966programming}
 based schemes and systems can be used to allow for transfer of control over
 resources in a more flexible way, but is not sufficient alone: a collective
 authorization scheme is required to determine whether or not to issue capability
-tokens. %Other yet undeveloped primitives, techniques, and tools may be needed
-%as well. Future work can address these needs, as described in
-%Section~\ref{sec:futurework}.
+tokens.
+
+Previous attempts of expanding access control to fill some of these gaps have
+been made, but each of them has its flaw. Most work centers around the idea of
+multi-ownership access control or multi-party access control (MPAC), where
+different files in a system are owned by multiple different users who need to
+agree on who may see a given resource and who may not. These schemes are usually
+specifically designed for online social networks (OSNs), and generally use
+either majority voting
+(\cite{Hu_Ahn_Jorgensen_2013,Ilia_Polakis_Athanasopoulos_Maggi_Ioannidis_2015},
+etc.) secret sharing techniques 
+(\cite{Ilia_Carminati_Ferrari_Fragopoulou_Ioannidis_2017}, etc.), or conflict
+resolution protocols
+(\cite{Carminati_Ferrari_2011, Bruns_Huth_2011, Rao_Lin_Bertino_Li_Lobo_2011}, 
+etc.) to determine with whom files should be shared. Other approaches rely on
+the relationships between the owners of a resource and other users within a
+community or (OSN) to determine who gets to access a file. However, these
+approaches are different from ours in many ways. Primarily, none of the MPAC
+solutions focus on flexible horizontality: instead, they assume either majority
+voting or some form of conflict resolution, rather than begin
+flexible enough to cover multiple forms of horizontal structure. More, these
+systems focus on specific issues related to OSNs, such as privacy rights and
+concerns for photo sharing, and as such these systems emphasize read decisions
+over write or execute decisions, making them insufficient for the purpose of
+access control and authorization on a general-purpose system. Finally, previous
+attempts to fill this gap consider resource sharing and authorization within a
+complex community where individuals who belong to the community own files and
+make decisions regarding those files. They do not consider the problem of access
+control and authorization in the name of the community or collective as a whole,
+as our solution does.
 
 % XXX: We need an awesome one sentence to transition over to the idea of COLBAC
 % here.
-To this end we present COLBAC, a collective based access control system to
-provide the fundamental basis for more democratic and participatory security
-software and systems.
-
+To address these gaps we present COLBAC, a collective based access control
+system to provide the fundamental basis for more democratic and participatory
+security software and systems.
 %\input{tex/Colbac}
 
 % Access Control:

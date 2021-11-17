@@ -6,36 +6,45 @@ organizations of different horizontality can use the same foundation and arrive
 at much differently structured organizations?
 
 In this section we describe Collective Based Access Control, or COLBAC: our
-approach to a dynamic horizontality access control system. We begin by
-describing its requirements, focusing on the dynamic horizontality that
-separates COLBAC from other access control systems. We then define the system
-itself. Finally, we discuss the properties and in Section~\ref{sec:limitations}
-we discuss the limitations of this system. Though this is, to our knowledge, the
-first attempt at defining a collective based access control system with dynamic
-and flexible horizontality, it is far from the only potential approach. Section
-\ref{sec:future_work} discusses some potential future work to improve upon it.
+approach to a dynamic horizontality access control system. We describe its
+requirements in Section~\ref{sec:colbacrequirements}, focusing on the dynamic
+horizontality that separates COLBAC from other access control systems. We then
+define the system itself in Sections~\ref{sec:colbacdesign},
+\ref{sec:Tokentypes}, \ref{sec:Tokenformat} and \ref{sec:colbacformal}.
+Finally, we discuss the properties of COLBAC in
+Section~\ref{sec:colbacproperties}. We discuss the limitations of this system
+later in the paper in Section \ref{sec:limitations}. Though this is, to our
+knowledge\footnote{This lack of democratic access control systems was identified
+through a review of all systemization of knowledge or survey papers in the ACM
+Computing Surveys Journal mentioning access control. Out of the 288 entries,
+none explicitly aimed at creating a flexibly horizontal access control system.
+The closest access control systems are described in Section~\ref{sec:previous}},
+the first attempt at defining a collective based access control system with
+dynamic and flexible horizontality, it is far from the only potential approach.
+Section \ref{sec:future_work} discusses some potential future work to improve
+upon it.
 
-To our knowledge COLBAC is the first attempt to incorporate democratic processes
-into access control. However, democracy is a complex concept, and COLBAC only
-incorporates some aspects of democracy. For example, solution is not utilized
-at all in COLBAC. For our definition of the \textit{Demos}, we consider all
-members of a system using COLBAC do be part of the \textit{Demos} and thus
-eligible to vote. Our design of COLBAC also assumes there exists an external
-channel for deliberation that is used by all members of the \textit{Demos}, and
-that there may exist external channels for other forms of decision-making.
-However, every decision made in these external channels that affects the system
-must eventually become a vote within COLBAC.
+However, democracy is a complex concept, and COLBAC only incorporates some
+aspects of democracy. For example, sortition is not utilized at all in COLBAC.
+For our definition of the \textit{Demos}, we consider all members of a system
+using COLBAC do be part of the \textit{Demos} and thus eligible to vote. Our
+design of COLBAC also assumes there exists an external channel for deliberation
+that is used by all members of the \textit{Demos}, and that there may exist
+external channels for other forms of decision-making. However, every decision
+made in these external channels that affects the system must eventually be
+reflected by a vote within COLBAC, be it an Action Token Petition or a
+Delegation Token Petition.
 
 Given these assumptions and the design of COLBAC, we can see that COLBAC allows
 for a large variety of different democratic governance schemes. More direct
 forms of democracy can be done using Action Tokens, and elective representation
-can be done using Delegation Tokens\footnote{These types of tokens are described
-in Section~\ref{sec:Tokentypes}}. The spectrum between full consensus and
-majority decision-making is represented through the security parameter $f$ and
-the decision of how much participation is required per vote and, therefore, how
-difficult it is to create a quorum can be fine-tuned using the security
-parameter $m$\footnote{These security parameters are described in Section
-\ref{sec:colbacdesign}}.
+can be done using Delegation Tokens (described in Section~\ref{sec:Tokentypes}).
+The spectrum between full consensus and majority decision-making is represented
+through the security parameter $f$ and the decision of how much participation is
+required per vote and, therefore, how difficult it is to create a quorum can be
+fine-tuned using the security parameter $m$. The amount of time a petition
+remains open to votes is specificied by $t$. These security parameters are
+described in Section \ref{sec:colbacdesign}.
 
 \subsection{System Requirements}
 \label{sec:colbacrequirements}
@@ -60,13 +69,26 @@ control over the system.
 However, it makes no sense to have horizontal or democratic control without
 transparency. An individual cannot meaningfully vote or otherwise decide on a
 practice, or place confidence in a representative, without understanding what
-the action is going to take place, and what actions have been taken in the past.
+action is going to be taken, and what actions have been taken in the past.
 More, if authority is abused, the collective must be able to notice the abuse,
 and remove the powers that allowed the abuse to take place. Thus, we can see
 that any horizontal access control system requires transparency. Towards this
 end, our system must have a method of logging information about the actions of
 individuals and the collective that is immutable and available.
 
+More, though in this work we abstract away the details of the system, our system
+must also be able to operate as either a distributed system running on multiple
+nodes, or a system running on a singular machine. Though the remainder of these
+paper abstracts these details away, we believe our system is general enough to
+cover both of these cases, as aided by the separation between different spheres.
+Future work will provide details of how COLBAC can be run both in a singular
+machine and a distributed system.
+
+Finally, our system is an authorization system, not an authentication system. We
+assume that there is a working authentication system for the system, and that
+all COLBAC users are already authenticated when they interact with the COLBAC
+reference monitor.
+\vspace{-.5em}
 \subsection{System Design}
 \label{sec:colbacdesign}
 COLBAC presents a solution to access control that relies on the collective.
@@ -89,10 +111,9 @@ sources of collective information, must also exist in this sphere.
 However, not everything should be directly managed by the collective. Individual
 users may have their own files and programs, which they intend to use only in
 ways that do not affect other users of the system or the resources of the
-collective\footnote{We can think of these as the home directories of users in
-modern Unix-like systems.}. This sphere, called the \textbf{User Sphere},
-can use traditional DAC systems like modern Unix-like systems without affecting
-the horizontality of the system as a whole.
+collective (like home directories in modern Unix-like systems). This sphere,
+called the \textbf{User Sphere}, can use traditional DAC systems like modern
+Unix-like systems without affecting the horizontality of the system as a whole.
 
 Finally, to have meaningful control of the system we must have transparency. To
 achieve this, a system must have an \textbf{Immutable Sphere}, or a portion of
@@ -349,22 +370,22 @@ requires a function to get the type of a given token.
 Let $u$ be a user of the system.\\
 Let $o$ be the object or set if objects the user is attempting to access.\\
 Let $p$ be the set of permissions the user is requesting.\\
-Let $t$ be the type of token the user is attempting to create.\\
+Let $\uptau$ be the type of token the user is attempting to create.\\
 Let $e$ be the proposed expiration time of the token.\\
 Let $c$ be the comment attached to a token, or in the case it doesn't exist,
 let $c$ be $NULL$.\\
-Let $a$ be the action\footnote{command, script or program} the user wants to run
+Let $a$ be the action (command, script, or program) the user wants to run
 in the Collective Sphere, or in the case that it doesn't exist, let $a$ be 
 $NULL$.\\
 Let $d$ be the set of delegates the user is proposing, or in the case where it
 doesn't exist, let $d$ be $NULL$.\\
-$DraftToken(u,o,p,e,a,c,t) \rightarrow T$ of type $T_{a}$ or $T_{d}$ or 
+$DraftToken(u,o,p,e,a,c,\uptau) \rightarrow T$ of type $T_{a}$ or $T_{d}$ or 
 $T_{e}$\\
 $DraftToken_{a}(u,o,p,e,a,c) \rightarrow T_{a} = (u,o,p,e,a,c)$\\
 $DraftToken_{d}(u,o,p,e,d,c) \rightarrow T_{d} = (u,o,p,e,d,c)$\\
 $DraftToken_{e}(u,o,p,a,c) \rightarrow T_{e} = (u,o,p,a,c)$\\
-$GetTokenType(t:$ token$) \rightarrow \{$the type of token $t$ from $Action$,
-$Delegation$, or $Emergency$\}
+$GetTokenType(\uptau:$ token$) \rightarrow \{$the type of token $\uptau$ from
+$Action$, $Delegation$, or $Emergency$\}
 \hrule \mbox{}\\
 \end{definition}
 
@@ -375,9 +396,10 @@ the token enters a $Petition$ function, which sends the token to all other
 users\footnote{Here we mean human users of the system, not subjects or user
 accounts on the system that don't correspond to humans.} of the system for a
 participatory decision-making process on whether or not the token should be
-authorized. This $Petition$ function returns a set of votes on the token $T$,
-referred to as $V_{T}$, and can only be called on tokens of type \textit{action}
-or \textit{delegation.}
+authorized. This process lasts $t$ seconds, as per the parameter of the system.
+The $Petition$ function returns a set of votes on the token $T$, referred to as
+$V_{T}$, and can only be called on tokens of type \textit{action} or
+\textit{delegation.}
 
 Let's consider again the example of the democratic trade union presented in
 Section~\ref{sec:introduction}. As mentioned in Section~\ref{sec:Tokentypes},
@@ -392,33 +414,35 @@ the token\footnote{Which should be set to the last day of the mandate of the
 elected body.}, $d$ was the list of all members of the committee, and $c$ was
 any human-readable comment the token drafter deemed necessary. Then, the token
 drafter would compute $T_{d} = DraftToken_{d}(u,o,p,e,d,c)$, and run
-$Petition(T)$ as follows.
+$Petition(T, t)$ as follows.
 
 \begin{definition}[Petition Function]\label{def:petition}
 Let $T$ be a token created through $DraftToken$.\\
-$Petition(T) \rightarrow \{$set of votes $V_{T}$ on authorizing $T$ iff $T$ is
+Let $t$ be the system parameter that specifies how long voting is open.\\
+$Petition(T, t) \rightarrow \{$set of votes $V_{T}$ on authorizing $T$ iff $T$ is
 of type $T_{a}$ or $T_{d}$, else $NULL$\}.\\
 \hrule \mbox{}\\
 \end{definition}
 
 \noindent This Petition Phase would collect votes from all of the members on the
-system. The returned set of votes, $V$, can then be split into more useful
-sets, such as the set of votes that affirm the authorization of $T$,
-$V_{(T, Yes)}$, the set of votes that negate the authorization of $T$,
-$V_{(T, No)}$, and the set of abstentions, $V_{(T, Blank)}$. After votes are
-sorted into their respective sets, the process of authorizing the votes comes
-down to a simple task of comparing the number of votes to fractions of voters
-initially defined at system registration. Said another way, a function called
-$AuthorizeToken$ will count the votes and compare the results to two security
-parameters, $f$, or the fraction of yes votes required to authorize a token, and
-$m$, the fraction of voters required to participate in order for a vote to be
-considered. These two security parameters are chosen at the initialization of
-the system, and can be changed by a successful Action Token\footnote{These
-parameters cannot be changed by a delegate or by an Emergency Token. This is
-discussed more in Section \ref{sec:colbacproperties}.}. If the vote is
-successful, the token is then authorized by the addition of a signature field
-that is difficult to predict or replicate, but easy for the reference monitor to
-later verify. One example of this is a keyed HMAC.
+system after waiting $t$ seconds. The returned set of votes, $V$, can then be
+split into more useful sets, such as the set of votes that affirm the
+authorization of $T$, $V_{(T, Yes)}$, the set of votes that negate the
+authorization of $T$, $V_{(T, No)}$, and the set of abstentions,
+$V_{(T, Blank)}$. After votes are sorted into their respective sets, the process
+of authorizing the votes comes down to a simple task of comparing the number of
+votes to fractions of voters initially defined at system registration. Said
+another way, a function called $AuthorizeToken$ will count the votes and compare
+the results to two security parameters, $f$, or the fraction of yes votes
+required to authorize a token, and $m$, the fraction of voters required to
+participate in order for a vote to be considered. These two security parameters,
+along with the time a petition remains open to votes, are chosen at the
+initialization of the system, and can be changed by a successful Action
+Token\footnote{These parameters cannot be changed by a delegate or by an
+Emergency Token. This is discussed more in Section \ref{sec:colbacproperties}.}.
+If the vote is successful, the token is then authorized by the addition of a
+signature field that is difficult to predict or replicate, but easy for the
+reference monitor to later verify. One example of this is a keyed HMAC.
 %\begin{definition}[Sets of Votes]\label{def:votes}
 %$V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}$\\
 %$V_{(T, No)} = \{v \in V$ s.t. $v = False\}$\\
@@ -492,7 +516,7 @@ permissions. As such, lines 22 -- 32 or line 19 would be executed, respectively.
 \State Let $s$ be the subject attempting access.
 \State Let $o$ be the object or set if objects the user is attempting to access.
 \State Let $p$ be the set of permissions the user is requesting.
-\State Let $t$ be the type of token the user is attempting to create.
+\State Let $\uptau$ be the type of token the user is attempting to create.
 \State Let $e$ be the proposed expiration time of the token.
 \State Let $c$ be the comment attached to a token, or in the case it doesn't exist,
 let $c$ be $NULL$.
@@ -500,6 +524,8 @@ let $c$ be $NULL$.
 case that it doesn't exist, let $a$ be $NULL$.
 \State Let $d$ be the set of delegates the user is proposing, or in the case where it
 doesn't exist, let $d$ be $NULL$.
+\State Let $f$, $m$ and $t$ be the system parameters reflecting approval
+fraction, quorum fraction, and petition voting time.
 \State Let $DAC(s :$ Subject$, o:$ Object$)$ be a Discretionary Access Control
 system.
 \If{$GetSphere(o)=U$}
@@ -514,9 +540,9 @@ system.
             \State LogFailedAction($a, u$)
         \EndIf
     \Else
-        \State $T = DraftToken(u,o,p,t,e,c,a,d)$
+        \State $T = DraftToken(u,o,p,\uptau,e,c,a,d)$
         \If{$GetTokenType(T) \in (T_{a}, T_{d})$}
-            \State $V_{T} = Petition(T)$
+            \State $V_{T} = Petition(T, t)$
             \State $V_{(T, Yes)} = \{v \in V$ s.t. $v = True\}.$
             \State $V_{(T, No)} = \{v \in V$ s.t. $v = False\}.$
             \State $V_{(T, Blank)} = \{v \in V$ s.t. $v = NULL\}$.

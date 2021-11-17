@@ -38,7 +38,9 @@
 \usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage{algorithm}
+%\usepackage{authblk}
 \usepackage[noend]{algpseudocode}
+\usepackage{upgreek}
 %% Fonts used in the template cannot be substituted; margin
 %% adjustments are not allowed.
 %%
@@ -52,18 +54,14 @@
 %% values in them; it is your responsibility as an author to replace
 %% the commands and values with those provided to you when you
 %% complete the rights form.
-\setcopyright{acmcopyright}
 \copyrightyear{2021}
 \acmYear{2021}
-\acmDOI{XXXXXXXXXXXXXXXXXXXXXXXXX}
-
+\setcopyright{rightsretained}
+\acmConference[NSPW '21]{New Security Paradigms Workshop}{October 25--28, 2021}{Virtual Event, USA}
+\acmBooktitle{New Security Paradigms Workshop (NSPW '21), October 25--28, 2021, Virtual Event, USA}
+\acmDOI{10.1145/3498891.3498903}
+\acmISBN{978-1-4503-8573-2/21/10}
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[NSPW 2021]{NSPW: New Security Paradigms Workshop}
-{October 25--28, 2021}{Online}
-\acmBooktitle{NSPW '21: New Security Paradigms Workshop,
-  October 25--28, 2021, Online}
-\acmPrice{15.00}
-\acmISBN{978-1-4503-XXXX-X/18/06}
 
 
 %%
@@ -115,9 +113,18 @@
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
 \author{Kevin Gallagher}
-%\authornote{Both authors contributed equally to this research.}
-\email{kevin.gallagher@nyu.edu}
+%\authornote{This work began while the first author was affiliated with New York
+%University, but was concluded when he was affiliated with Universidade de
+%Lisboa.}
+\email{kevin.gallagher@tecnico.ulisboa.pt}
 %\orcid{1234-5678-9012}
+\affiliation{%
+    \institution{DCentral/DEI\\Instituto Superior T\'ecnico, Universidade de Lisboa}
+    \streetaddress{Av Rovisco Pais 1}
+    \city{Lisboa}
+    \country{Portugal}
+    \postcode{1049 001}
+}
 \affiliation{%
     \institution{Department Of Computer Science and Engineering\\New York University}
     \streetaddress{370 Jay Street, 10th Floor}
@@ -126,7 +133,6 @@
     \country{USA}
     \postcode{11021}
 }
-\email{kevin.gallagher@privacylx.org}
 \affiliation{%
     \institution{Defend Our Privacy Association (PrivacyLX)}
     \state{Lisbon}
@@ -140,7 +146,7 @@
     \streetaddress{501 Northwestern Avenue}
     \city{West Lafayette}
     \state{Indiana}
-    \country{United States of America}
+    \country{USA}
     \postcode{47907-2305}
 }
 
@@ -151,7 +157,7 @@
     \streetaddress{370 Jay Street, 10th floor}
     \city{Brooklyn}
     \state{New York}
-    \country{United States of America}
+    \country{USA}
     \postcode{11201}
 }
 
@@ -166,6 +172,16 @@
     \country{France}
     \postcode{75007}
 }
+%\author[1, 2, 3]{Kevin Gallagher}
+%\author[4]{Santiago Torres-Arias}
+%\author[3]{Nasir Memon}
+%\author[5]{Jessica Feldman}
+%
+%\affil[1]{\small DCentral, Instituto Superior T\'ecnico, Universidade de Lisboa, Av Rovisco Pais 1, 1049 001, Lisboa, Portugal}
+%\affil[2]{\small Defend our Privacy Association (PrivacyLX), Lisboa, Portugal}
+%\affil[3]{\small Department of Computer Science and Engineering, New York University, 370 Jay Street, 10\textsuperscript{th} Floor, Brooklyn, NY, 11201, USA}
+%\affil[4]{\small Departemtn of Electrical and Computer Engineering, Purdue University, 501 Northwestern Avenue, West Lafayette, Indiana, 47907-2305, USA}
+%\affil[5]{\small Department of Communication, Media, and Culture, American University of Paris, 5, Boulevard de La Tour-Maubourg, 75005 Paris, France}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -235,7 +251,7 @@
 \section{Envisioning Horizontal Security}
 \label{sec:envisioning}
 \input{tex/Envision}
-
+\vspace{-.5em}
 \section{Democracy and COLBAC}
 \label{sec:democracy}
 \input{tex/Democracy}
@@ -259,7 +275,7 @@
 \section{Limitations}
 \label{sec:limitations}
 \input{tex/Limitations}
-
+\vspace{-.5em}
 \section{Future Work}
 \label{sec:future_work}
 \input{tex/FutureWork}
