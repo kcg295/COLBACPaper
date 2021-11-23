@@ -6,10 +6,11 @@ organizations of different horizontality can use the same foundation and arrive
 at much differently structured organizations?
 
 In this section we describe Collective Based Access Control, or COLBAC: our
-approach to a dynamic horizontality access control system. We describe its
-requirements in Section~\ref{sec:colbacrequirements}, focusing on the dynamic
-horizontality that separates COLBAC from other access control systems. We then
-define the system itself in Sections~\ref{sec:colbacdesign},
+approach to a dynamic horizontality access control system that performs
+authorization and execution of access control policies via democratic processes.
+We describe its requirements in Section~\ref{sec:colbacrequirements}, focusing
+on the dynamic horizontality that separates COLBAC from other access control
+systems. We then define the system itself in Sections~\ref{sec:colbacdesign},
 \ref{sec:Tokentypes}, \ref{sec:Tokenformat} and \ref{sec:colbacformal}.
 Finally, we discuss the properties of COLBAC in
 Section~\ref{sec:colbacproperties}. We discuss the limitations of this system
@@ -24,16 +25,16 @@ dynamic and flexible horizontality, it is far from the only potential approach.
 Section \ref{sec:future_work} discusses some potential future work to improve
 upon it.
 
-However, democracy is a complex concept, and COLBAC only incorporates some
-aspects of democracy. For example, sortition is not utilized at all in COLBAC.
-For our definition of the \textit{Demos}, we consider all members of a system
-using COLBAC do be part of the \textit{Demos} and thus eligible to vote. Our
-design of COLBAC also assumes there exists an external channel for deliberation
-that is used by all members of the \textit{Demos}, and that there may exist
-external channels for other forms of decision-making. However, every decision
-made in these external channels that affects the system must eventually be
-reflected by a vote within COLBAC, be it an Action Token Petition or a
-Delegation Token Petition.
+Democracy is a complex concept, and COLBAC only incorporates some aspects of
+democracy. For example, sortition is not utilized at all in COLBAC. For our
+definition of the \textit{Demos}, we consider all members of a system using
+COLBAC do be part of the \textit{Demos} and thus eligible to vote. Our design of
+COLBAC also assumes there exists an external channel for deliberation that is
+used by all members of the \textit{Demos}, and that there may exist external
+channels for other forms of decision-making. However, every decision made in
+these external channels that affects the system must eventually be reflected by
+a vote within COLBAC, be it an Action Token Petition or a Delegation Token 
+Petition.
 
 Given these assumptions and the design of COLBAC, we can see that COLBAC allows
 for a large variety of different democratic governance schemes. More direct
@@ -76,14 +77,6 @@ that any horizontal access control system requires transparency. Towards this
 end, our system must have a method of logging information about the actions of
 individuals and the collective that is immutable and available.
 
-More, though in this work we abstract away the details of the system, our system
-must also be able to operate as either a distributed system running on multiple
-nodes, or a system running on a singular machine. Though the remainder of these
-paper abstracts these details away, we believe our system is general enough to
-cover both of these cases, as aided by the separation between different spheres.
-Future work will provide details of how COLBAC can be run both in a singular
-machine and a distributed system.
-
 Finally, our system is an authorization system, not an authentication system. We
 assume that there is a working authentication system for the system, and that
 all COLBAC users are already authenticated when they interact with the COLBAC
@@ -111,9 +104,8 @@ sources of collective information, must also exist in this sphere.
 However, not everything should be directly managed by the collective. Individual
 users may have their own files and programs, which they intend to use only in
 ways that do not affect other users of the system or the resources of the
-collective (like home directories in modern Unix-like systems). This sphere,
-called the \textbf{User Sphere}, can use traditional DAC systems like modern
-Unix-like systems without affecting the horizontality of the system as a whole.
+collective. This sphere, called the \textbf{User Sphere}, can use traditional
+DAC systems without affecting the horizontality of the system as a whole.
 
 Finally, to have meaningful control of the system we must have transparency. To
 achieve this, a system must have an \textbf{Immutable Sphere}, or a portion of
@@ -124,12 +116,12 @@ section. Additionally, this section can hold a list of inalienable rights that
 each participant in the system has, such as the right to a vote.
 
 When the system is first installed, a \textit{Registration Phase} will occur.
-During this phase, at least 3 users will be signed up in the system. These users
+During this phase, at least 2 users will be signed up in the system. These users
 will need to supply their public keys, which correspond to offline private keys,
 since they will be needed for later interactions with the system. In addition to
 supplying their public keys, the users will need to decide on an initial
-fraction $f$ and a minimum fraction $m$ that will be used for action and
-delegation petitions, as explained later.
+fraction $f$, a minimum fraction $m$ that will be used for action and delegation
+petitions, and the voting timeout parameter $t$, as explained later.
 
 After the system is set up, users can interact with objects in the User Sphere
 as they would in any other system. However, to interact with any objects in the
@@ -160,11 +152,11 @@ counts all of the votes. If the number of votes divided by the total number of
 users is greater than or equal to $m$, and the fraction of yes votes to the
 total number of votes is greater than or equal to $f$, the petition is
 considered successful and the token is returned to the petitioning user. In
-addition to taking the action, the system logs the action in log files held in
-the immutable sphere. However, if the number of all votes divided by the total
-number of users is less than $m$ or if the number of yes votes divided by the
-total number of votes is less than $f$, the petition fails, and the attempted
-action is logged in the immutable sphere.
+addition to taking the action, the system logs the action, the edited file, and
+the permissions used in log files held in the immutable sphere. However, if the
+number of all votes divided by the total number of users is less than $m$ or if
+the number of yes votes divided by the total number of votes is less than $f$,
+the petition fails, and the attempted action is logged in the immutable sphere.
 
 \subsection{Types of Tokens}
 \label{sec:Tokentypes}
@@ -487,11 +479,10 @@ attempted in the Collective Sphere, since the Immutable Sphere mainly contains
 logs of what was done in the Collective Sphere. If the type of access on the
 resource in the Immutable Sphere is a $write$ operation, it always fails, since
 $write$ operations can arbitrarily write to any portion of a file. Likewise,
-$delete$ operations and $execute$ operations always fail. If the operation is a
-$create$ or $append$ operation, the reference monitor must check that the
-subject has a valid token to do so. If not, they may not perform the action.
-The reference monitor, however, may always append or create in the Immutable
-Sphere.
+$delete$ operations always fail. If the operation is an $execute$, $create$ or
+$append$ operation, the reference monitor must check that the subject has a
+valid token to do so. If not, they may not perform the action. The reference
+monitor, however, may always execute, append or create in the Immutable Sphere.
 
 An algorithmic representation of these access control decisions are included in
 Algorithm~\ref{alg:main}. To continue with our example from Section
@@ -577,11 +568,10 @@ in Algorithm~\ref{alg:isvalid}.
 To understand this Algorithm we still need to introduce one more function
 definition. In order to be able to decide whether or not a given action should
 be allowed, the reference monitor must be able to see what permissions the
-action the subject is supplying requires. Thus, we introduce the
-GetRequiredPermissions function as follows. This function works on the level of
-commands, instead of actions, to allow for granular identification of which
-portion of the action is causing issues (if indeed the action is longer than one
-command).
+action requires. Thus, we introduce the GetRequiredPermissions function as
+follows. This function works on the level of commands, instead of actions, to
+allow for granular identification of which portion of the action is causing
+issues (if indeed the action is longer than one command).
 
 \begin{definition}
 GetRequiredPermissions$(c:$ Command$) \rightarrow$ \{the set of permissions,
